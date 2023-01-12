@@ -6,10 +6,10 @@ import {
   signInWithPopup,
 } from 'firebase/auth';
 import { initializeApp } from 'firebase/app';
-import { myFunction } from './lib/index.js';
-// const analytics = getAnalytics(app);
-
 // import { getAnalytics } from 'firebase/analytics';
+import { myFunction } from './lib/index.js';
+
+// const analytics = getAnalytics(app);
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
