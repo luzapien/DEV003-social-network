@@ -57,3 +57,8 @@ btnGoogle.addEventListener('click', () => {
 const auth = getAuth(app);
 
 myFunction();
+
+const btnLogoutGoogle = document.getElementById('btnLogout');
+btnLogoutGoogle.addEventListener('click', () => {
+  auth.signOut();
+});
