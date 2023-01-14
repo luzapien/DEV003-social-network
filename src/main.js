@@ -44,7 +44,7 @@ btnGoogle.addEventListener('click', () => {
 });
 
 const auth = getAuth(app);
-
+console.log(document.cookie);
 // myFunction();
 
 const btnLogoutGoogle = document.getElementById('btnLogout');
