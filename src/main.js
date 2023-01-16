@@ -1,35 +1,15 @@
-// Este es el punto de entrada de tu aplicacion
-// Import the functions you need from the SDKs you need
 import {
   getAuth,
   GoogleAuthProvider,
   signInWithPopup,
 } from 'firebase/auth';
 import { initializeApp } from 'firebase/app';
-// import { getAnalytics } from 'firebase/analytics';
-import { myFunction } from './lib/index.js';
+import firebaseConfig from './lib/index.js';
 
-// const analytics = getAnalytics(app);
-
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: 'AIzaSyDsV641BeYPAlGnaSM_CPuV5nWGVNOiPZs',
-  authDomain: 'catslover012023.firebaseapp.com',
-  databaseURL: 'https://catslover012023-default-rtdb.firebaseio.com',
-  projectId: 'catslover012023',
-  storageBucket: 'catslover012023.appspot.com',
-  messagingSenderId: '262132831591',
-  appId: '1:262132831591:web:12a097d59110e034244bc2',
-  measurementId: 'G-K4QCS1CZVP',
-};
 const btnGoogle = document.getElementById('btnGoogle');
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-console.log(app);
+// console.log(app);
 
 btnGoogle.addEventListener('click', () => {
   const auth = getAuth();
@@ -53,7 +33,4 @@ btnGoogle.addEventListener('click', () => {
       console.log(error);
     });
 });
-
 const auth = getAuth(app);
-
-myFunction();
