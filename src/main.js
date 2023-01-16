@@ -4,12 +4,13 @@ import {
   getAuth,
   GoogleAuthProvider,
   signInWithPopup,
+  createUserWithEmailAndPassword,
 } from 'firebase/auth';
 import { initializeApp } from 'firebase/app';
+// import { getFirestore } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js';
 import firebaseConfig from './lib/index';
-// import { getAnalytics } from 'firebase/analytics';
-// import { myFunction } from './lib/index.js';
 
+// import { getAnalytics } from 'firebase/analytics';
 // const analytics = getAnalytics(app);
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -18,39 +19,42 @@ import firebaseConfig from './lib/index';
 const btnGoogle = document.getElementById('btnGoogle');
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-//console.log(app);
+// const db = getFirestore();
+// console.log(app);
 
-btnGoogle.addEventListener('click', () => {
+btnGoogle.addEventListener('click', async () => {
   const auth = getAuth();
   const provider = new GoogleAuthProvider();
-  signInWithPopup(auth, provider)
-    .then((result) => {
-      // This gives you a Google Access Token. You can use it to access the Google API.
-      const credential = GoogleAuthProvider.credentialFromResult(result);
-      const token = credential.accessToken;
-      // The signed-in user info.
-      const user = result.user;
-      console.log(user);
-    }).catch((error) => {
-      // Handle Errors here.
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      // The email of the user's account used.
-      const email = error.customData.email;
-      // The AuthCredential type that was used.
-      const credential = GoogleAuthProvider.credentialFromError(error);
-      console.log(error);
-    });
+  try {
+    const result = await signInWithPopup(auth, provider);
+    const credential = GoogleAuthProvider.credentialFromResult(result);
+    const token = credential.accessToken;
+    // The signed-in user info.
+    const user = result.user;
+    console.log(user);
+  } catch (error) {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    // The email of the user's account used.
+    const email = error.customData.email;
+    // The AuthCredential type that was used.
+    const credential = GoogleAuthProvider.credentialFromError(error);
+    console.log(error);
+  }
 });
 
-const auth = getAuth(app);
-console.log(document.cookie);
-// myFunction();
-
-const btnLogoutGoogle = document.getElementById('btnLogout');
-btnLogoutGoogle.addEventListener('click', () => {
-  auth.signOut();
-  console.log('cerraste sesion');
-  console.log(auth);
-  console.log(document.cookie);
+const btnRegister = document.getElementById('btnRegister');
+btnRegister.addEventListener('click', async () => {
+  const auth = getAuth(app);
+  const email = document.getElementById('txtMail').value;
+  const password = document.getElementById('txtPass').value;
+  console.log(email, password);
+  try {
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    console.log(userCredential);
+  } catch (error) {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    console.log(error);
+  }
 });
