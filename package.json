@@ -19,7 +19,8 @@
     "dev": "vite dev src",
     "start": "npm run dev",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy": "gh-pages -d dist"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.19.4",
@@ -27,6 +28,7 @@
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-jest": "^25.3.0",
+    "gh-pages": "^4.0.0",
     "htmlhint": "^1.0.0",
     "jest": "^27.0.1",
     "regenerator-runtime": "^0.13.1",
@@ -43,7 +45,6 @@
     "commit": "554537acba119b006aadd63f243aceff8a25c582"
   },
   "dependencies": {
-    "firebase": "^9.15.0",
-    "gh-pages": "^4.0.0"
+    "firebase": "^9.15.0"
   }
 }
