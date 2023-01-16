@@ -9,11 +9,10 @@ import firebaseConfig from './lib/index.js';
 const btnGoogle = document.getElementById('btnGoogle');
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-console.log(app);
+// console.log(app);
 
-const auth = getAuth(app);
 btnGoogle.addEventListener('click', () => {
-//  const auth = getAuth();
+  const auth = getAuth();
   const provider = new GoogleAuthProvider();
   signInWithPopup(auth, provider)
     .then((result) => {
@@ -34,3 +33,4 @@ btnGoogle.addEventListener('click', () => {
       console.log(error);
     });
 });
+const auth = getAuth(app);
