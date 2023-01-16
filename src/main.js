@@ -44,13 +44,22 @@ btnGoogle.addEventListener('click', () => {
 });
 
 const auth = getAuth(app);
-console.log(document.cookie);
+// console.log(document.cookie);
 // myFunction();
 
-const btnLogoutGoogle = document.getElementById('btnLogout');
+const btnLogoutGoogle = document.getElementById('btnLogoutGoogle');
 btnLogoutGoogle.addEventListener('click', () => {
   auth.signOut();
   console.log('cerraste sesion');
   console.log(auth);
   console.log(document.cookie);
+});
+
+
+
+const btnNewUser = document.getElementById('btnNewUser');
+btnNewUser.addEventListener('click', () => {
+  const newMail = document.getElementById('txtMail').value;
+  const newPassword = document.getElementById('txtPass').value;
+  console.log(newMail);
 });
