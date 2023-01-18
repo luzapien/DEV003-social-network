@@ -1,5 +1,7 @@
 #scWelcome{
-    display: none;
+    display:flex;
+    flex-direction: column;
+  
 }
 body{
 min-height: 600px;
@@ -18,10 +20,11 @@ text-align: center;
     border-radius: 15px;
     background-color: rgba(16, 14, 16, 0.5);  
 }
-main{
-    margin-top: 10%;
-    margin-bottom: 10%;
-    padding-top: 20%;
+main{  
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
     background-color: rgba(16, 14, 16, 0.5);
     border-radius: 10px;    
 }
