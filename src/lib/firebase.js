@@ -79,10 +79,10 @@ export async function registerNewUser(email, password) {
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
   // console.log(userCredential);
   } catch (error) {
-    const errorCode = error.code;
+    //const errorCode = error.code;
     //  const errorMessage = error.message;
 
-    // console.log(errorCode);
+    console.log(error.code);
     // auth/invalid-email
 
     if (error.code === 'auth/email-already-in-use') {
