@@ -1,4 +1,17 @@
 // aqui exportaras las funciones que necesites
+import { initializeApp } from 'firebase/app';
+
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  createUserWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+} from 'firebase/auth';
+
+import { checkStateUser } from '../main';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDsV641BeYPAlGnaSM_CPuV5nWGVNOiPZs',
@@ -10,4 +23,81 @@ const firebaseConfig = {
   appId: '1:262132831591:web:12a097d59110e034244bc2',
   measurementId: 'G-K4QCS1CZVP',
 };
-export default firebaseConfig;
+
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+const app = initializeApp(firebaseConfig);
+
+export async function loginWithGoogle() {
+  const auth = getAuth();
+  const provider = new GoogleAuthProvider();
+  try {
+    const result = await signInWithPopup(auth, provider);
+    // const credential = GoogleAuthProvider.credentialFromResult(result);
+    // const token = credential.accessToken;
+    return result.user;
+  } catch (error) {
+    // const errorCode = error.code;
+    // const errorMessage = error.message;
+    // const email = error.customData.email;
+    // const credential = GoogleAuthProvider.credentialFromError(error);
+    return error;
+  }
+}
+export async function logOutFunction() {
+  const auth = getAuth();
+  await signOut(auth);
+}
+
+export async function emailLogin(email, password) {
+  let message;
+  try {
+    const auth = getAuth(app);
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    message = `Bienvenido ${email}`;
+    return message;
+  } catch (error) {
+    console.log(error.code);
+    if (error.code === 'auth/wrong-password') {
+      message = 'Contraseña incorrecta';
+    } if (error.code === 'auth/user-not-found') {
+      message = 'Correo no registrado';
+    } if (error.code === 'auth/invalid-email') {
+      message = 'Correo invalido';
+    }
+    return message;
+  }
+
+  // auth/wrong-password
+}
+
+export async function registerNewUser(email, password) {
+  //  console.log(email, password);
+  let message;
+  const auth = getAuth(app);
+  try {
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+  // console.log(userCredential);
+  } catch (error) {
+    const errorCode = error.code;
+    //  const errorMessage = error.message;
+
+    // console.log(errorCode);
+    // auth/invalid-email
+
+    if (error.code === 'auth/email-already-in-use') {
+      message = 'Ya hay un usuario registrado con el correo';
+    // falta limpiar el correo y usuario
+    } else if (error.code === 'auth/internal-error' || error.code === 'auth/invalid-email') {
+      message = 'Ingrese un correo valido';
+    } else if (error.code === 'auth/weak-password') {
+      message = 'La contraseña debe tener minimo 6 caracteres';
+    }
+    return message;
+  }
+}
+const auth = getAuth(app);
+onAuthStateChanged(auth, async (user) => {
+  checkStateUser(user);
+  console.log(user);
+});
