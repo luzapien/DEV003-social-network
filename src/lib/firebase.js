@@ -11,7 +11,7 @@ import {
   signInWithEmailAndPassword,
 } from 'firebase/auth';
 
-import { checkStateUser } from '../main';
+// import { checkStateUser } from '../main';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDsV641BeYPAlGnaSM_CPuV5nWGVNOiPZs',
@@ -96,8 +96,11 @@ export async function registerNewUser(email, password) {
     return message;
   }
 }
-const auth = getAuth(app);
-onAuthStateChanged(auth, async (user) => {
-  checkStateUser(user);
-  console.log(user);
-});
+
+export function userStatusValidation() {
+  const auth = getAuth(app);
+  onAuthStateChanged(auth, async (user) => {
+    console.log(user);
+    return user;
+  });
+}

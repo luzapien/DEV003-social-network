@@ -32,49 +32,46 @@ btnRegister.addEventListener('click', async () => {
   //  console.log(email, password);
   // console.log(userCredential);
   const resultNewUser = registerNewUser(email, password);
-  console.log(resultNewUser);
-  if (!resultNewUser) {
+  //console.log(resultNewUser);
+  /*if (!resultNewUser) {
     document.getElementById('scWelcome').style.display = 'block';
     document.getElementById('scAccess').style.display = 'none';
-  }
+  } else {
+    document.getElementById('scWelcome').style.display = 'none';
+    document.getElementById('scAccess').style.display = 'block';
+  }*/
 });
 
 const logout = document.getElementById('btnLogout');
 logout.addEventListener('click', async () => {
   // await signOut(auth);
   logOutFunction();
-  document.getElementById('scWelcome').style.display = 'none';
+  displayElement("");
+  /*document.getElementById('scWelcome').style.display = 'none';
   document.getElementById('scAccess').style.display = 'block';
-  console.log('sesion cerrada');
+  console.log('sesion cerrada');*/
 });
 
 // btnLogin
 const loginWithMail = document.getElementById('btnLogin');
-loginWithMail.addEventListener('click', () => {
+loginWithMail.addEventListener('click', async () => {
   const email = document.getElementById('txtMail').value;
   const password = document.getElementById('txtPass').value;
   const dataReturn = emailLogin(email, password);
+  let value1 
 
   // Promise.resolve(dataReturn).then((value) => alert (value));
-  Promise.resolve(dataReturn).then((value) => {
+  await Promise.resolve(dataReturn).then((value) => {
     // alert(value);
-    const value1 = value;
-    if (value1.indexOf('@')) {
-      document.getElementById('scWelcome').style.display = 'none';
-      document.getElementById('scAccess').style.display = 'block';
+    value1 = value;
+    console.log (value1);
+    if (value1.indexOf('@') >= 0) {
+      console.log (value1.indexOf("@"));
+        displayElement("user");
     } else {
-      document.getElementById('scWelcome').style.display = 'block';
-      document.getElementById('scAccess').style.display = 'none';
+        displayElement("");
+        alert(value1)  
     }
-    alert(value1);
+    //alert(value1);
   });
 });
-export function checkStateUser(user) {
-  if (user) {
-    document.getElementById('scWelcome').style.display = 'block';
-    document.getElementById('scAccess').style.display = 'none';
-  } else {
-    document.getElementById('scWelcome').style.display = 'none';
-    document.getElementById('scAccess').style.display = 'block';
-  }
-}
