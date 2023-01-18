@@ -32,10 +32,13 @@ btnRegister.addEventListener('click', async () => {
   //  console.log(email, password);
   // console.log(userCredential);
   const resultNewUser = registerNewUser(email, password);
-  console.log(resultNewUser);
+  //console.log(resultNewUser);
   if (!resultNewUser) {
     document.getElementById('scWelcome').style.display = 'block';
     document.getElementById('scAccess').style.display = 'none';
+  } else {
+    document.getElementById('scWelcome').style.display = 'none';
+    document.getElementById('scAccess').style.display = 'block';
   }
 });
 
@@ -60,13 +63,13 @@ loginWithMail.addEventListener('click', () => {
     // alert(value);
     const value1 = value;
     if (value1.indexOf('@')) {
-      document.getElementById('scWelcome').style.display = 'none';
-      document.getElementById('scAccess').style.display = 'block';
-    } else {
       document.getElementById('scWelcome').style.display = 'block';
       document.getElementById('scAccess').style.display = 'none';
+    } else {
+      document.getElementById('scWelcome').style.display = 'none';
+      document.getElementById('scAccess').style.display = 'block';
     }
-    alert(value1);
+    //alert(value1);
   });
 });
 export function checkStateUser(user) {
