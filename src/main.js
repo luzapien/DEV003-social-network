@@ -1,63 +1,80 @@
-import {
-  getAuth,
-  GoogleAuthProvider,
-  signInWithPopup,
-  createUserWithEmailAndPassword,
-} from 'firebase/auth';
-import { initializeApp } from 'firebase/app';
-import firebaseConfig from './lib/index.js';
 // import { getFirestore } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js';
-import firebaseConfig from './lib/index';
+import {
+  loginWithGoogle, logOutFunction, emailLogin, registerNewUser,
+} from './lib/firebase';
 
 // import { getAnalytics } from 'firebase/analytics';
 // const analytics = getAnalytics(app);
 
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-
 const btnGoogle = document.getElementById('btnGoogle');
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-// const db = getFirestore();
-// console.log(app);
 
-const auth = getAuth();
-btnGoogle.addEventListener('click', async () => {
-const auth = getAuth();
-  const provider = new GoogleAuthProvider();
-  try {
-    const result = await signInWithPopup(auth, provider);
-    const credential = GoogleAuthProvider.credentialFromResult(result);
-    const token = credential.accessToken;
-    // The signed-in user info.
-    const user = result.user;
+function displayElement(user) {
+  if (user) {
+    document.getElementById('scWelcome').style.display = 'block';
+    document.getElementById('scAccess').style.display = 'none';
     console.log(user);
-  } catch (error) {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    // The email of the user's account used.
-    const email = error.customData.email;
-    // The AuthCredential type that was used.
-    const credential = GoogleAuthProvider.credentialFromError(error);
-    console.log(error);
+  } else {
+    document.getElementById('scWelcome').style.display = 'none';
+    document.getElementById('scAccess').style.display = 'block';
   }
+}
+
+btnGoogle.addEventListener('click', async () => {
+  const user = await loginWithGoogle();
+  displayElement(user);
 });
 
 const btnRegister = document.getElementById('btnRegister');
 btnRegister.addEventListener('click', async () => {
-  const auth = getAuth(app);
+  // llamar funcion validar correo nuevo (correo, email)
   const email = document.getElementById('txtMail').value;
   const password = document.getElementById('txtPass').value;
-  console.log(email, password);
-  try {
-    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-    console.log(userCredential);
-  } catch (error) {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    console.log(error);
+  //  console.log(email, password);
+  // console.log(userCredential);
+  const resultNewUser = registerNewUser(email, password);
+  console.log(resultNewUser);
+  if (!resultNewUser) {
+    document.getElementById('scWelcome').style.display = 'block';
+    document.getElementById('scAccess').style.display = 'none';
   }
 });
+
+const logout = document.getElementById('btnLogout');
+logout.addEventListener('click', async () => {
+  // await signOut(auth);
+  logOutFunction();
+  document.getElementById('scWelcome').style.display = 'none';
+  document.getElementById('scAccess').style.display = 'block';
+  console.log('sesion cerrada');
+});
+
+// btnLogin
+const loginWithMail = document.getElementById('btnLogin');
+loginWithMail.addEventListener('click', () => {
+  const email = document.getElementById('txtMail').value;
+  const password = document.getElementById('txtPass').value;
+  const dataReturn = emailLogin(email, password);
+
+  // Promise.resolve(dataReturn).then((value) => alert (value));
+  Promise.resolve(dataReturn).then((value) => {
+    // alert(value);
+    const value1 = value;
+    if (value1.indexOf('@')) {
+      document.getElementById('scWelcome').style.display = 'none';
+      document.getElementById('scAccess').style.display = 'block';
+    } else {
+      document.getElementById('scWelcome').style.display = 'block';
+      document.getElementById('scAccess').style.display = 'none';
+    }
+    alert(value1);
+  });
+});
+export function checkStateUser(user) {
+  if (user) {
+    document.getElementById('scWelcome').style.display = 'block';
+    document.getElementById('scAccess').style.display = 'none';
+  } else {
+    document.getElementById('scWelcome').style.display = 'none';
+    document.getElementById('scAccess').style.display = 'block';
+  }
+}
