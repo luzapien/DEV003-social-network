@@ -1,6 +1,6 @@
 // import { getFirestore } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js';
 import {
-  loginWithGoogle, logOutFunction, emailLogin, registerNewUser, userStatusValidation
+  loginWithGoogle, logOutFunction, emailLogin, registerNewUser
 } from './lib/firebase';
 
 // import { getAnalytics } from 'firebase/analytics';
@@ -8,7 +8,7 @@ import {
 
 const btnGoogle = document.getElementById('btnGoogle');
 
-function displayElement(user) {
+export function displayElement(user) {
   if (user) {
     document.getElementById('scWelcome').style.display = 'block';
     document.getElementById('scAccess').style.display = 'none';
@@ -20,13 +20,8 @@ function displayElement(user) {
   }
 }
 
-//const userStatus = userStatusValidation()
-//console.log (userStatus);
-displayElement(userStatusValidation());
-
 btnGoogle.addEventListener('click', async () => {
   const user = await loginWithGoogle();
-  displayElement(user);
 });
 
 const btnRegister = document.getElementById('btnRegister');
@@ -34,10 +29,7 @@ btnRegister.addEventListener('click', async () => {
   // llamar funcion validar correo nuevo (correo, email)
   const email = document.getElementById('txtMail').value;
   const password = document.getElementById('txtPass').value;
-  //  console.log(email, password);
-  // console.log(userCredential);
   const resultNewUser = registerNewUser(email, password);
-  //console.log(resultNewUser);
   /*if (!resultNewUser) {
     document.getElementById('scWelcome').style.display = 'block';
     document.getElementById('scAccess').style.display = 'none';
@@ -49,12 +41,7 @@ btnRegister.addEventListener('click', async () => {
 
 const logout = document.getElementById('btnLogout');
 logout.addEventListener('click', async () => {
-  // await signOut(auth);
   logOutFunction();
-  displayElement("");
-  /*document.getElementById('scWelcome').style.display = 'none';
-  document.getElementById('scAccess').style.display = 'block';
-  console.log('sesion cerrada');*/
 });
 
 // btnLogin
@@ -64,19 +51,14 @@ loginWithMail.addEventListener('click', async () => {
   const password = document.getElementById('txtPass').value;
   const dataReturn = emailLogin(email, password);
   let value1 
-
-  // Promise.resolve(dataReturn).then((value) => alert (value));
   await Promise.resolve(dataReturn).then((value) => {
     // alert(value);
     value1 = value;
     console.log (value1);
     if (value1.indexOf('@') >= 0) {
       console.log (value1.indexOf("@"));
-        displayElement("user");
     } else {
-        displayElement("");
         alert(value1)  
     }
-    //alert(value1);
   });
 });

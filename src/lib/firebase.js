@@ -11,7 +11,7 @@ import {
   signInWithEmailAndPassword,
 } from 'firebase/auth';
 
-// import { checkStateUser } from '../main';
+import { displayElement } from '../main';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDsV641BeYPAlGnaSM_CPuV5nWGVNOiPZs',
@@ -33,14 +33,8 @@ export async function loginWithGoogle() {
   const provider = new GoogleAuthProvider();
   try {
     const result = await signInWithPopup(auth, provider);
-    // const credential = GoogleAuthProvider.credentialFromResult(result);
-    // const token = credential.accessToken;
     return result.user;
   } catch (error) {
-    // const errorCode = error.code;
-    // const errorMessage = error.message;
-    // const email = error.customData.email;
-    // const credential = GoogleAuthProvider.credentialFromError(error);
     return error;
   }
 }
@@ -80,10 +74,6 @@ export async function registerNewUser(email, password) {
   // console.log(userCredential);
   } catch (error) {
     const errorCode = error.code;
-    //  const errorMessage = error.message;
-
-    // console.log(errorCode);
-    // auth/invalid-email
 
     if (error.code === 'auth/email-already-in-use') {
       message = 'Ya hay un usuario registrado con el correo';
@@ -97,10 +87,10 @@ export async function registerNewUser(email, password) {
   }
 }
 
-export function userStatusValidation() {
-  const auth = getAuth(app);
-  onAuthStateChanged(auth, async (user) => {
-    console.log(user);
-    return user;
-  });
-}
+
+const auth = getAuth(app);
+onAuthStateChanged(auth, async (user) => {
+  console.log(user);
+  displayElement(user);
+  return user;
+});
