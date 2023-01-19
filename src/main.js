@@ -1,6 +1,6 @@
 // import { getFirestore } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js';
 import {
-  loginWithGoogle, logOutFunction, emailLogin, registerNewUser,
+  loginWithGoogle, logOutFunction, emailLogin, registerNewUser, userStatusValidation
 } from './lib/firebase';
 
 // import { getAnalytics } from 'firebase/analytics';
@@ -16,8 +16,13 @@ function displayElement(user) {
   } else {
     document.getElementById('scWelcome').style.display = 'none';
     document.getElementById('scAccess').style.display = 'block';
+    console.log ("no hay un usuario");
   }
 }
+
+//const userStatus = userStatusValidation()
+//console.log (userStatus);
+displayElement(userStatusValidation());
 
 btnGoogle.addEventListener('click', async () => {
   const user = await loginWithGoogle();
