@@ -11,7 +11,7 @@ import {
   signInWithEmailAndPassword,
 } from 'firebase/auth';
 
-import { checkStateUser } from '../main';
+// import { checkStateUser } from '../main';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDsV641BeYPAlGnaSM_CPuV5nWGVNOiPZs',
@@ -79,7 +79,7 @@ export async function registerNewUser(email, password) {
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
   // console.log(userCredential);
   } catch (error) {
-    //const errorCode = error.code;
+    // const errorCode = error.code;
     //  const errorMessage = error.message;
 
     console.log(error.code);
@@ -97,7 +97,7 @@ export async function registerNewUser(email, password) {
   }
 }
 const auth = getAuth(app);
-onAuthStateChanged(auth, async (user) => {
-  checkStateUser(user);
-  console.log(user);
-});
+// onAuthStateChanged(auth, async (user) => {
+//   checkStateUser(user);
+//   console.log(user);
+// });
