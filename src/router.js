@@ -1,25 +1,43 @@
-const route = (event) => {
-  event = event || window.event;
-  event.preventDefault();
-  window.history.pushState({}, '', event.target.href);
-  handleLocation();
-};
+/* eslint-disable import/no-cycle */
+/* import { Home } from './components/Home.js';
+import { Register } from './components/Register.js';
+import { Login } from './components/Login.js'; */
+
+// eslint-disable-next-line import/no-unresolved
+import {
+  Home, Login, googleLogin, Register,
+} from './main.js';
+
+const rootDiv = document.getElementById('root');
 
 const routes = {
-  404: '/pages/404.html',
-  '/': '/pages/index.html',
-  '/about': '/pages/about.html',
-  '/lorem': '/pages/lorem.html',
+  '/': Home,
+  '/register': Register,
+  '/login': Login,
+  '/google': googleLogin,
 };
 
-const handleLocation = async () => {
-  const path = window.location.pathname;
-  const route = routes[path] || routes[404];
-  const html = await fetch(route).then((data) => data.text());
-  document.getElementById('main-page').innerHTML = html;
+export const onNavigate = (pathname) => {
+  window.history.pushState(
+    {},
+    pathname,
+    window.location.origin + pathname,
+  );
+
+  while (rootDiv.firstChild) {
+    rootDiv.removeChild(rootDiv.firstChild);
+  }
+
+  rootDiv.appendChild(routes[pathname]());
 };
 
-window.onpopstate = handleLocation;
-window.route = route;
+const component = routes[window.location.pathname];
 
-handleLocation();
+window.onpopstate = () => {
+  while (rootDiv.firstChild) {
+    rootDiv.removeChild(rootDiv.firstChild);
+  }
+  rootDiv.appendChild(routes[window.location.pathname]());
+};
+
+rootDiv.appendChild(component());

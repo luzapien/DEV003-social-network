@@ -27,7 +27,7 @@ main{
     gap: 20px;
     background-color: rgba(16, 14, 16, 0.5);
     border-radius: 10px;    
-}
+}/*
 .email{
     margin-bottom:20px;
 }
@@ -53,7 +53,7 @@ main{
 }
 #btnGoogle:hover{
     cursor: pointer;
-}
+}*/
 footer{
     position: absolute;
     bottom: 0;

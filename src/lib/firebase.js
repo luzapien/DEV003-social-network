@@ -12,7 +12,7 @@ import {
 } from 'firebase/auth';
 
 // import { getFirestore, getDocs, collection } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js';
-import { checkStateUser } from '../main';
+// import { checkStateUser } from '../main';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDsV641BeYPAlGnaSM_CPuV5nWGVNOiPZs',
@@ -102,6 +102,6 @@ export async function registerNewUser(email, password) {
 }
 const auth = getAuth(app);
 onAuthStateChanged(auth, async (user) => {
-  checkStateUser(user);
+ // checkStateUser(user);
   console.log(user);
 });
