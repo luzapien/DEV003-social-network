@@ -2,23 +2,14 @@
 // import {
 //   loginWithGoogle, logOutFunction, emailLogin, registerNewUser,
 // } from './lib/firebase';
-//import { handleRoute } from './router';
-const ROUTER = new Router(PATHS);
-// import { getAnalytics } from 'firebase/analytics';
-// const analytics = getAnalytics(app);
-// const boton = document.getElementById('btn');
-// boton.addEventListener('click', () => {
-//   handleRoute()
-// })
-// // const navbarItems = document.querySelectorAll('.navbar a');
+// eslint-disable-next-line import/no-cycle
+// import { onNavigate } from './router';
+// import { Home } from './components/Home';
 
-// navbarItems.forEach((item) => {
-//   item.addEventListener('click', (e) => { // se crea un addEventListener por cada item del navbar (array)
-//     e.preventDefault(); // para evitar que refresque la página
-//     handleRoute(item.href); // pasando de esa manera el parámetro accedemos al href del item (a
-//   });
-// });
+// const regresarHome = Home(btnRegister){
+import './router';
 
+// }
 // // function displayElement(user) {
 // //   if (user) {
 // //     document.getElementById('scWelcome').style.display = 'block';

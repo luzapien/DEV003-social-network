@@ -28,21 +28,23 @@ const firebaseConfig = {
 // https://firebase.google.com/docs/web/setup#available-libraries
 const app = initializeApp(firebaseConfig);
 
-export async function loginWithGoogle() {
+export function loginWithGoogle() {
   const auth = getAuth();
   const provider = new GoogleAuthProvider();
-  try {
-    const result = await signInWithPopup(auth, provider);
-    // const credential = GoogleAuthProvider.credentialFromResult(result);
-    // const token = credential.accessToken;
-    return result.user;
-  } catch (error) {
-    // const errorCode = error.code;
-    // const errorMessage = error.message;
-    // const email = error.customData.email;
-    // const credential = GoogleAuthProvider.credentialFromError(error);
-    return error;
-  }
+
+  return signInWithPopup(auth, provider);
+  // try {
+  //   const result = await signInWithPopup(auth, provider);
+  //   // const credential = GoogleAuthProvider.credentialFromResult(result);
+  //   // const token = credential.accessToken;
+  //   return result.user;
+  // } catch (error) {
+  //   // const errorCode = error.code;
+  //   // const errorMessage = error.message;
+  //   // const email = error.customData.email;
+  //   // const credential = GoogleAuthProvider.credentialFromError(error);
+  //   return error;
+  // }
 }
 export async function logOutFunction() {
   const auth = getAuth();
@@ -77,7 +79,7 @@ export async function registerNewUser(email, password) {
   const auth = getAuth(app);
   try {
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-  // console.log(userCredential);
+    // console.log(userCredential);
   } catch (error) {
     // const errorCode = error.code;
     //  const errorMessage = error.message;
@@ -87,7 +89,7 @@ export async function registerNewUser(email, password) {
 
     if (error.code === 'auth/email-already-in-use') {
       message = 'Ya hay un usuario registrado con el correo';
-    // falta limpiar el correo y usuario
+      // falta limpiar el correo y usuario
     } else if (error.code === 'auth/internal-error' || error.code === 'auth/invalid-email') {
       message = 'Ingrese un correo valido';
     } else if (error.code === 'auth/weak-password') {
