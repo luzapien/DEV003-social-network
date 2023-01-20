@@ -1,18 +1,21 @@
 // import { getFirestore } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js';
-import {
-  loginWithGoogle, logOutFunction, emailLogin, registerNewUser,
-} from './lib/firebase';
+// import {
+// loginWithGoogle, logOutFunction, emailLogin, registerNewUser,
+// } from './lib/firebase';
 
 // import { getAnalytics } from 'firebase/analytics';
 // const analytics = getAnalytics(app);
 
-const btnGoogle = document.getElementById('btnGoogle');
+/* const btnGoogle = document.getElementById('btnGoogle');
+prueba.addEventListener('click', () => {
+  console.log('prueba');
+});
 
 function displayElement(user) {
   if (user) {
     document.getElementById('scWelcome').style.display = 'block';
     document.getElementById('scAccess').style.display = 'none';
-    console.log(user);
+    // console.log(user);
   } else {
     document.getElementById('scWelcome').style.display = 'none';
     document.getElementById('scAccess').style.display = 'block';
@@ -25,25 +28,41 @@ btnGoogle.addEventListener('click', async () => {
 });
 
 const btnRegister = document.getElementById('btnRegister');
-btnRegister.addEventListener('click', async () => {
+btnRegister.addEventListener('click', () => {
   // llamar funcion validar correo nuevo (correo, email)
   const email = document.getElementById('txtMail').value;
   const password = document.getElementById('txtPass').value;
   //  console.log(email, password);
   // console.log(userCredential);
-  const resultNewUser = registerNewUser(email, password);
-  //console.log(resultNewUser);
-  if (!resultNewUser) {
+  /** ***** *//*
+  const resultNewRegister = registerNewUser(email, password);
+  Promise.resolve(resultNewRegister).then((valorRegistro) => {
+    // alert(value);
+    const valueRegister = valorRegistro;
+    console.log('nuevo registro', valueRegister);
+    if (valueRegister.indexOf('@')) {
+      document.getElementById('scWelcome').style.display = 'block';
+      document.getElementById('scAccess').style.display = 'none';
+    } else {
+      document.getElementById('scWelcome').style.display = 'none';
+      document.getElementById('scAccess').style.display = 'block';
+    }
+
+    /** **************** */
+/* const resultNewUser = registerNewUser(email, password);
+  console.log(resultNewUser);
+  if (resultNewUser) {
     document.getElementById('scWelcome').style.display = 'block';
     document.getElementById('scAccess').style.display = 'none';
   } else {
     document.getElementById('scWelcome').style.display = 'none';
     document.getElementById('scAccess').style.display = 'block';
-  }
+  } *//*
+  });
 });
 
 const logout = document.getElementById('btnLogout');
-logout.addEventListener('click', async () => {
+logout.addEventListener('click', () => {
   // await signOut(auth);
   logOutFunction();
   document.getElementById('scWelcome').style.display = 'none';
@@ -69,7 +88,7 @@ loginWithMail.addEventListener('click', () => {
       document.getElementById('scWelcome').style.display = 'none';
       document.getElementById('scAccess').style.display = 'block';
     }
-    //alert(value1);
+    // alert(value1);
   });
 });
 export function checkStateUser(user) {
@@ -80,4 +99,9 @@ export function checkStateUser(user) {
     document.getElementById('scWelcome').style.display = 'none';
     document.getElementById('scAccess').style.display = 'block';
   }
-}
+} */
+const botonLogout = document.getElementById('btnLogout');
+botonLogout.addEventListener('click',()=>{
+  
+})
+
