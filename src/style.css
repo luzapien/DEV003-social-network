@@ -35,13 +35,13 @@ main{
     margin-bottom: 20px;
 }
 
-.btnRegister{
+.btnsLogIn{
     border-radius:10px;
     background-color: rgb(57, 9, 42);
     color:white;
     
 }
-.btnRegister:hover{
+.btnsLogIn:hover{
     cursor: pointer;
     background-color:#FBE3D4;
     color:black;

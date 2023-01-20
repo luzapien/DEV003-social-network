@@ -1,21 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
-  <title>CatsLover</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-
-<body>
-  <header>
-    <h1 class = "title-page">CATSLOVER</h1>
-  </header>
-  <nav></nav>
-  <main id="sectionMain">
+const views = {
+  login: `
     <section id="scAccess">
       <div class="email">
         <label>Correo:</label><br>
@@ -31,16 +15,12 @@
          <img src="./Images/googleBtn.png" width="100%" height="100%" id="btnGoogle">
       </div> 
     </section>
+    `,
+  welcome: `
     <section id="scWelcome">
-      Bienvenido a CatsLover<br>
-      
+       Bienvenido a CatsLover<br>
       <button class="btnsLogIn" id="btnLogout">Cerrar Sesion</button>
     </section>
-  </main>
-  <footer> 
-    <p> © January 2023 Developed by Chris, María and Sofía </p>
-  </footer>
-  <script type="module" src="main.js"></script>
-</body>
-
-</html>
+    `,
+};
+export default views;
