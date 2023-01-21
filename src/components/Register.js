@@ -53,7 +53,7 @@ export const Register = () => {
         } else if (error.code === 'auth/weak-password') {
           message = 'La contraseña debe tener minimo 6 caracteres';
         }
-        console.log(message);
+        alert(message);
       }
     }
   });
