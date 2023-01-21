@@ -1,21 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Router pruebas</title>
-    <link rel="stylesheet" href="styles-router.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <title>CatsLover</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
+<h1>CATSLOVER</h1>
 <body>
-    <main class="container">
-        <nav id="section">
-            <a href="/">Home</a>
-            <a href="/about">About</a>
-            <a href="/contact">Contact Mx</a>
-        </nav>
-        <div id ="content"></div>
-    </main>
-    <script type="module" src="/router-practicas/url-router.js"></script>    
+  <header>
+
+  </header>
+  <nav></nav>
+  <main>
+    <section id="scAcceso">
+      <label>Correo:</label><br>
+      <input type="text" id="txtMail" autocomplete="off" placeholder="Ingresa tu correo"><br>
+      <label>Contraseña:</label><br>
+      <input type="password" id="txtPass" autocomplete="off" placeholder="Ingresa tu Contraseña"><br>
+      <button id="btnNewUser">Nuevo Usuario</button>
+      <button id="btnSignin">Ingresar</button>
+      <button id="btnGoogle">Sign in Google</button>
+      <button id="btnLogoutGoogle">Cerrar Sesion</button>
+    </section>
+  </main>
+  
+  <script type="module" src="main.js"></script>
 </body>
+<footer> 
+  <p> © January 2023 Developed by Chris, María and Sofía </p>
+</footer>
 </html>

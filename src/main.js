@@ -39,26 +39,23 @@ btnRegister.addEventListener('click', async () => {
   }*/
 });
 
-const logout = document.getElementById('btnLogout');
-logout.addEventListener('click', async () => {
-  logOutFunction();
+const auth = getAuth(app);
+// console.log(document.cookie);
+// myFunction();
+
+const btnLogoutGoogle = document.getElementById('btnLogoutGoogle');
+btnLogoutGoogle.addEventListener('click', () => {
+  auth.signOut();
+  console.log('cerraste sesion');
+  console.log(auth);
+  console.log(document.cookie);
 });
 
-// btnLogin
-const loginWithMail = document.getElementById('btnLogin');
-loginWithMail.addEventListener('click', async () => {
-  const email = document.getElementById('txtMail').value;
-  const password = document.getElementById('txtPass').value;
-  const dataReturn = emailLogin(email, password);
-  let value1 
-  await Promise.resolve(dataReturn).then((value) => {
-    // alert(value);
-    value1 = value;
-    console.log (value1);
-    if (value1.indexOf('@') >= 0) {
-      console.log (value1.indexOf("@"));
-    } else {
-        alert(value1)  
-    }
-  });
+
+
+const btnNewUser = document.getElementById('btnNewUser');
+btnNewUser.addEventListener('click', () => {
+  const newMail = document.getElementById('txtMail').value;
+  const newPassword = document.getElementById('txtPass').value;
+  console.log(newMail);
 });
