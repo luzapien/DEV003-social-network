@@ -11,7 +11,8 @@ import {
   signInWithEmailAndPassword,
 } from 'firebase/auth';
 
-import { displayElement } from '../main';
+// import { getFirestore, getDocs, collection } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js';
+// import { checkStateUser } from '../main';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDsV641BeYPAlGnaSM_CPuV5nWGVNOiPZs',
@@ -27,6 +28,9 @@ const firebaseConfig = {
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 const app = initializeApp(firebaseConfig);
+// Initialize Cloud Firestore and get a reference to the service
+// const db = getFirestore(app);
+// console.log(db);
 
 export async function loginWithGoogle() {
   const auth = getAuth();
@@ -38,9 +42,9 @@ export async function loginWithGoogle() {
     return error;
   }
 }
-export async function logOutFunction() {
+export function logOutFunction() {
   const auth = getAuth();
-  await signOut(auth);
+  signOut(auth);
 }
 
 export async function emailLogin(email, password) {
@@ -71,9 +75,14 @@ export async function registerNewUser(email, password) {
   const auth = getAuth(app);
   try {
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-  // console.log(userCredential);
+    // console.log(userCredential);
+    message = userCredential;
   } catch (error) {
-    const errorCode = error.code;
+    // const errorCode = error.code;
+    //  const errorMessage = error.message;
+  //  message = error.code;
+    console.log(error.code);
+    // auth/invalid-email
 
     if (error.code === 'auth/email-already-in-use') {
       message = 'Ya hay un usuario registrado con el correo';
@@ -83,13 +92,13 @@ export async function registerNewUser(email, password) {
     } else if (error.code === 'auth/weak-password') {
       message = 'La contraseña debe tener minimo 6 caracteres';
     }
-    return message;
-  }
+  } return message;
 }
 
 
 const auth = getAuth(app);
 onAuthStateChanged(auth, async (user) => {
+ // checkStateUser(user);
   console.log(user);
   displayElement(user);
   return user;
