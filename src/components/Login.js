@@ -35,7 +35,7 @@ export const Login = () => {
         } if (error.code === 'auth/invalid-email') {
           message = 'Correo invalido';
         }
-        console.log(message);
+        alert(message);
       }
     }
   })
@@ -56,7 +56,7 @@ export const Login = () => {
   btnGoogle.addEventListener('click', async () => {
     try {
       const result = await loginWithGoogle();
-      console.log(result.user);
+      console.log(result);
       onNavigate('/');
     } catch (error) {
       console.log(error);

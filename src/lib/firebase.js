@@ -1,5 +1,6 @@
 // aqui exportaras las funciones que necesites
 import { initializeApp } from 'firebase/app';
+import { onNavigate } from '../router';
 
 import {
   getAuth,
@@ -36,7 +37,7 @@ export function loginWithGoogle() {
   return signInWithPopup(auth, provider);
   // try {
   //   const result = await signInWithPopup(auth, provider);
-  //   // const credential = GoogleAuthProvider.credentialFromResult(result);
+  //const credential = GoogleAuthProvider.credentialFromResult(result);
   //   // const token = credential.accessToken;
   //   return result.user;
   // } catch (error) {
@@ -113,14 +114,14 @@ export const updateUserProfile = (user, displayName, userPhoto) => {
   return updateProfile(user, userProperties);
 }
 
-export function userStatus (user){
-  const auth = getAuth(app);
-  return onAuthStateChanged(auth,user);
-};
 
-// export const auth = getAuth(app);
-// onAuthStateChanged(auth, (user) => {
-//   if (user) {
-//     console.log(user);
-//   }
-// });
+const auth = getAuth(app);
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    onNavigate('/');
+    console.log(user);
+  } else {
+    onNavigate('/login');
+  }
+ 
+});
