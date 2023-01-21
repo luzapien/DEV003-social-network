@@ -1,83 +1,103 @@
 // import { getFirestore } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js';
-import {
-  loginWithGoogle, logOutFunction, emailLogin, registerNewUser,
-} from './lib/firebase';
+// import {
+//   loginWithGoogle, logOutFunction, emailLogin, registerNewUser,
+// } from './lib/firebase';
+// eslint-disable-next-line import/no-cycle
+// import { onNavigate } from './router';
+// import { Home } from './components/Home';
 
-// import { getAnalytics } from 'firebase/analytics';
-// const analytics = getAnalytics(app);
+// const regresarHome = Home(btnRegister){
+import './router';
+import { userStatus } from './lib/firebase';
+// import { checkStatus } from './lib/firebase';
+import { onNavigate } from './router';
 
-const btnGoogle = document.getElementById('btnGoogle');
-
-function displayElement(user) {
+ function checkStatus () { 
+  userStatus();
   if (user) {
-    document.getElementById('scWelcome').style.display = 'block';
-    document.getElementById('scAccess').style.display = 'none';
-    console.log(user);
-  } else {
-    document.getElementById('scWelcome').style.display = 'none';
-    document.getElementById('scAccess').style.display = 'block';
-  }
+    onNavigate('/');
+} else {
+  onNavigate('/login');
 }
+ }
+// checkStatus(onNavigate('/login'), onNavigate('/'));
 
-btnGoogle.addEventListener('click', async () => {
-  const user = await loginWithGoogle();
-  displayElement(user);
-});
+// }
+// // function displayElement(user) {
+// //   if (user) {
+// //     document.getElementById('scWelcome').style.display = 'block';
+// //     document.getElementById('scAccess').style.display = 'none';
+// //     console.log(user);
+// //   } else {
+// //     document.getElementById('scWelcome').style.display = 'none';
+// //     document.getElementById('scAccess').style.display = 'block';
+// //   }
+// // }
+// const btnGoogle = document.getElementById('btnGoogle');
+// btnGoogle.addEventListener('click', () => {
+//   console.log('boton');
+// });
 
-const btnRegister = document.getElementById('btnRegister');
-btnRegister.addEventListener('click', async () => {
-  // llamar funcion validar correo nuevo (correo, email)
-  const email = document.getElementById('txtMail').value;
-  const password = document.getElementById('txtPass').value;
-  //  console.log(email, password);
-  // console.log(userCredential);
-  const resultNewUser = registerNewUser(email, password);
-  //console.log(resultNewUser);
-  if (!resultNewUser) {
-    document.getElementById('scWelcome').style.display = 'block';
-    document.getElementById('scAccess').style.display = 'none';
-  } else {
-    document.getElementById('scWelcome').style.display = 'none';
-    document.getElementById('scAccess').style.display = 'block';
-  }
-});
+// // btnGoogle.addEventListener('click', async () => {
+// //   const user = await loginWithGoogle();
+// //   handleRoute('/');
+// //   console.log(user);
+// // });
 
-const logout = document.getElementById('btnLogout');
-logout.addEventListener('click', async () => {
-  // await signOut(auth);
-  logOutFunction();
-  document.getElementById('scWelcome').style.display = 'none';
-  document.getElementById('scAccess').style.display = 'block';
-  console.log('sesion cerrada');
-});
+// const btnRegister = document.getElementById('btnRegister');
+// btnRegister.addEventListener('click', async () => {
+//   // llamar funcion validar correo nuevo (correo, email)
+//   const email = document.getElementById('txtMail').value;
+//   const password = document.getElementById('txtPass').value;
+//   //  console.log(email, password);
+//   // console.log(userCredential);
+//   const resultNewUser = registerNewUser(email, password);
+//   // console.log(resultNewUser);
+//   if (!resultNewUser) {
+//     document.getElementById('scWelcome').style.display = 'block';
+//     document.getElementById('scAccess').style.display = 'none';
+//   } else {
+//     document.getElementById('scWelcome').style.display = 'none';
+//     document.getElementById('scAccess').style.display = 'block';
+//   }
+// });
 
-// btnLogin
-const loginWithMail = document.getElementById('btnLogin');
-loginWithMail.addEventListener('click', () => {
-  const email = document.getElementById('txtMail').value;
-  const password = document.getElementById('txtPass').value;
-  const dataReturn = emailLogin(email, password);
+// const logout = document.getElementById('btnLogout');
+// logout.addEventListener('click', async () => {
+//   // await signOut(auth);
+//   logOutFunction();
+//   document.getElementById('scWelcome').style.display = 'none';
+//   document.getElementById('scAccess').style.display = 'block';
+//   console.log('sesion cerrada');
+// });
 
-  // Promise.resolve(dataReturn).then((value) => alert (value));
-  Promise.resolve(dataReturn).then((value) => {
-    // alert(value);
-    const value1 = value;
-    if (value1.indexOf('@')) {
-      document.getElementById('scWelcome').style.display = 'block';
-      document.getElementById('scAccess').style.display = 'none';
-    } else {
-      document.getElementById('scWelcome').style.display = 'none';
-      document.getElementById('scAccess').style.display = 'block';
-    }
-    //alert(value1);
-  });
-});
-export function checkStateUser(user) {
-  if (user) {
-    document.getElementById('scWelcome').style.display = 'block';
-    document.getElementById('scAccess').style.display = 'none';
-  } else {
-    document.getElementById('scWelcome').style.display = 'none';
-    document.getElementById('scAccess').style.display = 'block';
-  }
-}
+// // btnLogin
+// const loginWithMail = document.getElementById('btnLogin');
+// loginWithMail.addEventListener('click', () => {
+//   const email = document.getElementById('txtMail').value;
+//   const password = document.getElementById('txtPass').value;
+//   const dataReturn = emailLogin(email, password);
+
+//   // Promise.resolve(dataReturn).then((value) => alert (value));
+//   Promise.resolve(dataReturn).then((value) => {
+//     // alert(value);
+//     const value1 = value;
+//     if (value1.indexOf('@')) {
+//       document.getElementById('scWelcome').style.display = 'block';
+//       document.getElementById('scAccess').style.display = 'none';
+//     } else {
+//       document.getElementById('scWelcome').style.display = 'none';
+//       document.getElementById('scAccess').style.display = 'block';
+//     }
+//     // alert(value1);
+//   });
+// });
+// export function checkStateUser(user) {
+//   if (user) {
+//     document.getElementById('scWelcome').style.display = 'block';
+//     document.getElementById('scAccess').style.display = 'none';
+//   } else {
+//     document.getElementById('scWelcome').style.display = 'none';
+//     document.getElementById('scAccess').style.display = 'block';
+//   }
+// 
