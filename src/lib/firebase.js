@@ -8,6 +8,7 @@ import {
   createUserWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
+  updateProfile,
   signInWithEmailAndPassword,
 } from 'firebase/auth';
 
@@ -46,60 +47,80 @@ export function loginWithGoogle() {
   //   return error;
   // }
 }
-export async function logOutFunction() {
+export function logOutFunction() {
   const auth = getAuth();
-  await signOut(auth);
+  return signOut(auth);
 }
 
-export async function emailLogin(email, password) {
-  let message;
-  try {
-    const auth = getAuth(app);
-    const userCredential = await signInWithEmailAndPassword(auth, email, password);
-    message = `Bienvenido ${email}`;
-    return message;
-  } catch (error) {
-    console.log(error.code);
-    if (error.code === 'auth/wrong-password') {
-      message = 'Contraseña incorrecta';
-    } if (error.code === 'auth/user-not-found') {
-      message = 'Correo no registrado';
-    } if (error.code === 'auth/invalid-email') {
-      message = 'Correo invalido';
-    }
-    return message;
-  }
+export function emailLogin(email, password) {
+  const auth = getAuth();
+  return signInWithEmailAndPassword(auth, email, password);
+  // let message;
+  // try {
+  //   const auth = getAuth(app);
+  //   const userCredential = await signInWithEmailAndPassword(auth, email, password);
+  //   message = `Bienvenido ${email}`;
+  //   return message;
+  // } catch (error) {
+  //   console.log(error.code);
+  //   if (error.code === 'auth/wrong-password') {
+  //     message = 'Contraseña incorrecta';
+  //   } if (error.code === 'auth/user-not-found') {
+  //     message = 'Correo no registrado';
+  //   } if (error.code === 'auth/invalid-email') {
+  //     message = 'Correo invalido';
+  //   }
+  //   return message;
+  // }
 
   // auth/wrong-password
 }
 
-export async function registerNewUser(email, password) {
-  //  console.log(email, password);
-  let message;
+export function registerNewUser(email, password) {
   const auth = getAuth(app);
-  try {
-    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-    // console.log(userCredential);
-  } catch (error) {
-    // const errorCode = error.code;
-    //  const errorMessage = error.message;
+  return createUserWithEmailAndPassword(auth, email, password);
+  //  console.log(email, password);
+  //let message;
 
-    console.log(error.code);
-    // auth/invalid-email
+  // try {
+  //   const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+  //   // console.log(userCredential);
+  // } catch (error) {
+  //   // const errorCode = error.code;
+  //   //  const errorMessage = error.message;
 
-    if (error.code === 'auth/email-already-in-use') {
-      message = 'Ya hay un usuario registrado con el correo';
-      // falta limpiar el correo y usuario
-    } else if (error.code === 'auth/internal-error' || error.code === 'auth/invalid-email') {
-      message = 'Ingrese un correo valido';
-    } else if (error.code === 'auth/weak-password') {
-      message = 'La contraseña debe tener minimo 6 caracteres';
-    }
-    return message;
-  }
+  //   console.log(error.code);
+  //   // auth/invalid-email
+
+  //   if (error.code === 'auth/email-already-in-use') {
+  //     message = 'Ya hay un usuario registrado con el correo';
+  //     // falta limpiar el correo y usuario
+  //   } else if (error.code === 'auth/internal-error' || error.code === 'auth/invalid-email') {
+  //     message = 'Ingrese un correo valido';
+  //   } else if (error.code === 'auth/weak-password') {
+  //     message = 'La contraseña debe tener minimo 6 caracteres';
+  //   }
+  //   return message;
+  // }
 }
-const auth = getAuth(app);
-// onAuthStateChanged(auth, async (user) => {
-//   checkStateUser(user);
-//   console.log(user);
+
+export const updateUserProfile = (user, displayName, userPhoto) => {
+  const userProperties = {
+    displayName: displayName,
+    photoURL: userPhoto,
+  }
+
+  return updateProfile(user, userProperties);
+}
+
+export function userStatus (user){
+  const auth = getAuth(app);
+  return onAuthStateChanged(auth,user);
+};
+
+// export const auth = getAuth(app);
+// onAuthStateChanged(auth, (user) => {
+//   if (user) {
+//     console.log(user);
+//   }
 // });

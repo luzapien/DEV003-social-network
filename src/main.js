@@ -8,6 +8,19 @@
 
 // const regresarHome = Home(btnRegister){
 import './router';
+import { userStatus } from './lib/firebase';
+// import { checkStatus } from './lib/firebase';
+import { onNavigate } from './router';
+
+ function checkStatus () { 
+  userStatus();
+  if (user) {
+    onNavigate('/');
+} else {
+  onNavigate('/login');
+}
+ }
+// checkStatus(onNavigate('/login'), onNavigate('/'));
 
 // }
 // // function displayElement(user) {
@@ -87,4 +100,4 @@ import './router';
 //     document.getElementById('scWelcome').style.display = 'none';
 //     document.getElementById('scAccess').style.display = 'block';
 //   }
-// }
+// 

@@ -1,12 +1,12 @@
 import { Home } from './components/Home';
-// import { Login } from './components/Login';
+import { Login } from './components/Login';
 import { Register } from './components/Register';
 
 const rootDiv = document.getElementById('root');
 
 const routes = {
   '/': Home,
-  // '/login': Login,
+  '/login': Login,
   '/register': Register,
 };
 
