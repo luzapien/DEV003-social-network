@@ -62,7 +62,7 @@ export const Login = () => {
 
   const btnGoogle = document.createElement('img');
   btnGoogle.className = 'btnGoogle';
-  btnGoogle.src = 'images/icon-google-rose.png';
+  btnGoogle.src = 'images/googleicon.png';
   btnGoogle.alt = 'Entrar con google';
   btnGoogle.width = '100%';
   btnGoogle.height = '100%';
