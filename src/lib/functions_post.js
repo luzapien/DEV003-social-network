@@ -1,100 +1,164 @@
 
-async function addTodo(text) {
-    try {
-      const todo = {
-        id: getUUID(),
-        text: text,
-        completed: false,
-        userid: currentUser.uid,
-      };
-      const response = await insert(todo);
-      loadTodos();
-    } catch (error) {
-      console.error(error);
-    }
+import { insert, getItems, update } from "./firestore.js";
+import { createUserID } from "./createUserID.js";
+import { getFirestore,collection, addDoc } from "firebase/firestore";
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+// Initialize Cloud Firestore and get a reference to the service
+const db = getFirestore(app);
+
+let currentUser;
+let todos = [];
+//const todoInput = document.getElementById("todo-input");
+//const todoForm = document.getElementById("todo-form");
+//const userInfo = document.getElementById("user-info");
+const allPostContainer = document.getElementById("allPostContainer");
+
+
+
+
+
+//addNewPost
+async function addNewPost(text) {
+  /*
+  try {
+  const docRef = await addDoc(collection(db, "users"), {
+    first: "Ada",
+    last: "Lovelace",
+    born: 1815
+  });
+  console.log("Document written with ID: ", docRef.id);
+} */
+  try {
+    const newPost = {
+      id: createUserID(),
+      text: text,
+//agregar fecha de creacion
+      userid: currentUser.uid,
+    };
+    const response = await insert(newPost);
+    loadAllPost();
+  } catch (error) {
+    console.error(error);
   }
+}
+
+/*funcion que cree collection. debe llamarse al registrarse */
+async function userCollection (){
+  try {
+    
+  } catch (error) {
+    
+  }
+}
+
+export async function insert(item) {
+  //crear coleccion e insertar post
+  //obtener coleccion del usuario
+  //coleccion se crea al registrar
+  try {
+    //colecion por usuario
+  /*  const response = await addDoc(collection(db, "users"), {
+      first: "Ada",
+      last: "Lovelace",
+      born: 1815
+    });*/
+    const response = await db.collection("users").add(todo);
+    return response;
+  } catch (error) {
+    throw new Error(error);
+  }
+}
+
+export async function getItems(uid) {
+  try {
+    let items = [];
+    const response = await db
+      .collection("users")
+      .where("userid", "==", uid)
+      .get();
+
+    response.forEach(function (item) {
+      items.push(item.data());
+    });
+
+    return items;
+  } catch (error) {
+    throw new Error(error);
+  }
+}
+
+
+
+
   
-  async function loadTodos() {
-    todosContainer.innerHTML = "";
+  async function loadAllPost() {
+    allPostContainer.innerHTML = "";
     todos = [];
   
     try {
       const response = await getItems(currentUser.uid);
   
       todos = [...response];
-      renderTodos();
+      showAllPost();
     } catch (error) {
       console.error(error);
     }
   }
   
-  function renderTodos() {
+  function showAllPost() {
     let html = "";
     todos.forEach((todo) => {
       html += `
-        <li>
-          <input type="checkbox" id="${todo.id}" ${
-        todo.completed ? "checked" : ""
-      } />
-          <label for="${todo.id}">${todo.text}</label>
-        </li>
+        <label for="${todo.id}">${todo.text}</label>
+        <button id="btnEdit">Editar</button>
+        <button id="btnDelete">Elminar</button><br>
       `;
     });
   
-    todosContainer.innerHTML = html;
+    allPostContainer.innerHTML = html;
   
     document
-      .querySelectorAll('#todos-container input[type="checkbox"]')
+      .querySelectorAll("btnEdit")
       .forEach((checkbox) => {
-        checkbox.addEventListener("change", async (e) => {
+        checkbox.addEventListener("click", async (e) => {
           const id = e.target.id;
-          try {
+          console.log("Editando...")
+         /* try {
             await update(id, e.target.checked);
           } catch (error) {
             console.error(error);
-          }
+          }*/
+        });
+      });
+
+
+      document
+      .querySelectorAll("btnDelete")
+      .forEach((checkbox) => {
+        checkbox.addEventListener("click", async (e) => {
+          const id = e.target.id;
+          console.log("Eliminar...")
+         /* try {
+            await update(id, e.target.checked);
+          } catch (error) {
+            console.error(error);
+          }*/
         });
       });
   }
 
-async function addTodo(text) {
+  export async function update(id) {
     try {
-      const todo = {
-        id: getUUID(),
-        text: text,
-        completed: false,
-        userid: currentUser.uid,
-      };
-      const response = await insert(todo);
-      loadTodos();
+      let docId;
+      const doc = await db.collection("todos").where("id", "==", id).get();
+      doc.forEach((i) => {
+        docId = i.id;
+      });
+  
+     // await db.collection("todos").doc(docId).update({ completed: completed });
     } catch (error) {
-      console.error(error);
+      throw new Error(error);
     }
   }
-  
-  async function loadTodos() {
-    todosContainer.innerHTML = "";
-    todos = [];
-  
-    try {
-      const response = await getItems(currentUser.uid);
-  
-      todos = [...response];
-      renderTodos();
-    } catch (error) {
-      console.error(error);
-    }
-  }
-  
-  function renderTodos() {
-    let html = "";
-    todos.forEach((todo) => {
-      html += `
-        <li>
-          <input type="checkbox" id="${todo.id}" ${
-        todo.completed ? "checked" : ""
-      } />
-          <label for="${todo.id}">${todo.text}</label>
-        </li>
-      `;
-    });

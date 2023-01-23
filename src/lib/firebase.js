@@ -29,9 +29,10 @@ const firebaseConfig = {
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 const app = initializeApp(firebaseConfig);
+const auth = getAuth();
+
 
 export function loginWithGoogle() {
-  const auth = getAuth();
   const provider = new GoogleAuthProvider();
 
   return signInWithPopup(auth, provider);
@@ -49,12 +50,11 @@ export function loginWithGoogle() {
   // }
 }
 export function logOutFunction() {
-  const auth = getAuth();
   return signOut(auth);
 }
 
 export function emailLogin(email, password) {
-  const auth = getAuth();
+
   return signInWithEmailAndPassword(auth, email, password);
   // let message;
   // try {
@@ -78,7 +78,6 @@ export function emailLogin(email, password) {
 }
 
 export function registerNewUser(email, password) {
-  const auth = getAuth(app);
   return createUserWithEmailAndPassword(auth, email, password);
   //  console.log(email, password);
   //let message;
@@ -115,7 +114,6 @@ export const updateUserProfile = (user, displayName, userPhoto) => {
 }
 
 
-const auth = getAuth(app);
 onAuthStateChanged(auth, (user) => {
   if (user) {
     onNavigate('/');
