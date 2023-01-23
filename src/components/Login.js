@@ -5,16 +5,21 @@ export const Login = () => {
   document.title = 'Login';
   const container = document.createElement('section');
   container.className = 'mainContainer';
+  const title =`<h1 class = "title-page">CatLovers</h1>`;
   const form = document.createElement('form');
+  form.className =  'form-login';
   const label = document.createElement('label');
+  label.className =  'label-login';
   const email = document.createElement('input');
   email.type = 'email';
   email.required = true;
   email.placeholder = 'Correo';
+  email.className = 'input-login';
   const password = document.createElement('input');
   password.type = 'password';
   password.placeholder = 'Contraseña';
   password.minLength = 6;
+  password.className = 'input-login';
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -35,28 +40,36 @@ export const Login = () => {
         } if (error.code === 'auth/invalid-email') {
           message = 'Correo invalido';
         }
-        alert(message);
+        console.log(message);
       }
     }
   })
   // Botones inicio y registrar
+  const containerBtnsEnd = document.createElement ('div');
+  containerBtnsEnd.className = 'containerBtnsEnd';
+  const btnLogin = document.createElement('button');
+  btnLogin.textContent = 'Iniciar Sesión';
+  btnLogin.type = 'submit';
+  btnLogin.className = 'btn-login';
+
   const btnRegister = document.createElement('button');
-  btnRegister.textContent = 'Registro';
+  btnRegister.textContent = 'Crear cuenta';
+  btnRegister.className = 'btn-register';
   btnRegister.addEventListener('click', (e) => {
     e.preventDefault();
     onNavigate('/register');
   });
 
-  const btnLogin = document.createElement('button');
-  btnLogin.textContent = 'Inicia Sesión';
-  btnLogin.type = 'submit';
-
-  const btnGoogle = document.createElement('button');
-  btnGoogle.innerText = 'Sign in with Google';
+  const btnGoogle = document.createElement('img');
+  btnGoogle.className = 'btnGoogle';
+  btnGoogle.src = 'images/icon-google-rose.png';
+  btnGoogle.alt = 'Entrar con google';
+  btnGoogle.width = '100%';
+  btnGoogle.height = '100%';
   btnGoogle.addEventListener('click', async () => {
     try {
       const result = await loginWithGoogle();
-      console.log(result);
+      console.log(result.user);
       onNavigate('/');
     } catch (error) {
       console.log(error);
@@ -66,9 +79,10 @@ export const Login = () => {
   label.append(email, password);
   form.appendChild(label);
   form.appendChild(btnLogin);
+  containerBtnsEnd.append(btnRegister, btnGoogle);
+  container.innerHTML = title;
   container.appendChild(form);
-  container.appendChild(btnRegister);
-  container.appendChild(btnGoogle);
+  container.appendChild(containerBtnsEnd);
 
   return container;
 };
