@@ -3,8 +3,10 @@ import { onNavigate } from '../router';
 
 export const Register = () => {
   const container = document.createElement('div');
-  container.textContent = 'Registrate';
+  container.className ='container-register';
+  const titleRegister = `<h1 class = 'title-register'>Registrate</h1>`
   const form = document.createElement('form');
+  form.className = 'form-register';
   const name = document.createElement('input');
   name.type = 'text';
   name.required = true;
@@ -61,15 +63,19 @@ export const Register = () => {
   const registerBtn = document.createElement('button');
   registerBtn.textContent = 'Registrar';
   registerBtn.type = 'submit';
+  registerBtn.className = 'btns-register';
 
   const loginBtn = document.createElement('button');
-  loginBtn.textContent = 'Ir al inicio de sesión';
+  loginBtn.textContent = 'Regresar al inicio de sesión';
   loginBtn.type = 'button';
+  loginBtn.className = 'btns-register';
+  loginBtn.setAttribute('id', 'btn-return-login');
   loginBtn.addEventListener('click', () => {
     onNavigate('/login');
   });
   form.append(name, lastname, email, password, passwordConfirm);
   form.appendChild(registerBtn);
+  container.innerHTML = titleRegister;
   container.appendChild(form);
   container.append(loginBtn);
 

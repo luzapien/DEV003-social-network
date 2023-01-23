@@ -76,7 +76,6 @@ export const Login = () => {
     }
   });
 
-  //Img gatito
   label.append(email, password);
   form.appendChild(label);
   form.appendChild(btnLogin);
