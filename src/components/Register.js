@@ -3,8 +3,8 @@ import { onNavigate } from '../router';
 
 export const Register = () => {
   const container = document.createElement('div');
-  container.className ='container-register';
-  const titleRegister = `<h1 class = 'title-register'>Registrate</h1>`
+  container.className = 'container-register';
+  const titleRegister = '<h1 class = \'title-register\'>Registrate</h1>';
   const form = document.createElement('form');
   form.className = 'form-register';
   const name = document.createElement('input');
@@ -14,7 +14,7 @@ export const Register = () => {
   const lastname = document.createElement('input');
   lastname.type = 'text';
   lastname.required = true;
-  lastname.placeholder = 'Apellido'
+  lastname.placeholder = 'Apellido';
   const email = document.createElement('input');
   email.type = 'email';
   email.required = true;
@@ -24,7 +24,7 @@ export const Register = () => {
   password.placeholder = 'Contraseña';
   const passwordConfirm = document.createElement('input');
   passwordConfirm.type = 'password';
-  passwordConfirm.placeholder = 'Confirmar contraseña'
+  passwordConfirm.placeholder = 'Confirmar contraseña';
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -33,7 +33,7 @@ export const Register = () => {
     const passwordValue = password.value;
     const nameValue = name.value;
     const lastnameValue = lastname.value;
-    const fullName = nameValue + ' ' + lastnameValue;
+    const fullName = `${nameValue} ${lastnameValue}`;
 
     if (passwordValue !== passwordConfirmValue) {
       alert('Las contraseñas no coinciden');
@@ -44,7 +44,7 @@ export const Register = () => {
       try {
         const result = await registerNewUser(emailValue, passwordValue);
         const user = result.user;
-        await updateUserProfile(user, fullName, 'http://placekitten.com/200/300')
+        await updateUserProfile(user, fullName, 'http://placekitten.com/200/300');
         onNavigate('/');
       } catch (error) {
         let message;

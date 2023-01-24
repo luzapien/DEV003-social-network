@@ -34,18 +34,6 @@ export function loginWithGoogle() {
   const provider = new GoogleAuthProvider();
 
   return signInWithPopup(auth, provider);
-  // try {
-  //   const result = await signInWithPopup(auth, provider);
-  // const credential = GoogleAuthProvider.credentialFromResult(result);
-  //   // const token = credential.accessToken;
-  //   return result.user;
-  // } catch (error) {
-  //   // const errorCode = error.code;
-  //   // const errorMessage = error.message;
-  //   // const email = error.customData.email;
-  //   // const credential = GoogleAuthProvider.credentialFromError(error);
-  //   return error;
-  // }
 }
 export function logOutFunction() {
   const auth = getAuth();
@@ -78,6 +66,8 @@ export function emailLogin(email, password) {
 
 export function registerNewUser(email, password) {
   const auth = getAuth(app);
+  const valor = createUserWithEmailAndPassword(auth, email, password);
+  console.log(valor.email);
   return createUserWithEmailAndPassword(auth, email, password);
   //  console.log(email, password);
   // let message;
