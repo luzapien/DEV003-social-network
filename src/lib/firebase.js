@@ -1,7 +1,5 @@
 // aqui exportaras las funciones que necesites
 import { initializeApp } from 'firebase/app';
-import { onNavigate } from '../router';
-
 import {
   getAuth,
   GoogleAuthProvider,
@@ -12,6 +10,7 @@ import {
   updateProfile,
   signInWithEmailAndPassword,
 } from 'firebase/auth';
+import { onNavigate } from '../router';
 
 // import { checkStateUser } from '../main';
 
@@ -38,7 +37,7 @@ export function loginWithGoogle() {
   return signInWithPopup(auth, provider);
   // try {
   //   const result = await signInWithPopup(auth, provider);
-  //const credential = GoogleAuthProvider.credentialFromResult(result);
+  // const credential = GoogleAuthProvider.credentialFromResult(result);
   //   // const token = credential.accessToken;
   //   return result.user;
   // } catch (error) {
@@ -80,7 +79,7 @@ export function emailLogin(email, password) {
 export function registerNewUser(email, password) {
   return createUserWithEmailAndPassword(auth, email, password);
   //  console.log(email, password);
-  //let message;
+  // let message;
 
   // try {
   //   const userCredential = await createUserWithEmailAndPassword(auth, email, password);
@@ -106,13 +105,12 @@ export function registerNewUser(email, password) {
 
 export const updateUserProfile = (user, displayName, userPhoto) => {
   const userProperties = {
-    displayName: displayName,
+    displayName,
     photoURL: userPhoto,
-  }
+  };
 
   return updateProfile(user, userProperties);
-}
-
+};
 
 onAuthStateChanged(auth, (user) => {
   if (user) {
@@ -121,5 +119,4 @@ onAuthStateChanged(auth, (user) => {
   } else {
     onNavigate('/login');
   }
- 
 });

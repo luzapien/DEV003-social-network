@@ -1,7 +1,9 @@
 
 /**Estilos generales**/
+html {
+    font-size: 16px;
+}
 body {
-min-height: 600px;
 justify-items: center;
 background-image:url("./images/patitascat.jpg");
 text-align: center;
@@ -13,17 +15,17 @@ text-align: center;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    background-color: rgba(16, 14, 16, 0.4);
+    background-color: rgba(248, 108, 248, 0.4);
     margin: 15%;
     border-radius: 10px; 
-    min-height: 900px;   
+    /*min-height: 900px;*/ 
 }
 .title-page{
     color: #FBE3D4;
     border-radius: 15px;
-    background-color: rgba(16, 14, 16, 0.5);  
+    background-color: rgba(248, 108, 248, 0.8);
     font-style: oblique;
-    font-size: 700%;
+    font-size: 8rem;
     width: 95%;
     margin: 8%;
 }
@@ -38,7 +40,7 @@ text-align: center;
 }
 .input-login{
     border-radius: 15px;
-    font-size: 270%;
+    font-size: 3rem;
     font-family:'Courier New', Courier, monospace;
     font-style: italic;
     margin: 5%;
@@ -47,9 +49,9 @@ text-align: center;
     background-color: rgba(95, 41, 109, 0.8);
     color:white;
     border-radius: 15px;
-    font-size: 270%;
-    font-family:'Courier New', Courier, monospace;
-    font-style: italic;
+    font-size: 3rem;
+    font-family:cursive;
+    font-weight: 300;
     margin: 5%;
     width: 80%;
 }
@@ -60,18 +62,22 @@ text-align: center;
 }
 .containerBtnsEnd{
     display: grid;
+    gap:20px;
     grid-template-columns: 50% 50%;
     grid-template-rows: 100%;
     align-items: center;
+    
 }
 .btn-register{
     border-radius: 10px;
     background-color: rgba(95, 41, 109, 0.8);
-    font-size: 240%;
-    font-family:'Courier New', Courier, monospace;
-    font-style: italic;
+    font-size: 3rem;
+    font-family:cursive;
+    font-weight: 300;
     color:white;
     margin-top: 3%;
+    width: 80%;
+   
 }
 .btn-register:hover{
     cursor: pointer;
@@ -79,13 +85,14 @@ text-align: center;
     color:black;
 }
 .btnGoogle{
-    width:55%;
-    height:60%;
+    width:80%;
+    height:80%;
     margin-top: 1%;
-    margin-left: 10%;
     background-color:#FBE3D4;
-    opacity: 0.7;
+    opacity: 0.8;
     border-radius: 10px;
+    margin-left: 15%;
+    border-style: solid;
 }
 .btnGoogle:hover{
     cursor: pointer;
@@ -98,7 +105,7 @@ text-align: center;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    background-color: rgba(16, 14, 16, 0.4);
+    background-color: rgba(248, 108, 248, 0.4);
     margin: 15%;
     border-radius: 10px; 
     min-height: 900px;   
@@ -106,10 +113,10 @@ text-align: center;
 .title-register{
     color: #FBE3D4;
     border-radius: 15px;
-    background-color: rgba(16, 14, 16, 0.5);  
+    background-color: rgba(248, 108, 248, 0.8);  
     font-style: oblique;
-    font-size: 600%;
-    width: 65%;
+    font-size: 7rem;
+    width: 80%;
     margin: 10%;
     margin-bottom: 3%;
 }
@@ -120,19 +127,19 @@ text-align: center;
 }
 .form-register > input{
     border-radius: 15px;
-    font-size: 270%;
+    font-size: 3rem;
     font-family:'Courier New', Courier, monospace;
     font-style: italic;
     margin: 4%;
 }
 .btns-register{
+    border-radius: 10px;
     background-color: rgba(95, 41, 109, 0.8);
+    font-size: 3rem;
+    font-family:cursive;
+    font-weight: 300;
     color:white;
-    border-radius: 15px;
-    font-size: 270%;
-    font-family:'Courier New', Courier, monospace;
-    font-style: italic;
-    margin: 5%;
+    margin-top: 3%;
     width: 70%;
 }
 .btns-register:hover{
@@ -141,7 +148,7 @@ text-align: center;
     color:black;
 }
 #btn-return-login{
-    font-size: 240%;
+    font-size: 2rem;
     width: 70%;
     margin-top: 7%;
     margin-bottom: 5%;
@@ -153,4 +160,45 @@ footer{
     bottom: 0;
     width: 100%;
     height: 40px;
+}
+/** Responsive desktop **/
+@media (min-width: 992px) { 
+    html{
+        font-size: 6px;
+    }
+    /**Responsividad para login **/
+    .mainContainer {
+        background-color: rgba(248, 108, 248, 0.4);
+        margin: 0% 15%;
+    }
+    .input-login{
+        width: 100%;
+        margin: 4%;
+    }
+    .title-page{
+        margin: 5%;
+        width: 70%;
+    }
+    .btnGoogle{
+        width:70%;
+        height:70%;
+    }
+    /** Responsividad para register **/
+    .container-register{  
+
+        margin: 0% 15%;
+    }
+    #btn-return-login{
+        font-size: 3rem;
+        width: 35%;
+        margin-top: 5%;
+}
+   .title-register{
+        margin: 5%;
+        
+}
+.btns-register{
+    width: 90%;
+}
+
 }
