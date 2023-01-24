@@ -5,11 +5,11 @@ export const Login = () => {
   document.title = 'Login';
   const container = document.createElement('section');
   container.className = 'mainContainer';
-  const title =`<h1 class = "title-page">CatLovers</h1>`;
+  const title = '<h1 class = "title-page">CatLovers</h1>';
   const form = document.createElement('form');
-  form.className =  'form-login';
+  form.className = 'form-login';
   const label = document.createElement('label');
-  label.className =  'label-login';
+  label.className = 'label-login';
   const email = document.createElement('input');
   email.type = 'email';
   email.required = true;
@@ -43,9 +43,9 @@ export const Login = () => {
         console.log(message);
       }
     }
-  })
+  });
   // Botones inicio y registrar
-  const containerBtnsEnd = document.createElement ('div');
+  const containerBtnsEnd = document.createElement('div');
   containerBtnsEnd.className = 'containerBtnsEnd';
   const btnLogin = document.createElement('button');
   btnLogin.textContent = 'Iniciar Sesión';
@@ -53,7 +53,7 @@ export const Login = () => {
   btnLogin.className = 'btn-login';
 
   const btnRegister = document.createElement('button');
-  btnRegister.textContent = 'Crear cuenta';
+  btnRegister.textContent = 'Registrar';
   btnRegister.className = 'btn-register';
   btnRegister.addEventListener('click', (e) => {
     e.preventDefault();
@@ -62,7 +62,7 @@ export const Login = () => {
 
   const btnGoogle = document.createElement('img');
   btnGoogle.className = 'btnGoogle';
-  btnGoogle.src = 'images/googleicon.png';
+  btnGoogle.src = 'images/googleBtn.png';
   btnGoogle.alt = 'Entrar con google';
   btnGoogle.width = '100%';
   btnGoogle.height = '100%';
