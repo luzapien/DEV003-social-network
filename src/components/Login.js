@@ -63,7 +63,7 @@ export const Login = () => {
   const btnGoogle = document.createElement('img');
   btnGoogle.className = 'btnGoogle';
   btnGoogle.src = 'images/googleBtn.png';
-  btnGoogle.alt = 'Entrar con google';
+  btnGoogle.alt = 'Google';
   btnGoogle.width = '100%';
   btnGoogle.height = '100%';
   btnGoogle.addEventListener('click', async () => {
