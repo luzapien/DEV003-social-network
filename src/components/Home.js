@@ -7,15 +7,15 @@ export const Home = () => {
   title.innerText = 'Home';
   const container = document.createElement('section');
   container.className = 'mainContainer';
-  /****************MURO****************** */
-const sectionPost =document.createElement('section');
-sectionPost.id="scPost";
-const textPost=document.createElement('txt');
-textPost.placeholder = '¿Qué vas a compartir?'
-const frmEnterPost = document.createElement('form');
-frmEnterPost.id="allPostContainer";
+  /** **************MURO****************** */
+  const sectionPost = document.createElement('section');
+  sectionPost.id = 'scPost';
+  const textPost = document.createElement('txt');
+  textPost.placeholder = '¿Qué vas a compartir?';
+  const frmEnterPost = document.createElement('form');
+  frmEnterPost.id = 'allPostContainer';
 
-  /**********FIN MURO******************* */
+  /** ********FIN MURO******************* */
   const signOutBtn = document.createElement('button');
   signOutBtn.type = 'button';
   signOutBtn.innerText = 'Cerrar sesión';

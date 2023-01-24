@@ -89,14 +89,16 @@ text-align: center;
     height:80%;
     margin-top: 1%;
     background-color:#FBE3D4;
-    opacity: 0.8;
+   /* opacity: 0.8;*/
     border-radius: 10px;
     margin-left: 15%;
     border-style: solid;
 }
 .btnGoogle:hover{
     cursor: pointer;
-    opacity: 1;
+ /*   opacity: 0.8;*/
+    
+
 }
 
 /**Estilos pagina de registro**/
@@ -180,8 +182,8 @@ footer{
         width: 70%;
     }
     .btnGoogle{
-        width:70%;
-        height:70%;
+        width:62%;
+        height:58%;
     }
     /** Responsividad para register **/
     .container-register{  

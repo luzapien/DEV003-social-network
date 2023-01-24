@@ -66,6 +66,14 @@ export const Login = () => {
   btnGoogle.alt = 'Google';
   btnGoogle.width = '100%';
   btnGoogle.height = '100%';
+  // btnGoogle.onmouseover = (btnGoogle.src = 'images/googleBtn2.png');
+  btnGoogle.addEventListener('mouseover', () => {
+    btnGoogle.src = 'images/googleBtn2.png';
+  });
+  btnGoogle.addEventListener('mouseout', () => {
+    btnGoogle.src = 'images/googleBtn.png';
+  });
+
   btnGoogle.addEventListener('click', async () => {
     try {
       const result = await loginWithGoogle();
