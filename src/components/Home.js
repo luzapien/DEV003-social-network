@@ -7,6 +7,12 @@ export const Home = () => {
   title.innerText = 'Home';
   const container = document.createElement('section');
   container.className = 'mainContainer';
+
+  const welcomeContainer = document.createElement('section');
+  const labelWelcome = document.createElement('label');
+  labelWelcome.innerHTML = 'Bienvenido ';
+  // <strong> " + displayname + "<strong/>"
+
   /** **************MURO****************** */
   const sectionPost = document.createElement('section');
   sectionPost.id = 'scPost';
@@ -29,7 +35,8 @@ export const Home = () => {
   });
 
   container.appendChild(title);
-  container.appendChild(signOutBtn);
+  container.appendChild(signOutBtn, welcomeContainer);
+  welcomeContainer.appendChild(labelWelcome);
 
   return container;
 };

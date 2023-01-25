@@ -27,8 +27,9 @@ export const Login = () => {
     const passwordValue = password.value;
     if (emailValue && passwordValue) {
       try {
-        /* const result = */await emailLogin(emailValue, passwordValue);
-        // const user = result.user;
+        const result = await emailLogin(emailValue, passwordValue);
+        // return const userLogged = result.user;
+        console.log(result);
         onNavigate('/');
       } catch (error) {
         let message = 'Algo salió mal';
