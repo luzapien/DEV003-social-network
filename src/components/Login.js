@@ -40,13 +40,11 @@ export const Login = () => {
         } if (error.code === 'auth/invalid-email') {
           message = 'Correo invalido';
         }
-        console.log(message);
+        alert(message);
       }
     }
   });
   // Botones inicio y registrar
-  const containerBtnsEnd = document.createElement('div');
-  containerBtnsEnd.className = 'containerBtnsEnd';
   const btnLogin = document.createElement('button');
   btnLogin.textContent = 'Iniciar Sesión';
   btnLogin.type = 'submit';
@@ -60,18 +58,9 @@ export const Login = () => {
     onNavigate('/register');
   });
 
-  const btnGoogle = document.createElement('img');
+  const btnGoogle = document.createElement('button');
   btnGoogle.className = 'btnGoogle';
-  btnGoogle.src = 'images/googleBtn.png';
-  btnGoogle.alt = 'Google';
-  btnGoogle.width = '100%';
-  btnGoogle.height = '100%';
-  btnGoogle.addEventListener('mouseover', () => {
-    btnGoogle.src = 'images/googlePink.png';
-  });
-  btnGoogle.addEventListener('mouseout', () => {
-    btnGoogle.src = 'images/googleBtn.png';
-  });
+  btnGoogle.textContent = 'Entrar con Google';
   btnGoogle.addEventListener('click', async () => {
     try {
       const result = await loginWithGoogle();
@@ -82,13 +71,13 @@ export const Login = () => {
     }
   });
 
-  label.append(email, password);
+  label.append(email, password, btnLogin, btnGoogle, btnRegister);
   form.appendChild(label);
-  form.appendChild(btnLogin);
-  containerBtnsEnd.append(btnRegister, btnGoogle);
+  // form.appendChild(btnLogin);
+  // containerBtnsEnd.append(btnRegister);
   container.innerHTML = title;
   container.appendChild(form);
-  container.appendChild(containerBtnsEnd);
+  // container.appendChild(containerBtnsEnd);
 
   return container;
 };

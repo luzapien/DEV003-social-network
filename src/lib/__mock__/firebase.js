@@ -1,4 +1,5 @@
 // jest.mock('firebase/auth');
+
 // import { emailLogin } from '../firebase';
 
 // export const resultEmailLogin = async () => {
