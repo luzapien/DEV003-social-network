@@ -134,7 +134,7 @@ text-align: center;
 
 #btn-return-login{
     width: 70%;
-    margin-top: 7%;
+    margin-top: 5%;
     margin-bottom: 5%;
 }
 
@@ -187,17 +187,20 @@ footer{
         margin: 0% 15%;
     }
     #btn-return-login{
-        font-size: 2rem;
-        width: 70%;
+
+        width: 49%;
         margin-top: 5%;
 }
    .title-register{
         margin: 5%;
         
 }
-.btns-register{
-    width: 100%;
+
+.form-register > input {
+    width: 70%;
+}
+.form-register > button{
+    width: 70%;
     font-size: 2rem;
 }
-
 }
