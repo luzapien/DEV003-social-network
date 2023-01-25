@@ -1,5 +1,6 @@
 // aqui exportaras las funciones que necesites
 import { initializeApp } from 'firebase/app';
+import { onNavigate } from '../router';
 
 import {
   getAuth,
@@ -8,10 +9,10 @@ import {
   createUserWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
+  updateProfile,
   signInWithEmailAndPassword,
 } from 'firebase/auth';
 
-// import { getFirestore, getDocs, collection } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js';
 // import { checkStateUser } from '../main';
 
 const firebaseConfig = {
@@ -28,78 +29,99 @@ const firebaseConfig = {
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 const app = initializeApp(firebaseConfig);
-// Initialize Cloud Firestore and get a reference to the service
-// const db = getFirestore(app);
-// console.log(db);
 
-export async function loginWithGoogle() {
+export function loginWithGoogle() {
   const auth = getAuth();
   const provider = new GoogleAuthProvider();
-  try {
-    const result = await signInWithPopup(auth, provider);
-    return result.user;
-  } catch (error) {
-    return error;
-  }
+
+  return signInWithPopup(auth, provider);
+  // try {
+  //   const result = await signInWithPopup(auth, provider);
+  //const credential = GoogleAuthProvider.credentialFromResult(result);
+  //   // const token = credential.accessToken;
+  //   return result.user;
+  // } catch (error) {
+  //   // const errorCode = error.code;
+  //   // const errorMessage = error.message;
+  //   // const email = error.customData.email;
+  //   // const credential = GoogleAuthProvider.credentialFromError(error);
+  //   return error;
+  // }
 }
 export function logOutFunction() {
   const auth = getAuth();
-  signOut(auth);
+  return signOut(auth);
 }
 
-export async function emailLogin(email, password) {
-  let message;
-  try {
-    const auth = getAuth(app);
-    const userCredential = await signInWithEmailAndPassword(auth, email, password);
-    message = `Bienvenido ${email}`;
-    return message;
-  } catch (error) {
-    console.log(error.code);
-    if (error.code === 'auth/wrong-password') {
-      message = 'Contraseña incorrecta';
-    } if (error.code === 'auth/user-not-found') {
-      message = 'Correo no registrado';
-    } if (error.code === 'auth/invalid-email') {
-      message = 'Correo invalido';
-    }
-    return message;
-  }
+export function emailLogin(email, password) {
+  const auth = getAuth();
+  return signInWithEmailAndPassword(auth, email, password);
+  // let message;
+  // try {
+  //   const auth = getAuth(app);
+  //   const userCredential = await signInWithEmailAndPassword(auth, email, password);
+  //   message = `Bienvenido ${email}`;
+  //   return message;
+  // } catch (error) {
+  //   console.log(error.code);
+  //   if (error.code === 'auth/wrong-password') {
+  //     message = 'Contraseña incorrecta';
+  //   } if (error.code === 'auth/user-not-found') {
+  //     message = 'Correo no registrado';
+  //   } if (error.code === 'auth/invalid-email') {
+  //     message = 'Correo invalido';
+  //   }
+  //   return message;
+  // }
 
   // auth/wrong-password
 }
 
-export async function registerNewUser(email, password) {
-  //  console.log(email, password);
-  let message;
+export function registerNewUser(email, password) {
   const auth = getAuth(app);
-  try {
-    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-    // console.log(userCredential);
-    message = userCredential;
-  } catch (error) {
-    // const errorCode = error.code;
-    //  const errorMessage = error.message;
-  //  message = error.code;
-    console.log(error.code);
-    // auth/invalid-email
+  return createUserWithEmailAndPassword(auth, email, password);
+  //  console.log(email, password);
+  //let message;
 
-    if (error.code === 'auth/email-already-in-use') {
-      message = 'Ya hay un usuario registrado con el correo';
-    // falta limpiar el correo y usuario
-    } else if (error.code === 'auth/internal-error' || error.code === 'auth/invalid-email') {
-      message = 'Ingrese un correo valido';
-    } else if (error.code === 'auth/weak-password') {
-      message = 'La contraseña debe tener minimo 6 caracteres';
-    }
-  } return message;
+  // try {
+  //   const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+  //   // console.log(userCredential);
+  // } catch (error) {
+  //   // const errorCode = error.code;
+  //   //  const errorMessage = error.message;
+
+  //   console.log(error.code);
+  //   // auth/invalid-email
+
+  //   if (error.code === 'auth/email-already-in-use') {
+  //     message = 'Ya hay un usuario registrado con el correo';
+  //     // falta limpiar el correo y usuario
+  //   } else if (error.code === 'auth/internal-error' || error.code === 'auth/invalid-email') {
+  //     message = 'Ingrese un correo valido';
+  //   } else if (error.code === 'auth/weak-password') {
+  //     message = 'La contraseña debe tener minimo 6 caracteres';
+  //   }
+  //   return message;
+  // }
+}
+
+export const updateUserProfile = (user, displayName, userPhoto) => {
+  const userProperties = {
+    displayName: displayName,
+    photoURL: userPhoto,
+  }
+
+  return updateProfile(user, userProperties);
 }
 
 
 const auth = getAuth(app);
-onAuthStateChanged(auth, async (user) => {
- // checkStateUser(user);
-  console.log(user);
-  displayElement(user);
-  return user;
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    onNavigate('/');
+    console.log(user);
+  } else {
+    onNavigate('/login');
+  }
+ 
 });

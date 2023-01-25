@@ -1,23 +1,16 @@
-/* eslint-disable import/no-cycle */
-/* import { Home } from './components/Home.js';
-import { Register } from './components/Register.js';
-import { Login } from './components/Login.js'; */
-
-// eslint-disable-next-line import/no-unresolved
-import {
-  Home, Login, googleLogin, Register,
-} from './main.js';
+import { Home } from './components/Home';
+import { Login } from './components/Login';
+import { Register } from './components/Register';
 
 const rootDiv = document.getElementById('root');
 
 const routes = {
   '/': Home,
-  '/register': Register,
   '/login': Login,
-  '/google': googleLogin,
+  '/register': Register,
 };
 
-export const onNavigate = (pathname) => {
+export function onNavigate(pathname) {
   window.history.pushState(
     {},
     pathname,
@@ -29,15 +22,7 @@ export const onNavigate = (pathname) => {
   }
 
   rootDiv.appendChild(routes[pathname]());
-};
+}
 
 const component = routes[window.location.pathname];
-
-window.onpopstate = () => {
-  while (rootDiv.firstChild) {
-    rootDiv.removeChild(rootDiv.firstChild);
-  }
-  rootDiv.appendChild(routes[window.location.pathname]());
-};
-
 rootDiv.appendChild(component());

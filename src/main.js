@@ -1,124 +1,95 @@
-// HOME
+// import { getFirestore } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js';
+// import {
+//   loginWithGoogle, logOutFunction, emailLogin, registerNewUser,
+// } from './lib/firebase';
 // eslint-disable-next-line import/no-cycle
-import { onNavigate } from './router.js';
-import {
-  loginWithGoogle,
-  logOutFunction,
-  registerNewUser,
-  emailLogin,
-} from './lib/firebase';
+// import { onNavigate } from './router';
+// import { Home } from './components/Home';
 
-export const Home = () => {
-  const secHome = document.createElement('sec');
+// const regresarHome = Home(btnRegister){
+import './router';
+// import { userStatus } from './lib/firebase';
+// // import { checkStatus } from './lib/firebase';
+// import { onNavigate } from './router';
 
-  const labelMail = document.createElement('label');
-  labelMail.innerHTML = '<strong>Correo: </strong><br>';
-  const textMail = document.createElement('input');
-  textMail.type = 'text';
-  textMail.id = 'txtMail';
-  // textMail.ariaPlaceholder = 'Ingresa tu correo';
-  // textMail.ariaAutoComplete = 'off';
-  const space1 = document.createElement('br');
-  const labelPassword = document.createElement('label');
-  labelPassword.innerHTML = '<strong>Clave: </strong><br>';
-  const textPass = document.createElement('input');
-  textPass.type = 'password';
-  textPass.id = 'txtPassword';
+// checkStatus(onNavigate('/login'), onNavigate('/'));
 
-  const space2 = document.createElement('br');
-  const buttonRegister = document.createElement('button');
-  buttonRegister.id = 'btnRegister';
-  buttonRegister.textContent = 'Registrate';
-  const buttonLogin = document.createElement('button');
-  buttonLogin.id = 'btnLogin';
-  buttonLogin.textContent = 'Inicia sesión';
-  /** ********************************** */
-  const buttonGoogle = document.createElement('button');
-  buttonGoogle.id = 'btnLoginGoogle';
-  buttonGoogle.textContent = 'Google';
-  /** *************************************** */
-  buttonRegister.addEventListener('click', async () => {
-    const email = document.getElementById('txtMail').value;
-    const password = document.getElementById('txtPassword').value;
-    //  console.log(email, password);
-    // console.log(userCredential);
-    const resultNewUser = await registerNewUser(email, password);
-    onNavigate('/register');
-  });
+// }
+// // function displayElement(user) {
+// //   if (user) {
+// //     document.getElementById('scWelcome').style.display = 'block';
+// //     document.getElementById('scAccess').style.display = 'none';
+// //     console.log(user);
+// //   } else {
+// //     document.getElementById('scWelcome').style.display = 'none';
+// //     document.getElementById('scAccess').style.display = 'block';
+// //   }
+// // }
+// const btnGoogle = document.getElementById('btnGoogle');
+// btnGoogle.addEventListener('click', () => {
+//   console.log('boton');
+// });
 
-  buttonLogin.addEventListener('click', () => {
-    const email = document.getElementById('txtMail').value;
-    const password = document.getElementById('txtPassword').value;
-    const dataReturn = emailLogin(email, password);
+// // btnGoogle.addEventListener('click', async () => {
+// //   const user = await loginWithGoogle();
+// //   handleRoute('/');
+// //   console.log(user);
+// // });
 
-    onNavigate('/login');
-  });
+// const btnRegister = document.getElementById('btnRegister');
+// btnRegister.addEventListener('click', async () => {
+//   // llamar funcion validar correo nuevo (correo, email)
+//   const email = document.getElementById('txtMail').value;
+//   const password = document.getElementById('txtPass').value;
+//   //  console.log(email, password);
+//   // console.log(userCredential);
+//   const resultNewUser = registerNewUser(email, password);
+//   // console.log(resultNewUser);
+//   if (!resultNewUser) {
+//     document.getElementById('scWelcome').style.display = 'block';
+//     document.getElementById('scAccess').style.display = 'none';
+//   } else {
+//     document.getElementById('scWelcome').style.display = 'none';
+//     document.getElementById('scAccess').style.display = 'block';
+//   }
+// });
 
-  buttonGoogle.addEventListener('click', async () => {
-    const user = await loginWithGoogle();
-    setTimeout(onNavigate('/google'), 8000);
-  });
+// const logout = document.getElementById('btnLogout');
+// logout.addEventListener('click', async () => {
+//   // await signOut(auth);
+//   logOutFunction();
+//   document.getElementById('scWelcome').style.display = 'none';
+//   document.getElementById('scAccess').style.display = 'block';
+//   console.log('sesion cerrada');
+// });
 
-  secHome.appendChild(labelMail);
-  secHome.appendChild(textMail);
-  secHome.appendChild(space1);
-  secHome.appendChild(labelPassword);
-  secHome.appendChild(textPass);
-  secHome.appendChild(space2);
-  secHome.appendChild(buttonRegister);
-  secHome.appendChild(buttonLogin);
-  secHome.appendChild(buttonGoogle);
-  return secHome;
-};
+// // btnLogin
+// const loginWithMail = document.getElementById('btnLogin');
+// loginWithMail.addEventListener('click', () => {
+//   const email = document.getElementById('txtMail').value;
+//   const password = document.getElementById('txtPass').value;
+//   const dataReturn = emailLogin(email, password);
 
-// REGISTER
-export const Register = () => {
-  const secHome = document.createElement('sec');
-  secHome.textContent = 'Bienvenida al Register';
-  const buttonLogout = document.createElement('button');
-
-  buttonLogout.textContent = 'Cerrar Sesion';
-  buttonLogout.addEventListener('click', () => {
-    logOutFunction();
-    onNavigate('/');
-  });
-  secHome.appendChild(buttonLogout);
-
-  return secHome;
-};
-
-// LOGIN
-// eslint-disable-next-line import/no-cycle
-// import { onNavigate } from '../main.js';
-
-export const Login = () => {
-  const secHome = document.createElement('sec');
-  secHome.textContent = 'Bienvenida al Login';
-  const buttonLogOutMail = document.createElement('button');
-
-  buttonLogOutMail.textContent = 'Cerrar Sesion';
-  buttonLogOutMail.addEventListener('click', () => {
-    logOutFunction();
-    onNavigate('/');
-  });
-  secHome.appendChild(buttonLogOutMail);
-
-  return secHome;
-};
-
-export const googleLogin = () => {
-  const secHome = document.createElement('sec');
-  // const mailLogin = loginGoogle();
-  secHome.textContent = 'Bienvenida al Login';
-
-  const buttonLogoutGoogle = document.createElement('button');
-  buttonLogoutGoogle.textContent = 'Cerrar Sesion';
-  buttonLogoutGoogle.addEventListener('click', () => {
-    logOutFunction();
-    onNavigate('/');
-  });
-  secHome.appendChild(buttonLogoutGoogle);
-
-  return secHome;
-};
-  
+//   // Promise.resolve(dataReturn).then((value) => alert (value));
+//   Promise.resolve(dataReturn).then((value) => {
+//     // alert(value);
+//     const value1 = value;
+//     if (value1.indexOf('@')) {
+//       document.getElementById('scWelcome').style.display = 'block';
+//       document.getElementById('scAccess').style.display = 'none';
+//     } else {
+//       document.getElementById('scWelcome').style.display = 'none';
+//       document.getElementById('scAccess').style.display = 'block';
+//     }
+//     // alert(value1);
+//   });
+// });
+// export function checkStateUser(user) {
+//   if (user) {
+//     document.getElementById('scWelcome').style.display = 'block';
+//     document.getElementById('scAccess').style.display = 'none';
+//   } else {
+//     document.getElementById('scWelcome').style.display = 'none';
+//     document.getElementById('scAccess').style.display = 'block';
+//   }
+// 
