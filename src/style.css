@@ -8,8 +8,20 @@ justify-items: center;
 background-image:url("./images/patitascat.jpg");
 text-align: center;
 }
-
+.stylesBtns{
+    background-color:rgba(225, 103, 183, 0.8);
+    color: white;
+    font-size: 2rem;
+    border: none;
+    height: 10%;
+}
+.stylesBtns:hover{
+    cursor: pointer;
+    background-color:#f3b8d7;
+    color:black;
+}
 /*estilos y grillas login*/
+
 .mainContainer{  
     display: flex;
     flex-direction: column;
@@ -33,12 +45,25 @@ text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 60%;
   
+}
+.form-login > input {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+.form-login > button{
+    width: 100%;
 }
 .label-login{
     display: flex;
     flex-direction: column;
     width: 200%;
+    height: 450px;
 }
 .input-login{
   padding: 12px 20px;
@@ -46,50 +71,24 @@ text-align: center;
   display: inline-block;
   border: 1px solid #ccc;
   box-sizing: border-box;
+
 }
 .btn-login{
-    background-color:rgba(225, 103, 183, 0.8);
-    color: white;
-    padding: 14px 20px;
+    padding: 30px 20px;
     margin: 30px 0px 8px 0px;
-    border: none;
-    cursor: pointer;
+    height: 60px;
 }
-.btn-login:hover{
-    cursor: pointer;
-    background-color:#f3b8d7;
-    color:black;
-}
+
 
 .btn-register{
-    background-color:rgba(225, 103, 183, 0.8);
-  color: white;
   padding: 14px 20px;
-  margin: 25px 0;
-  border: none;
-  cursor: pointer;
-
-
+  margin: 16px 0px 25px 0px;
+  
 }
-.btn-register:hover{
-    cursor: pointer;
-    background-color:#f3b8d7;
-    color:black;
-}
-.btnGoogle{
-    background-color:rgba(225, 103, 183, 0.8);
-    color: white;
+
+.btnGoogle{ 
     padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    cursor: pointer;
-}
-.btnGoogle:hover{
-    
-        cursor: pointer;
-        background-color:#f3b8d7;
-        color:black;
-    
+    margin: 16px 0px 0px 0px; 
 }
 
 /**Estilos pagina de registro**/
@@ -128,26 +127,15 @@ text-align: center;
     
 }
 .btns-register{
-    background-color:rgba(225, 103, 183, 0.8);
-    color: white;
-    font-size: 1rem;
     padding: 14px 20px;
     margin: 30px 0px 8px 0px;
-    border: none;
-    cursor: pointer;
     width: 100%;
 }
-.btns-register:hover{
-    cursor: pointer;
-    background-color:#f3b8d7;
-    color:black;
-}
+
 #btn-return-login{
-    font-size: 1rem;
     width: 70%;
     margin-top: 7%;
     margin-bottom: 5%;
-    font-style: normal;
 }
 
 footer{

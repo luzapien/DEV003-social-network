@@ -68,12 +68,12 @@ export const Register = () => {
   const registerBtn = document.createElement('button');
   registerBtn.textContent = 'Registrar';
   registerBtn.type = 'submit';
-  registerBtn.className = 'btns-register';
+  registerBtn.className = 'btns-register stylesBtns';
 
   const loginBtn = document.createElement('button');
   loginBtn.textContent = 'Regresar al inicio de sesión';
   loginBtn.type = 'button';
-  loginBtn.className = 'btns-register';
+  loginBtn.className = 'btns-register stylesBtns';
   loginBtn.setAttribute('id', 'btn-return-login');
   loginBtn.addEventListener('click', () => {
     onNavigate('/login');

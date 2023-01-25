@@ -8,8 +8,8 @@ export const Login = () => {
   const title = '<h1 class = "title-page">CatLovers</h1>';
   const form = document.createElement('form');
   form.className = 'form-login';
-  const label = document.createElement('label');
-  label.className = 'label-login';
+  // const label = document.createElement('label');
+  // label.className = 'label-login';
   const email = document.createElement('input');
   email.type = 'email';
   email.required = true;
@@ -48,18 +48,17 @@ export const Login = () => {
   const btnLogin = document.createElement('button');
   btnLogin.textContent = 'Iniciar Sesión';
   btnLogin.type = 'submit';
-  btnLogin.className = 'btn-login';
-
+  btnLogin.className = 'btn-loginn stylesBtns';
   const btnRegister = document.createElement('button');
   btnRegister.textContent = 'Registrar';
-  btnRegister.className = 'btn-register';
+  btnRegister.className = 'btn-register stylesBtns';
   btnRegister.addEventListener('click', (e) => {
     e.preventDefault();
     onNavigate('/register');
   });
 
   const btnGoogle = document.createElement('button');
-  btnGoogle.className = 'btnGoogle';
+  btnGoogle.className = 'btnGoogle stylesBtns';
   btnGoogle.textContent = 'Entrar con Google';
   btnGoogle.addEventListener('click', async () => {
     try {
@@ -71,8 +70,8 @@ export const Login = () => {
     }
   });
 
-  label.append(email, password, btnLogin, btnGoogle, btnRegister);
-  form.appendChild(label);
+  // label.append(email, password, btnLogin, btnGoogle, btnRegister);
+  form.append(email, password, btnLogin, btnGoogle, btnRegister);
   // form.appendChild(btnLogin);
   // containerBtnsEnd.append(btnRegister);
   container.innerHTML = title;
