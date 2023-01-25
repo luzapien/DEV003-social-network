@@ -8,8 +8,20 @@ justify-items: center;
 background-image:url("./images/patitascat.jpg");
 text-align: center;
 }
-
+.stylesBtns{
+    background-color:rgba(225, 103, 183, 0.8);
+    color: white;
+    font-size: 2rem;
+    border: none;
+    height: 10%;
+}
+.stylesBtns:hover{
+    cursor: pointer;
+    background-color:#f3b8d7;
+    color:black;
+}
 /*estilos y grillas login*/
+
 .mainContainer{  
     display: flex;
     flex-direction: column;
@@ -21,11 +33,11 @@ text-align: center;
     /*min-height: 900px;*/ 
 }
 .title-page{
-    color: #FBE3D4;
+    color: gray;
     border-radius: 15px;
-    background-color: rgba(248, 108, 248, 0.8);
     font-style: oblique;
-    font-size: 8rem;
+    font-size: 6rem;
+    -webkit-text-stroke: 2px rgb(106, 106, 106);
     width: 95%;
     margin: 8%;
 }
@@ -33,72 +45,50 @@ text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 60%;
+  
+}
+.form-login > input {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+.form-login > button{
+    width: 100%;
 }
 .label-login{
     display: flex;
     flex-direction: column;
+    width: 200%;
+    height: 450px;
 }
 .input-login{
-    border-radius: 15px;
-    font-size: 3rem;
-    font-family:'Courier New', Courier, monospace;
-    font-style: italic;
-    margin: 5%;
+  padding: 12px 20px;
+  margin: 6px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+
 }
 .btn-login{
-    background-color: rgba(95, 41, 109, 0.8);
-    color:white;
-    border-radius: 15px;
-    font-size: 3rem;
-    font-family:cursive;
-    font-weight: 300;
-    margin: 5%;
-    width: 80%;
+    padding: 30px 20px;
+    margin: 30px 0px 8px 0px;
+    height: 60px;
 }
-.btn-login:hover{
-    cursor: pointer;
-    background-color:#FBE3D4;
-    color:black;
-}
-.containerBtnsEnd{
-    display: grid;
-    gap:20px;
-    grid-template-columns: 50% 50%;
-    grid-template-rows: 100%;
-    align-items: center;
-    
-}
-.btn-register{
-    border-radius: 10px;
-    background-color: rgba(95, 41, 109, 0.8);
-    font-size: 3rem;
-    font-family:cursive;
-    font-weight: 300;
-    color:white;
-    margin-top: 3%;
-    width: 80%;
-   
-}
-.btn-register:hover{
-    cursor: pointer;
-    background-color:#FBE3D4;
-    color:black;
-}
-.btnGoogle{
-    width:80%;
-    height:80%;
-    margin-top: 1%;
-    background-color:#FBE3D4;
-   /* opacity: 0.8;*/
-    border-radius: 10px;
-    margin-left: 15%;
-    border-style: solid;
-}
-.btnGoogle:hover{
-    cursor: pointer;
- /*   opacity: 0.8;*/
-    
 
+
+.btn-register{
+  padding: 14px 20px;
+  margin: 16px 0px 25px 0px;
+  
+}
+
+.btnGoogle{ 
+    padding: 14px 20px;
+    margin: 16px 0px 0px 0px; 
 }
 
 /**Estilos pagina de registro**/
@@ -113,48 +103,39 @@ text-align: center;
     min-height: 900px;   
 }
 .title-register{
-    color: #FBE3D4;
+    color: gray;
     border-radius: 15px;
-    background-color: rgba(248, 108, 248, 0.8);  
     font-style: oblique;
-    font-size: 7rem;
-    width: 80%;
-    margin: 10%;
-    margin-bottom: 3%;
+    font-size: 6rem;
+    -webkit-text-stroke: 2px rgb(106, 106, 106);
+    width: 95%;
+    margin: 8%;
 }
 .form-register{
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-.form-register > input{
-    border-radius: 15px;
-    font-size: 3rem;
-    font-family:'Courier New', Courier, monospace;
-    font-style: italic;
-    margin: 4%;
-}
-.btns-register{
-    border-radius: 10px;
-    background-color: rgba(95, 41, 109, 0.8);
-    font-size: 3rem;
-    font-family:cursive;
-    font-weight: 300;
-    color:white;
-    margin-top: 3%;
     width: 70%;
 }
-.btns-register:hover{
-    cursor: pointer;
-    background-color:#FBE3D4;
-    color:black;
+.form-register > input{
+    width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+    
 }
+.btns-register{
+    padding: 14px 20px;
+    margin: 30px 0px 8px 0px;
+    width: 100%;
+}
+
 #btn-return-login{
-    font-size: 2rem;
     width: 70%;
     margin-top: 7%;
     margin-bottom: 5%;
-    font-style: normal;
 }
 
 footer{
@@ -166,33 +147,48 @@ footer{
 /** Responsive desktop **/
 @media (min-width: 992px) { 
     html{
-        font-size: 6px;
+        font-size: 10px;
     }
     /**Responsividad para login **/
     .mainContainer {
         background-color: rgba(248, 108, 248, 0.4);
         margin: 0% 15%;
     }
+    .label-login{
+        width: 200%;
+        align-items: center;
+    }
     .input-login{
         width: 100%;
         margin: 4%;
+    }
+    .btn-login{
+        width:100% ;
+        font-size: 2rem;
     }
     .title-page{
         margin: 5%;
         width: 70%;
     }
     .btnGoogle{
-        width:62%;
-        height:58%;
+        width:100%;
+        font-size: 2rem;
+        
     }
+ .btn-register{
+    width: 100%;
+    font-size: 2rem;
+ }
+
     /** Responsividad para register **/
     .container-register{  
-
+        min-height: 700px;
+        min-width: 250px;
         margin: 0% 15%;
     }
     #btn-return-login{
-        font-size: 3rem;
-        width: 35%;
+        font-size: 2rem;
+        width: 70%;
         margin-top: 5%;
 }
    .title-register{
@@ -200,7 +196,8 @@ footer{
         
 }
 .btns-register{
-    width: 90%;
+    width: 100%;
+    font-size: 2rem;
 }
 
 }

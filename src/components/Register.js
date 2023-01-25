@@ -42,18 +42,23 @@ export const Register = () => {
     }
 
     if (emailValue && passwordValue && nameValue && lastnameValue && passwordConfirmValue) {
+      let errorCode;
       try {
         const result = await registerNewUser(emailValue, passwordValue);
         const user = result.user;
         await updateUserProfile(user, fullName, 'https://p16-va-default.akamaized.net/img/musically-maliva-obj/1665282759496710~c5_720x720.jpeg');
         onNavigate('/');
       } catch (error) {
-        let message;
-        if (error.code === 'auth/email-already-in-use') {
+        errorCode = error.code;
+      }
+      let message;
+      console.log(errorCode);
+      if (errorCode) {
+        if (errorCode === 'auth/email-already-in-use') {
           message = 'Ya hay un usuario registrado con el correo';
-        } else if (error.code === 'auth/internal-error' || error.code === 'auth/invalid-email') {
+        } else if (errorCode === 'auth/internal-error' || errorCode === 'auth/invalid-email') {
           message = 'Ingrese un correo valido';
-        } else if (error.code === 'auth/weak-password') {
+        } else if (errorCode === 'auth/weak-password') {
           message = 'La contraseña debe tener minimo 6 caracteres';
         }
         alert(message);
@@ -64,12 +69,12 @@ export const Register = () => {
   const registerBtn = document.createElement('button');
   registerBtn.textContent = 'Registrar';
   registerBtn.type = 'submit';
-  registerBtn.className = 'btns-register';
+  registerBtn.className = 'btns-register stylesBtns';
 
   const loginBtn = document.createElement('button');
   loginBtn.textContent = 'Regresar al inicio de sesión';
   loginBtn.type = 'button';
-  loginBtn.className = 'btns-register';
+  loginBtn.className = 'btns-register stylesBtns';
   loginBtn.setAttribute('id', 'btn-return-login');
   loginBtn.addEventListener('click', () => {
     onNavigate('/login');

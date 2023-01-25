@@ -8,8 +8,8 @@ export const Login = () => {
   const title = '<h1 class = "title-page">CatLovers</h1>';
   const form = document.createElement('form');
   form.className = 'form-login';
-  const label = document.createElement('label');
-  label.className = 'label-login';
+  // const label = document.createElement('label');
+  // label.className = 'label-login';
   const email = document.createElement('input');
   email.type = 'email';
   email.required = true;
@@ -41,38 +41,26 @@ export const Login = () => {
         } if (error.code === 'auth/invalid-email') {
           message = 'Correo invalido';
         }
-        console.log(message);
+        alert(message);
       }
     }
   });
   // Botones inicio y registrar
-  const containerBtnsEnd = document.createElement('div');
-  containerBtnsEnd.className = 'containerBtnsEnd';
   const btnLogin = document.createElement('button');
   btnLogin.textContent = 'Iniciar Sesión';
   btnLogin.type = 'submit';
-  btnLogin.className = 'btn-login';
-
+  btnLogin.className = 'btn-loginn stylesBtns';
   const btnRegister = document.createElement('button');
   btnRegister.textContent = 'Registrar';
-  btnRegister.className = 'btn-register';
+  btnRegister.className = 'btn-register stylesBtns';
   btnRegister.addEventListener('click', (e) => {
     e.preventDefault();
     onNavigate('/register');
   });
 
-  const btnGoogle = document.createElement('img');
-  btnGoogle.className = 'btnGoogle';
-  btnGoogle.src = 'images/googleBtn.png';
-  btnGoogle.alt = 'Google';
-  btnGoogle.width = '100%';
-  btnGoogle.height = '100%';
-  btnGoogle.addEventListener('mouseover', () => {
-    btnGoogle.src = 'images/googlePink.png';
-  });
-  btnGoogle.addEventListener('mouseout', () => {
-    btnGoogle.src = 'images/googleBtn.png';
-  });
+  const btnGoogle = document.createElement('button');
+  btnGoogle.className = 'btnGoogle stylesBtns';
+  btnGoogle.textContent = 'Entrar con Google';
   btnGoogle.addEventListener('click', async () => {
     try {
       const result = await loginWithGoogle();
@@ -83,13 +71,13 @@ export const Login = () => {
     }
   });
 
-  label.append(email, password);
-  form.appendChild(label);
-  form.appendChild(btnLogin);
-  containerBtnsEnd.append(btnRegister, btnGoogle);
+  // label.append(email, password, btnLogin, btnGoogle, btnRegister);
+  form.append(email, password, btnLogin, btnGoogle, btnRegister);
+  // form.appendChild(btnLogin);
+  // containerBtnsEnd.append(btnRegister);
   container.innerHTML = title;
   container.appendChild(form);
-  container.appendChild(containerBtnsEnd);
+  // container.appendChild(containerBtnsEnd);
 
   return container;
 };
