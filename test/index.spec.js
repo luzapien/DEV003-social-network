@@ -25,7 +25,7 @@
 //     expect(result.email).toBe('test@gmail.com);
 //   });
 // });
-//import { resultEmailLogin } from '../src/lib/__mock__/firebase';
+// import { resultEmailLogin } from '../src/lib/__mock__/firebase';
 import { emailLogin } from '../src/lib/firebase';
 
 // jest.mock('firebase/auth');
