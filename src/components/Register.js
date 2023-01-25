@@ -41,18 +41,23 @@ export const Register = () => {
     }
 
     if (emailValue && passwordValue && nameValue && lastnameValue && passwordConfirmValue) {
+      let errorCode;
       try {
         const result = await registerNewUser(emailValue, passwordValue);
         const user = result.user;
         await updateUserProfile(user, fullName, 'http://placekitten.com/200/300');
         onNavigate('/');
       } catch (error) {
-        let message;
-        if (error.code === 'auth/email-already-in-use') {
+        errorCode = error.code;
+      }
+      let message;
+      console.log(errorCode);
+      if (errorCode) {
+        if (errorCode === 'auth/email-already-in-use') {
           message = 'Ya hay un usuario registrado con el correo';
-        } else if (error.code === 'auth/internal-error' || error.code === 'auth/invalid-email') {
+        } else if (errorCode === 'auth/internal-error' || errorCode === 'auth/invalid-email') {
           message = 'Ingrese un correo valido';
-        } else if (error.code === 'auth/weak-password') {
+        } else if (errorCode === 'auth/weak-password') {
           message = 'La contraseña debe tener minimo 6 caracteres';
         }
         alert(message);
