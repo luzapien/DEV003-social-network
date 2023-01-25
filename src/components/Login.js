@@ -27,8 +27,8 @@ export const Login = () => {
     const passwordValue = password.value;
     if (emailValue && passwordValue) {
       try {
-        const result = await emailLogin(emailValue, passwordValue);
-        const user = result.user;
+        /* const result = */await emailLogin(emailValue, passwordValue);
+        // const user = result.user;
         onNavigate('/');
       } catch (error) {
         let message = 'Algo salió mal';
@@ -66,14 +66,12 @@ export const Login = () => {
   btnGoogle.alt = 'Google';
   btnGoogle.width = '100%';
   btnGoogle.height = '100%';
-  // btnGoogle.onmouseover = (btnGoogle.src = 'images/googleBtn2.png');
   btnGoogle.addEventListener('mouseover', () => {
-    btnGoogle.src = 'images/googleBtn2.png';
+    btnGoogle.src = 'images/googlePink.png';
   });
   btnGoogle.addEventListener('mouseout', () => {
     btnGoogle.src = 'images/googleBtn.png';
   });
-
   btnGoogle.addEventListener('click', async () => {
     try {
       const result = await loginWithGoogle();
