@@ -1,5 +1,6 @@
 import { registerNewUser, updateUserProfile } from '../lib/firebase';
 import { onNavigate } from '../router';
+// importar el crear colecion por usuario y secrea con su id o nombre
 
 export const Register = () => {
   const container = document.createElement('div');

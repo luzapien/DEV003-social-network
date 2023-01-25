@@ -64,7 +64,10 @@ export async function insert(item) {
       last: "Lovelace",
       born: 1815
     });*/
-    const response = await db.collection("users").add(todo);
+    const response = await addDoc(collection(db,userRegisterColection)),item;
+
+    }
+  //  db.collection("users").add(todo);
     return response;
   } catch (error) {
     throw new Error(error);
