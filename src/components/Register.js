@@ -1,6 +1,6 @@
 import { registerNewUser, updateUserProfile } from '../lib/firebase';
 import { onNavigate } from '../router';
-import { userCollection } from '../lib/functions_post';
+import { createUserDoc } from '../lib/functions_post';
 // importar el crear colecion por usuario y secrea con su id o nombre
 
 export const Register = () => {
@@ -52,9 +52,10 @@ export const Register = () => {
       try {
         const result = await registerNewUser(emailValue, passwordValue);
         const user = result.user;
-        await updateUserProfile(user, fullName, 'https://p16-va-default.akamaized.net/img/musically-maliva-obj/1665282759496710~c5_720x720.jpeg');
+        await updateUserProfile(user, fullName, 'http://placekitten.com/200/300');
         // llamar a funcion crear coleccion del usuario , enviar correo
-        userCollection(emailValue);
+        // userCollection(emailValue);
+        await createUserDoc(user);
         onNavigate('/');
       } catch (error) {
         errorCode = error.code;

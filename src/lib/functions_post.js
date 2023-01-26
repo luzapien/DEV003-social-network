@@ -1,4 +1,12 @@
-import { getFirestore, collection, addDoc } from 'firebase/firestore';
+import {
+  getFirestore,
+  collection,
+  addDoc, setDoc,
+  doc,
+  where,
+  query,
+  getDocs,
+} from 'firebase/firestore';
 import { app } from './firebase';
 
 // Initialize Cloud Firestore and get a reference to the service
@@ -10,22 +18,30 @@ export function userCollection(userEmail) {
   addDoc(collection(dataBase, userEmail), {});
 }
 
-// export function userCollectionGoogle(userEmail) {
-//   // const citiesRef = collection(db, "cities");
-//   console.log(`entro al collection: ${userEmail}`);
-//   // db.collection("users")
-//   const userSearchC = dataBase.collection(userEmail);
-//   console.log(userSearchC);
-//   // // collection(dataBase, userEmail);
-//   try {
-//     console.log(userSearchC);
-//   } catch (error) {
-//     console.log(error.code);
-//   }
+export function createUserDoc(user) {
+  return setDoc(doc(dataBase, 'usuarios', user.uid), {
+    id: user.uid,
+    correo: user.email,
+    nombre: user.displayName,
+    foto: user.photoURL,
+  });
+}
 
-//   // if (userSearchC === '') {
-//   //   addDoc(collection(dataBase, userEmail), {});
-//   // } else {
-//   //   console.log('nada');
-//   // }
-// }
+export function createPost(userId, postContent) {
+  return addDoc(collection(dataBase, 'publicaciones'), {
+    userId,
+    contenido: postContent,
+  });
+}
+
+export async function getUserPosts(userId) {
+  // Obtener documentos de una Colección
+  const ref = collection(dataBase, 'publicaciones'); // Se crea la referencia de la colección
+  const q = query( // Se crea la query/consulta
+    ref,
+    where('userId', '==', userId), // Condición donde userId sea igual al userId pasado como parámetro
+  );
+
+  return getDocs(q);
+}
+

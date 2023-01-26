@@ -1,5 +1,6 @@
-import { emailLogin, loginWithGoogle } from '../lib/firebase';
+import { emailLogin, loginWithGoogle, getCurrentUser } from '../lib/firebase';
 // import { userCollectionGoogle } from '../lib/functions_post';
+import { createUserDoc, getUserPosts } from '../lib/functions_post';
 import { onNavigate } from '../router';
 
 export const Login = () => {
@@ -26,10 +27,15 @@ export const Login = () => {
     const passwordValue = password.value;
     if (emailValue && passwordValue) {
       try {
-       const email= await emailLogin(emailValue, passwordValue);
-       const email2 = email.user.email;
-      // console.log(email2);
-   //   userCollectionGoogle(email2);
+        const email = await emailLogin(emailValue, passwordValue);
+        const email2 = email.user.email;
+        const currentUser = getCurrentUser();
+        const prueba = await getUserPosts(currentUser.uid);
+        prueba.forEach((doc) => {
+          console.log(doc.data());
+        });
+
+        //   userCollectionGoogle(email2);
         onNavigate('/');
       } catch (error) {
         let message = 'Algo salió mal';
@@ -63,21 +69,18 @@ export const Login = () => {
   btnGoogle.textContent = 'Entrar con Google';
   btnGoogle.addEventListener('click', async () => {
     try {
-      const emailUser = await loginWithGoogle();
-      const emailCollection = emailUser.user.email;
-    //  console.log(emailUser.user.email);
-   //   userCollectionGoogle(emailCollection);
+      const result = await loginWithGoogle();
+      const user = result.user;
+      await createUserDoc(user);
     // onNavigate('/');
     } catch (error) {
       console.log(error);
     }
   });
 
-
   form.append(email, password, btnLogin, btnGoogle, btnRegister);
   container.innerHTML = title;
   container.appendChild(form);
-
 
   return container;
 };
