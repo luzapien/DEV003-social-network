@@ -1,4 +1,5 @@
 import { emailLogin, loginWithGoogle } from '../lib/firebase';
+// import { userCollectionGoogle } from '../lib/functions_post';
 import { onNavigate } from '../router';
 
 export const Login = () => {
@@ -25,7 +26,10 @@ export const Login = () => {
     const passwordValue = password.value;
     if (emailValue && passwordValue) {
       try {
-        await emailLogin(emailValue, passwordValue);
+       const email= await emailLogin(emailValue, passwordValue);
+       const email2 = email.user.email;
+      // console.log(email2);
+   //   userCollectionGoogle(email2);
         onNavigate('/');
       } catch (error) {
         let message = 'Algo salió mal';
@@ -59,8 +63,11 @@ export const Login = () => {
   btnGoogle.textContent = 'Entrar con Google';
   btnGoogle.addEventListener('click', async () => {
     try {
-      await loginWithGoogle();
-     // onNavigate('/');
+      const emailUser = await loginWithGoogle();
+      const emailCollection = emailUser.user.email;
+    //  console.log(emailUser.user.email);
+   //   userCollectionGoogle(emailCollection);
+    // onNavigate('/');
     } catch (error) {
       console.log(error);
     }

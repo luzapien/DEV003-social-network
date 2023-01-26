@@ -1,7 +1,7 @@
 
 /**Estilos generales**/
 html {
-    font-size: 16px;
+  /*  font-size: 16px;*/
 }
 body {
 justify-items: center;
@@ -147,7 +147,7 @@ footer{
 /** Responsive desktop **/
 @media (min-width: 992px) { 
     html{
-        font-size: 10px;
+        font-size: 12px;
     }
     /**Responsividad para login **/
     .mainContainer {
@@ -203,4 +203,6 @@ footer{
     width: 70%;
     font-size: 2rem;
 }
+/*Responsive para el home*/
+
 }
