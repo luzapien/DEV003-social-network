@@ -140,8 +140,11 @@ footer{
         margin: 5%;
         
 }
-.btns-register{
-    width: 100%;
-}
 
+.form-register > input {
+    width: 70%;
+}
+.form-register > button{
+    width: 70%;
+}
 }

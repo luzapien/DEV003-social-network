@@ -16,13 +16,22 @@ import { onNavigate } from '../router';
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();
+const auth1 = getAuth(app);
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
-
+export function informationUser() {
+  const user = auth.currentUser;
+  if (user !== null) {
+  // The user object has basic properties such as display name, email, etc.
+    const displayName = user.displayName;
+    // const email = user.email;
+    // const photoURL = user.photoURL;
+    return displayName;
+  }
+}
 export function loginWithGoogle() {
   const provider = new GoogleAuthProvider();
-
   return signInWithPopup(auth, provider);
 }
 export function logOutFunction() {
@@ -45,11 +54,9 @@ export const updateUserProfile = (user, displayName, userPhoto) => {
   return updateProfile(user, userProperties);
 };
 
-const auth1 = getAuth(app);
 onAuthStateChanged(auth1, (user) => {
   if (user) {
     onNavigate('/');
-    console.log(user);
   } else {
     onNavigate('/login');
   }
