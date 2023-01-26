@@ -17,7 +17,8 @@ export const Home = () => {
   /** **************MURO****************** */
   const sectionPost = document.createElement('section');
   sectionPost.id = 'scPost';
-  const textPost = document.createElement('txt');
+  const textPost = document.createElement('input');
+  textPost.type = 'text';
   textPost.placeholder = '¿Qué vas a compartir?';
   const frmEnterPost = document.createElement('form');
   frmEnterPost.id = 'allPostContainer';

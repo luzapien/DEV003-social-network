@@ -110,7 +110,7 @@ footer{
 /** Responsive desktop **/
 @media (min-width: 992px) { 
     html{
-        font-size: 10px;
+        font-size: 12px;
     }
     /**Responsividad para login **/
     .mainContainer,
@@ -147,4 +147,6 @@ footer{
 .form-register > button{
     width: 70%;
 }
+/*Responsive para el home*/
+
 }

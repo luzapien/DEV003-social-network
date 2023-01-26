@@ -1,5 +1,6 @@
 import { registerNewUser, updateUserProfile } from '../lib/firebase';
 import { onNavigate } from '../router';
+import { userCollection } from '../lib/functions_post';
 // importar el crear colecion por usuario y secrea con su id o nombre
 
 export const Register = () => {
@@ -52,6 +53,8 @@ export const Register = () => {
         const result = await registerNewUser(emailValue, passwordValue);
         const user = result.user;
         await updateUserProfile(user, fullName, 'https://p16-va-default.akamaized.net/img/musically-maliva-obj/1665282759496710~c5_720x720.jpeg');
+        // llamar a funcion crear coleccion del usuario , enviar correo
+        userCollection(emailValue);
         onNavigate('/');
       } catch (error) {
         errorCode = error.code;
@@ -65,6 +68,8 @@ export const Register = () => {
           message = 'Ingrese un correo valido';
         } else if (errorCode === 'auth/weak-password') {
           message = 'La contraseña debe tener minimo 6 caracteres';
+        } else if (errorCode === 'invalid-argument') {
+          message = 'Algo salió mal';
         }
         alert(message);
       }

@@ -14,7 +14,7 @@ import {
 import { firebaseConfig } from './configFirebase.js';
 import { onNavigate } from '../router';
 
-const app = initializeApp(firebaseConfig);
+export const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 const auth1 = getAuth(app);
 
@@ -32,6 +32,7 @@ export function informationUser() {
 }
 export function loginWithGoogle() {
   const provider = new GoogleAuthProvider();
+  
   return signInWithPopup(auth, provider);
 }
 export function logOutFunction() {
