@@ -14,12 +14,12 @@ export const Login = () => {
   email.type = 'email';
   email.required = true;
   email.placeholder = 'Correo';
-  email.className = 'input-login';
+  email.className = 'form-input';
   const password = document.createElement('input');
   password.type = 'password';
   password.placeholder = 'Contraseña';
   password.minLength = 6;
-  password.className = 'input-login';
+  password.className = 'form-input';
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -48,7 +48,7 @@ export const Login = () => {
   const btnLogin = document.createElement('button');
   btnLogin.textContent = 'Iniciar Sesión';
   btnLogin.type = 'submit';
-  btnLogin.className = 'btn-loginn stylesBtns';
+  btnLogin.className = 'btn-login stylesBtns mt-20';
   const btnRegister = document.createElement('button');
   btnRegister.textContent = 'Registrar';
   btnRegister.className = 'btn-register stylesBtns';

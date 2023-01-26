@@ -34,8 +34,6 @@ export function emailLogin(email, password) {
 }
 
 export function registerNewUser(email, password) {
-  const valor = createUserWithEmailAndPassword(auth, email, password);
-  console.log(valor.email);
   return createUserWithEmailAndPassword(auth, email, password);
 }
 
@@ -44,7 +42,6 @@ export const updateUserProfile = (user, displayName, userPhoto) => {
     displayName,
     photoURL: userPhoto,
   };
-
   return updateProfile(user, userProperties);
 };
 
