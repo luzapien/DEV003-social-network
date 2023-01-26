@@ -1,6 +1,6 @@
-import { logOutFunction, informationUser } from '../lib/firebase';
+import { logOutFunction, informationUser, getCurrentUser } from '../lib/firebase';
 import { onNavigate } from '../router';
-
+import { createPost } from '../lib/functions_post';
 
 export const Home = () => {
   const usuario = informationUser();
@@ -17,10 +17,25 @@ export const Home = () => {
   /** **************MURO****************** */
   const sectionPost = document.createElement('section');
   sectionPost.id = 'scPost';
-  const textPost = document.createElement('txt');
+  const textPost = document.createElement('input');
+  textPost.type = 'text';
   textPost.placeholder = '¿Qué vas a compartir?';
   const frmEnterPost = document.createElement('form');
+  const submitPostBtn = document.createElement('button');
+  submitPostBtn.textContent = 'Publicar';
+  submitPostBtn.type = 'submit';
   frmEnterPost.id = 'allPostContainer';
+  frmEnterPost.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    try {
+      const user = getCurrentUser();
+      await createPost(user.uid, textPost.value);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      frmEnterPost.reset();
+    }
+  });
 
   /** ********FIN MURO******************* */
   const signOutBtn = document.createElement('button');
@@ -40,9 +55,9 @@ export const Home = () => {
   welcomeContainer.appendChild(labelWelcome);
 
   welcomeContainer.appendChild(sectionPost);
-  sectionPost.appendChild(textPost);
+  frmEnterPost.append(textPost, submitPostBtn);
   sectionPost.appendChild(frmEnterPost);
-  
+
   container.appendChild(signOutBtn);
   return container;
 };
