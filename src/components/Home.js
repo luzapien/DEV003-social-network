@@ -1,29 +1,29 @@
-import { logOutFunction, getCurrentUser, informationUser } from '../lib/firebase';
+import { logOutFunction, informationUser } from '../lib/firebase';
 import { onNavigate } from '../router';
 import { createPost, getUserPosts } from '../lib/functions_post';
 
 async function showPost(container) {
-  const user = getCurrentUser();
+  const user = informationUser();
   if (!user) {
     console.log('no hay usuario');
   } else {
     console.log(user.uid);
   }
-
-  // const prueba = await getUserPosts(user.uid);
-  // prueba.forEach((doc) => {
-  //   const sectionPost = document.createElement('section');
-  //   sectionPost.innerText = doc.data();
-  //   container.appendChild(sectionPost);
-  //   // sectionPost.id = ''
-  //   // console.log(doc.data());
-  // });
+  const prueba = await getUserPosts(user.uid);
+  const postWall = document.createElement('section');
+  postWall.id = 'post-wall';
+  prueba.forEach((doc) => {
+    const sectionPost = document.createElement('div');
+    sectionPost.innerText = doc.data().contenido;
+    postWall.appendChild(sectionPost);
+  });
+  console.log(postWall);
+  container.appendChild(postWall);
 }
 
 export const Home = () => {
   console.log('ya no me repito :D');
-  const usuario = informationUser();
-  const user = getCurrentUser();
+  const user = informationUser();
   document.title = 'Home';
   const title = document.createElement('h1');
   title.innerText = 'Home';
@@ -32,7 +32,7 @@ export const Home = () => {
 
   const welcomeContainer = document.createElement('section');
   const labelWelcome = document.createElement('label');
-  labelWelcome.innerHTML = `Bienvenido <strong>${usuario}<strong/>`;
+  labelWelcome.innerHTML = `Bienvenido <strong>${user.displayName}<strong/>`;
 
   /** **************MURO****************** */
   const sectionPost = document.createElement('section');
@@ -55,8 +55,7 @@ export const Home = () => {
       frmEnterPost.reset();
     }
   });
-  const postSection = document.createElement('section');
-  showPost(postSection);
+
   /** ********FIN MURO******************* */
   const signOutBtn = document.createElement('button');
   signOutBtn.type = 'button';
@@ -77,6 +76,7 @@ export const Home = () => {
   welcomeContainer.appendChild(sectionPost);
   frmEnterPost.append(textPost, submitPostBtn);
   sectionPost.appendChild(frmEnterPost);
+  showPost(sectionPost);
 
   container.appendChild(signOutBtn);
   return container;

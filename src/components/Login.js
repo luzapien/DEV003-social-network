@@ -1,4 +1,4 @@
-import { emailLogin, loginWithGoogle, getCurrentUser } from '../lib/firebase';
+import { emailLogin, loginWithGoogle } from '../lib/firebase';
 // import { userCollectionGoogle } from '../lib/functions_post';
 import { createUserDoc, getUserPosts } from '../lib/functions_post';
 import { onNavigate } from '../router';
@@ -29,13 +29,6 @@ export const Login = () => {
       try {
         const email = await emailLogin(emailValue, passwordValue);
         const email2 = email.user.email;
-        //const currentUser = getCurrentUser();
-        // const prueba = await getUserPosts(currentUser.uid);
-        // // prueba.forEach((doc) => {
-        //   console.log(doc.data());
-        // });
-
-        //   userCollectionGoogle(email2);
       } catch (error) {
         let message = 'Algo salió mal';
 
