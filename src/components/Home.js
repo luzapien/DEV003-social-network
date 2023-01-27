@@ -9,12 +9,17 @@ async function showPost(container) {
   } else {
     console.log(user.uid);
   }
-  const prueba = await getUserPosts(user.uid);
+  const postsObject = await getUserPosts(user.uid);
   const postWall = document.createElement('section');
   postWall.id = 'post-wall';
-  prueba.forEach((doc) => {
+  const arrayPosts = [];
+  postsObject.forEach((doc) => {
+    arrayPosts.push(doc.data());
+  });
+  arrayPosts.sort((a, b) => a.date.seconds - b.date.seconds);
+  arrayPosts.forEach((doc) => {
     const sectionPost = document.createElement('div');
-    sectionPost.innerText = doc.data().contenido;
+    sectionPost.innerText = doc.contenido;
     postWall.appendChild(sectionPost);
   });
   console.log(postWall);
@@ -54,6 +59,7 @@ export const Home = () => {
     } finally {
       frmEnterPost.reset();
     }
+    window.location.reload();
   });
 
   /** ********FIN MURO******************* */

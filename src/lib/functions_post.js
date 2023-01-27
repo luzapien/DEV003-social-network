@@ -26,15 +26,20 @@ export function createUserDoc(user) {
   });
 }
 
-function createUserID() {
+function createID() {
   return Math.random().toString(30).substring(2);
 }
 
 export function createPost(userId, postContent) {
+  // crea un nuevo objeto `Date` con fecha y hora del momento
+  const today = new Date();
   return addDoc(collection(dataBase, 'publicaciones'), {
-    postId: createUserID(),
+    postId: createID(),
     userId,
     contenido: postContent,
+    likes: [],
+    date: today,
+
   });
 }
 
