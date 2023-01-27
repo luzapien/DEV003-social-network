@@ -92,4 +92,4 @@ import './router';
 //     document.getElementById('scWelcome').style.display = 'none';
 //     document.getElementById('scAccess').style.display = 'block';
 //   }
-// 
+//

@@ -1,20 +1,25 @@
-import { emailLogin, loginWithGoogle } from '../lib/firebase';
+import { emailLogin, loginWithGoogle, getCurrentUser } from '../lib/firebase';
+// import { userCollectionGoogle } from '../lib/functions_post';
+import { createUserDoc, getUserPosts } from '../lib/functions_post';
 import { onNavigate } from '../router';
 
 export const Login = () => {
   document.title = 'Login';
   const container = document.createElement('section');
   container.className = 'mainContainer';
+  const title = '<h1 class = "title-page">CatLovers</h1>';
   const form = document.createElement('form');
-  const label = document.createElement('label');
+  form.className = 'form-login';
   const email = document.createElement('input');
   email.type = 'email';
   email.required = true;
   email.placeholder = 'Correo';
+  email.className = 'form-input';
   const password = document.createElement('input');
   password.type = 'password';
   password.placeholder = 'Contraseña';
   password.minLength = 6;
+  password.className = 'form-input';
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -22,8 +27,15 @@ export const Login = () => {
     const passwordValue = password.value;
     if (emailValue && passwordValue) {
       try {
-        const result = await emailLogin(emailValue, passwordValue);
-        const user = result.user;
+        const email = await emailLogin(emailValue, passwordValue);
+        const email2 = email.user.email;
+        //const currentUser = getCurrentUser();
+        // const prueba = await getUserPosts(currentUser.uid);
+        // // prueba.forEach((doc) => {
+        //   console.log(doc.data());
+        // });
+
+        //   userCollectionGoogle(email2);
         onNavigate('/');
       } catch (error) {
         let message = 'Algo salió mal';
@@ -38,37 +50,37 @@ export const Login = () => {
         alert(message);
       }
     }
-  })
+  });
   // Botones inicio y registrar
+  const btnLogin = document.createElement('button');
+  btnLogin.textContent = 'Iniciar Sesión';
+  btnLogin.type = 'submit';
+  btnLogin.className = 'btn-login stylesBtns mt-20';
   const btnRegister = document.createElement('button');
-  btnRegister.textContent = 'Registro';
+  btnRegister.textContent = 'Registrar';
+  btnRegister.className = 'btn-register stylesBtns';
   btnRegister.addEventListener('click', (e) => {
     e.preventDefault();
     onNavigate('/register');
   });
 
-  const btnLogin = document.createElement('button');
-  btnLogin.textContent = 'Inicia Sesión';
-  btnLogin.type = 'submit';
-
   const btnGoogle = document.createElement('button');
-  btnGoogle.innerText = 'Sign in with Google';
+  btnGoogle.className = 'btnGoogle stylesBtns';
+  btnGoogle.textContent = 'Entrar con Google';
   btnGoogle.addEventListener('click', async () => {
     try {
       const result = await loginWithGoogle();
-      console.log(result);
-      onNavigate('/');
+      const user = result.user;
+      await createUserDoc(user);
+    // onNavigate('/');
     } catch (error) {
       console.log(error);
     }
   });
 
-  label.append(email, password);
-  form.appendChild(label);
-  form.appendChild(btnLogin);
+  form.append(email, password, btnLogin, btnGoogle, btnRegister);
+  container.innerHTML = title;
   container.appendChild(form);
-  container.appendChild(btnRegister);
-  container.appendChild(btnGoogle);
 
   return container;
 };

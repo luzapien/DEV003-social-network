@@ -11,10 +11,11 @@ const routes = {
 };
 
 export function onNavigate(pathname) {
+  const localPath = window.location.pathname;
   window.history.pushState(
     {},
     pathname,
-    window.location.origin + pathname,
+    window.location.origin + localPath,
   );
 
   while (rootDiv.firstChild) {
@@ -24,5 +25,12 @@ export function onNavigate(pathname) {
   rootDiv.appendChild(routes[pathname]());
 }
 
-const component = routes[window.location.pathname];
+const component = routes[window.location.pathname] || routes['/login'];
+
+window.onpopstate = () => {
+  while (rootDiv.firstChild) {
+    rootDiv.removeChild(rootDiv.firstChild);
+  }
+  rootDiv.appendChild(routes[window.location.pathname]());
+};
 rootDiv.appendChild(component());
