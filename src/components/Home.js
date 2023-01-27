@@ -2,6 +2,8 @@ import { logOutFunction, getCurrentUser, informationUser } from '../lib/firebase
 import { onNavigate } from '../router';
 import { createPost, getUserPosts } from '../lib/functions_post';
 
+const allposts = [];
+
 async function showPost(container) {
   const user = getCurrentUser();
   if (!user) {
@@ -48,6 +50,7 @@ export const Home = () => {
     e.preventDefault();
     try {
       await createPost(user.uid, textPost.value);
+    //  loadAllPost();
     } catch (error) {
       console.log(error);
     } finally {
@@ -80,3 +83,14 @@ export const Home = () => {
   container.appendChild(signOutBtn);
   return container;
 };
+
+function loadAllPost() {
+  const containerAllPost = document.getElementById('allPostContainer');
+  containerAllPost.innerHTML = '';
+  allposts= [];
+  try {
+    const response= await getUserPosts(userUid);
+  } catch (error) {
+    
+  }
+}
