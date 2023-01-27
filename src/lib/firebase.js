@@ -60,8 +60,8 @@ export const updateUserProfile = (user, displayName, userPhoto) => {
 
 onAuthStateChanged(auth, (user) => {
   if (user) {
-    onNavigate('/');
+    onNavigate('/home');
   } else {
-    onNavigate('/login');
+    onNavigate('/');
   }
 });

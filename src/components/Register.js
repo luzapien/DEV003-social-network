@@ -56,7 +56,6 @@ export const Register = () => {
         // llamar a funcion crear coleccion del usuario , enviar correo
         // userCollection(emailValue);
         await createUserDoc(user);
-        onNavigate('/');
       } catch (error) {
         errorCode = error.code;
       }

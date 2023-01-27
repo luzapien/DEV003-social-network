@@ -5,8 +5,8 @@ import { Register } from './components/Register';
 const rootDiv = document.getElementById('root');
 
 const routes = {
-  '/': Home,
-  '/login': Login,
+  '/': Login,
+  '/home': Home,
   '/register': Register,
 };
 

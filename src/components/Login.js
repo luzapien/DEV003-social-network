@@ -36,7 +36,6 @@ export const Login = () => {
         // });
 
         //   userCollectionGoogle(email2);
-        onNavigate('/');
       } catch (error) {
         let message = 'Algo salió mal';
 
@@ -72,7 +71,6 @@ export const Login = () => {
       const result = await loginWithGoogle();
       const user = result.user;
       await createUserDoc(user);
-    // onNavigate('/');
     } catch (error) {
       console.log(error);
     }

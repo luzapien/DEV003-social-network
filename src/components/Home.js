@@ -21,6 +21,7 @@ async function showPost(container) {
 }
 
 export const Home = () => {
+  console.log('ya no me repito :D');
   const usuario = informationUser();
   const user = getCurrentUser();
   document.title = 'Home';
@@ -63,7 +64,7 @@ export const Home = () => {
   signOutBtn.addEventListener('click', async () => {
     try {
       await logOutFunction();
-      onNavigate('/login');
+      onNavigate('/');
     } catch (error) {
       console.log(error);
     }
