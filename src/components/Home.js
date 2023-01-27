@@ -1,9 +1,28 @@
-import { logOutFunction, informationUser, getCurrentUser } from '../lib/firebase';
+import { logOutFunction, getCurrentUser, informationUser } from '../lib/firebase';
 import { onNavigate } from '../router';
-import { createPost } from '../lib/functions_post';
+import { createPost, getUserPosts } from '../lib/functions_post';
+
+async function showPost(container) {
+  const user = getCurrentUser();
+  if (!user) {
+    console.log('no hay usuario');
+  } else {
+    console.log(user.uid);
+  }
+
+  // const prueba = await getUserPosts(user.uid);
+  // prueba.forEach((doc) => {
+  //   const sectionPost = document.createElement('section');
+  //   sectionPost.innerText = doc.data();
+  //   container.appendChild(sectionPost);
+  //   // sectionPost.id = ''
+  //   // console.log(doc.data());
+  // });
+}
 
 export const Home = () => {
   const usuario = informationUser();
+  const user = getCurrentUser();
   document.title = 'Home';
   const title = document.createElement('h1');
   title.innerText = 'Home';
@@ -28,7 +47,6 @@ export const Home = () => {
   frmEnterPost.addEventListener('submit', async (e) => {
     e.preventDefault();
     try {
-      const user = getCurrentUser();
       await createPost(user.uid, textPost.value);
     } catch (error) {
       console.log(error);
@@ -36,7 +54,8 @@ export const Home = () => {
       frmEnterPost.reset();
     }
   });
-
+  const postSection = document.createElement('section');
+  showPost(postSection);
   /** ********FIN MURO******************* */
   const signOutBtn = document.createElement('button');
   signOutBtn.type = 'button';

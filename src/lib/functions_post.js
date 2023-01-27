@@ -11,7 +11,6 @@ import { app } from './firebase';
 
 // Initialize Cloud Firestore and get a reference to the service
 const dataBase = getFirestore(app);
-
 /* funcion que cree collection. debe llamarse al registrarse */
 export function userCollection(userEmail) {
   console.log(`entro al collection: ${userEmail}`);
@@ -27,8 +26,13 @@ export function createUserDoc(user) {
   });
 }
 
+function createUserID() {
+  return Math.random().toString(30).substring(2);
+}
+
 export function createPost(userId, postContent) {
   return addDoc(collection(dataBase, 'publicaciones'), {
+    postId: createUserID(),
     userId,
     contenido: postContent,
   });
@@ -44,4 +48,3 @@ export async function getUserPosts(userId) {
 
   return getDocs(q);
 }
-

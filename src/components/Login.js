@@ -29,11 +29,11 @@ export const Login = () => {
       try {
         const email = await emailLogin(emailValue, passwordValue);
         const email2 = email.user.email;
-        const currentUser = getCurrentUser();
-        const prueba = await getUserPosts(currentUser.uid);
-        prueba.forEach((doc) => {
-          console.log(doc.data());
-        });
+        //const currentUser = getCurrentUser();
+        // const prueba = await getUserPosts(currentUser.uid);
+        // // prueba.forEach((doc) => {
+        //   console.log(doc.data());
+        // });
 
         //   userCollectionGoogle(email2);
         onNavigate('/');
