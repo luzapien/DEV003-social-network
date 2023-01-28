@@ -87,7 +87,7 @@ export const Register = () => {
   loginBtn.className = 'btns-register stylesBtns';
   loginBtn.setAttribute('id', 'btn-return-login');
   loginBtn.addEventListener('click', () => {
-    onNavigate('/login');
+    onNavigate('/');
   });
   form.append(name, lastname, email, password, passwordConfirm, registerBtn, loginBtn);
   container.innerHTML = titleRegister;

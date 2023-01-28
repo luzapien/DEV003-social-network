@@ -2,15 +2,12 @@ import { logOutFunction, informationUser } from '../lib/firebase';
 import { onNavigate } from '../router';
 import { createPost, getUserPosts } from '../lib/functions_post';
 
+/* ========= Funcion que crea y ordena por fecha los posts del usuario ========= */
 async function showPost(container) {
   const user = informationUser();
-  if (!user) {
-    console.log('no hay usuario');
-  } else {
-    console.log(user.uid);
-  }
   const postsObject = await getUserPosts(user.uid);
   const postWall = document.createElement('section');
+  postWall.innerHTML = '';
   postWall.id = 'post-wall';
   const arrayPosts = [];
   postsObject.forEach((doc) => {
@@ -21,10 +18,25 @@ async function showPost(container) {
     const sectionPost = document.createElement('div');
     sectionPost.innerText = doc.contenido;
     postWall.appendChild(sectionPost);
+    const buttonDeletePost = document.createElement('button');
+    buttonDeletePost.id = doc.postId;
+    buttonDeletePost.className = 'btnDelete';
+    buttonDeletePost.textContent = 'Eliminar';
+    sectionPost.appendChild(buttonDeletePost);
   });
-  console.log(postWall);
   container.appendChild(postWall);
+  console.log(postWall);
 }
+
+/* ================ Funcion para elminar posts ================== */
+/* let btnsDeleteAll = [];
+  btnsDeleteAll = document.getElementsByClassName('btnDelete');
+  console.log(btnsDeleteAll);
+  btnsDeleteAll.forEach((element) => {
+    element.addEventListener('click', () => {
+      console.log(element);
+    });
+  }); */
 
 export const Home = () => {
   console.log('ya no me repito :D');
@@ -40,6 +52,8 @@ export const Home = () => {
   labelWelcome.innerHTML = `Bienvenido <strong>${user.displayName}<strong/>`;
 
   /** **************MURO****************** */
+  const sectionWall = document.createElement('section');
+  sectionWall.id = 'scWall';
   const sectionPost = document.createElement('section');
   sectionPost.id = 'scPost';
   const textPost = document.createElement('input');
@@ -59,7 +73,9 @@ export const Home = () => {
     } finally {
       frmEnterPost.reset();
     }
-    window.location.reload();
+    sectionPost.innerHTML = '';
+    showPost(sectionPost);
+    // window.location.reload();
   });
 
   /** ********FIN MURO******************* */
@@ -79,11 +95,11 @@ export const Home = () => {
   container.appendChild(welcomeContainer);
   welcomeContainer.appendChild(labelWelcome);
 
-  welcomeContainer.appendChild(sectionPost);
+  welcomeContainer.appendChild(sectionWall);
   frmEnterPost.append(textPost, submitPostBtn);
-  sectionPost.appendChild(frmEnterPost);
+  sectionWall.appendChild(frmEnterPost);
+  sectionWall.appendChild(sectionPost);
   showPost(sectionPost);
-
   container.appendChild(signOutBtn);
   return container;
 };
