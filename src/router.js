@@ -5,8 +5,8 @@ import { Register } from './components/Register';
 const rootDiv = document.getElementById('root');
 
 const routes = {
-  '/': Home,
-  '/login': Login,
+  '/': Login,
+  '/home': Home,
   '/register': Register,
 };
 
@@ -25,7 +25,7 @@ export function onNavigate(pathname) {
   rootDiv.appendChild(routes[pathname]());
 }
 
-const component = routes[window.location.pathname] || routes['/login'];
+const component = routes[window.location.pathname] || routes['/'];
 
 window.onpopstate = () => {
   while (rootDiv.firstChild) {

@@ -1,30 +1,46 @@
-import { logOutFunction, getCurrentUser, informationUser } from '../lib/firebase';
+import { logOutFunction, informationUser } from '../lib/firebase';
 import { onNavigate } from '../router';
 import { createPost, getUserPosts } from '../lib/functions_post';
 
-const allposts = [];
-
+/* ========= Funcion que crea y ordena por fecha los posts del usuario ========= */
 async function showPost(container) {
-  const user = getCurrentUser();
-  if (!user) {
-    console.log('no hay usuario');
-  } else {
-    console.log(user.uid);
-  }
-
-  // const prueba = await getUserPosts(user.uid);
-  // prueba.forEach((doc) => {
-  //   const sectionPost = document.createElement('section');
-  //   sectionPost.innerText = doc.data();
-  //   container.appendChild(sectionPost);
-  //   // sectionPost.id = ''
-  //   // console.log(doc.data());
-  // });
+  const user = informationUser();
+  const postsObject = await getUserPosts(user.uid);
+  const postWall = document.createElement('section');
+  postWall.innerHTML = '';
+  postWall.id = 'post-wall';
+  const arrayPosts = [];
+  postsObject.forEach((doc) => {
+    arrayPosts.push(doc.data());
+  });
+  arrayPosts.sort((a, b) => a.date.seconds - b.date.seconds);
+  arrayPosts.forEach((doc) => {
+    const sectionPost = document.createElement('div');
+    sectionPost.innerText = doc.contenido;
+    postWall.appendChild(sectionPost);
+    const buttonDeletePost = document.createElement('button');
+    buttonDeletePost.id = doc.postId;
+    buttonDeletePost.className = 'btnDelete';
+    buttonDeletePost.textContent = 'Eliminar';
+    sectionPost.appendChild(buttonDeletePost);
+  });
+  container.appendChild(postWall);
+  console.log(postWall);
 }
 
+/* ================ Funcion para elminar posts ================== */
+/* let btnsDeleteAll = [];
+  btnsDeleteAll = document.getElementsByClassName('btnDelete');
+  console.log(btnsDeleteAll);
+  btnsDeleteAll.forEach((element) => {
+    element.addEventListener('click', () => {
+      console.log(element);
+    });
+  }); */
+
 export const Home = () => {
-  const usuario = informationUser();
-  const user = getCurrentUser();
+  console.log('ya no me repito :D');
+  const user = informationUser();
   document.title = 'Home';
   const title = document.createElement('h1');
   title.innerText = 'Home';
@@ -33,9 +49,11 @@ export const Home = () => {
 
   const welcomeContainer = document.createElement('section');
   const labelWelcome = document.createElement('label');
-  labelWelcome.innerHTML = `Bienvenido <strong>${usuario}<strong/>`;
+  labelWelcome.innerHTML = `Bienvenido <strong>${user.displayName}<strong/>`;
 
   /** **************MURO****************** */
+  const sectionWall = document.createElement('section');
+  sectionWall.id = 'scWall';
   const sectionPost = document.createElement('section');
   sectionPost.id = 'scPost';
   const textPost = document.createElement('input');
@@ -56,9 +74,11 @@ export const Home = () => {
     } finally {
       frmEnterPost.reset();
     }
+    sectionPost.innerHTML = '';
+    showPost(sectionPost);
+    // window.location.reload();
   });
-  const postSection = document.createElement('section');
-  showPost(postSection);
+
   /** ********FIN MURO******************* */
   const signOutBtn = document.createElement('button');
   signOutBtn.type = 'button';
@@ -66,7 +86,7 @@ export const Home = () => {
   signOutBtn.addEventListener('click', async () => {
     try {
       await logOutFunction();
-      onNavigate('/login');
+      onNavigate('/');
     } catch (error) {
       console.log(error);
     }
@@ -76,10 +96,11 @@ export const Home = () => {
   container.appendChild(welcomeContainer);
   welcomeContainer.appendChild(labelWelcome);
 
-  welcomeContainer.appendChild(sectionPost);
+  welcomeContainer.appendChild(sectionWall);
   frmEnterPost.append(textPost, submitPostBtn);
-  sectionPost.appendChild(frmEnterPost);
-
+  sectionWall.appendChild(frmEnterPost);
+  sectionWall.appendChild(sectionPost);
+  showPost(sectionPost);
   container.appendChild(signOutBtn);
   return container;
 };
