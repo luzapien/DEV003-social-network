@@ -23,16 +23,16 @@ export function informationUser() {
   const user = auth.currentUser;
   if (user !== null) {
     // The user object has basic properties such as display name, email, etc.
-    const displayName = user.displayName;
     // const email = user.email;
     // const photoURL = user.photoURL;
-    return displayName;
+    return user;
   }
+  console.log('Aun no hay usuario');
 }
 
-export function getCurrentUser() {
+/* export function getCurrentUser() {
   return auth.currentUser;
-}
+} */
 
 export function loginWithGoogle() {
   const provider = new GoogleAuthProvider();
@@ -60,8 +60,8 @@ export const updateUserProfile = (user, displayName, userPhoto) => {
 
 onAuthStateChanged(auth, (user) => {
   if (user) {
-    onNavigate('/');
+    onNavigate('/home');
   } else {
-    onNavigate('/login');
+    onNavigate('/');
   }
 });

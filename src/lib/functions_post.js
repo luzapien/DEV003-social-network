@@ -2,6 +2,7 @@ import {
   getFirestore,
   collection,
   addDoc, setDoc,
+  deleteDoc,
   doc,
   where,
   query,
@@ -11,7 +12,6 @@ import { app } from './firebase';
 
 // Initialize Cloud Firestore and get a reference to the service
 const dataBase = getFirestore(app);
-
 /* funcion que cree collection. debe llamarse al registrarse */
 export function userCollection(userEmail) {
   console.log(`entro al collection: ${userEmail}`);
@@ -27,11 +27,25 @@ export function createUserDoc(user) {
   });
 }
 
+function createID() {
+  return Math.random().toString(30).substring(2);
+}
+
 export function createPost(userId, postContent) {
+  // crea un nuevo objeto `Date` con fecha y hora del momento
+  const today = new Date();
   return addDoc(collection(dataBase, 'publicaciones'), {
+    postId: createID(),
     userId,
     contenido: postContent,
+    likes: [],
+    date: today,
+
   });
+}
+
+export function deletePost(idPost) {
+  deleteDoc(doc(dataBase, 'publicaciones', idPost));
 }
 
 export async function getUserPosts(userId) {
@@ -44,4 +58,3 @@ export async function getUserPosts(userId) {
 
   return getDocs(q);
 }
-
