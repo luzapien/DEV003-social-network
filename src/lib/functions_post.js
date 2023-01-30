@@ -2,6 +2,7 @@ import {
   getFirestore,
   collection,
   addDoc, setDoc,
+  deleteDoc,
   doc,
   where,
   query,
@@ -41,6 +42,10 @@ export function createPost(userId, postContent) {
     date: today,
 
   });
+}
+
+export function deletePost(idPost) {
+  deleteDoc(doc(dataBase, 'publicaciones', idPost));
 }
 
 export async function getUserPosts(userId) {
