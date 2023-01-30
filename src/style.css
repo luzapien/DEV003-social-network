@@ -1,0 +1,152 @@
+
+/**Estilos generales**/
+html {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    justify-items: center;
+    background-image:url("./images/patitascat.jpg");
+    text-align: center;
+}
+.stylesBtns{
+    background-color:rgba(225, 103, 183, 0.8);
+    color: white;
+    border: none;
+    padding: 10px 12px;
+    font-size: var(--font-md);
+}
+.stylesBtns:hover{
+    cursor: pointer;
+    background-color:#f3b8d7;
+    color:black;
+}
+
+:root {
+    --font-sm: 1rem;
+    --font-md: 1.5rem;
+    --font-lg: 2rem;
+    --font-xl: 3rem;
+}
+
+.mt-20 {
+    margin-top: 20px;
+}
+
+/*estilos y grillas login*/
+
+.mainContainer, 
+.container-register {  
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background-color: rgba(248, 108, 248, 0.4);
+    margin: 15%;
+    border-radius: 10px; 
+    padding: 20px;
+    /*min-height: 900px;*/ 
+}
+.title-page{
+    color: gray;
+    border-radius: 15px;
+    font-style: oblique;
+    font-size: 6rem;
+    -webkit-text-stroke: 2px rgb(106, 106, 106);
+    width: 95%;
+    margin: 8%;
+}
+.form-login,
+.form-register {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 60%;
+    gap: 12px;
+}
+
+.form-input {
+    width: 100%;
+    padding: 12px 20px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    font-size: var(--font-md);
+}
+.form-login > button,
+.form-register > button {
+    width: 100%;
+}
+.label-login{
+    display: flex;
+    flex-direction: column;
+    width: 200%;
+    height: 450px;
+}
+.input-login{
+  padding: 12px 20px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+
+}
+
+/**Estilos pagina de registro**/
+.title-register{
+    color: gray;
+    border-radius: 15px;
+    font-style: oblique;
+    font-size: 6rem;
+    -webkit-text-stroke: 2px rgb(106, 106, 106);
+    width: 95%;
+    margin: 8%;
+}
+
+footer{
+    font-size: var(--font-lg);
+    bottom: 0;
+    width: 100%;
+    height: 40px;
+}
+/** Responsive desktop **/
+@media (min-width: 992px) { 
+    html{
+        font-size: 12px;
+    }
+    /**Responsividad para login **/
+    .mainContainer,
+    .container-register {
+        background-color: rgba(248, 108, 248, 0.4);
+        margin: 0% 15%;
+    }
+    .label-login{
+        width: 200%;
+        align-items: center;
+    }
+    .input-login{
+        /* width: 100%;
+        margin: 4%; */
+    }
+    .btn-login{
+        /* width:100% ;
+        font-size: 2rem; */
+    }
+    .title-page{
+        margin: 5%;
+        width: 70%;
+    }
+
+    /** Responsividad para register **/
+   .title-register{
+        margin: 5%;
+        
+}
+
+.form-register > input {
+    width: 70%;
+}
+.form-register > button{
+    width: 70%;
+}
+/*Responsive para el home*/
+
+}
