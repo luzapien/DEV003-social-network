@@ -21,15 +21,19 @@ async function showPost(container) {
     sectionPost.innerText = doc.contenido;
     postWall.appendChild(sectionPost);
     const buttonDeletePost = document.createElement('button');
+    const buttonEditPost = document.createElement('button');
+    buttonDeletePost.id = doc.uid;
     buttonDeletePost.id = doc.uid;
     buttonDeletePost.className = 'btnDelete';
-    buttonDeletePost.textContent = 'Eliminar';
+    buttonEditPost.className = 'btnEdit';
+    buttonDeletePost.textContent = '🗑️';
+    buttonEditPost.textContent = '🖉';
     buttonDeletePost.addEventListener('click', () => {
       deletePost(buttonDeletePost.id);
       // console.log(buttonDeletePost.id);
       sectionPost.innerHTML = '';
     });
-    sectionPost.appendChild(buttonDeletePost);
+    sectionPost.append(buttonEditPost, buttonDeletePost);
   });
   container.appendChild(postWall);
 }
