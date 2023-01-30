@@ -89,7 +89,15 @@ body {
 .form-register > button {
     width: 100%;
 }
-
+.btnGoogle{
+    width: 60%;
+    margin-top: 15px;
+    
+}
+.btn-register{
+    width: 60%;
+    margin-top: 15px;
+}
 .label-login{
     display: flex;
     flex-direction: column;

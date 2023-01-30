@@ -69,9 +69,9 @@ export const Login = () => {
     }
   });
 
-  form.append(email, password, btnLogin, btnGoogle, btnRegister);
+  form.append(email, password, btnLogin);
   container.innerHTML = title;
-  container.append(form);
+  container.append(form, btnGoogle, btnRegister);
 
   return container;
 };
