@@ -13,7 +13,6 @@ async function showPost(container) {
   postsObject.forEach((doc) => {
     const dataPostUid = doc.data();
     dataPostUid.uid = doc.id;
-    console.log(dataPostUid);
     arrayPosts.push(dataPostUid);
   });
   arrayPosts.sort((a, b) => a.date.seconds - b.date.seconds);
@@ -27,7 +26,7 @@ async function showPost(container) {
     buttonDeletePost.textContent = 'Eliminar';
     buttonDeletePost.addEventListener('click', () => {
       deletePost(buttonDeletePost.id);
-      console.log(buttonDeletePost.id);
+      // console.log(buttonDeletePost.id);
       sectionPost.innerHTML = '';
     });
     sectionPost.appendChild(buttonDeletePost);
