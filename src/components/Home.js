@@ -22,6 +22,9 @@ async function showPost(container) {
     buttonDeletePost.id = doc.postId;
     buttonDeletePost.className = 'btnDelete';
     buttonDeletePost.textContent = 'Eliminar';
+    buttonDeletePost.addEventListener('click', () => {
+      console.log(buttonDeletePost.id);
+    })
     sectionPost.appendChild(buttonDeletePost);
   });
   container.appendChild(postWall);
@@ -29,15 +32,17 @@ async function showPost(container) {
 }
 
 /* ================ Funcion para elminar posts ================== */
-/* let btnsDeleteAll = [];
-  btnsDeleteAll = document.getElementsByClassName('btnDelete');
+function deletePost() {
+  let btnsDeleteAll = [];
+  btnsDeleteAll = document.querySelectorAll('.btnDelete');
   console.log(btnsDeleteAll);
-  btnsDeleteAll.forEach((element) => {
+  Array.from(btnsDeleteAll).forEach((element) => {
+    console.log(element);
     element.addEventListener('click', () => {
-      console.log(element);
+      console.log('click dado');
     });
-  }); */
-
+  });
+}
 export const Home = () => {
   console.log('ya no me repito :D');
   const user = informationUser();
@@ -75,7 +80,6 @@ export const Home = () => {
     }
     sectionPost.innerHTML = '';
     showPost(sectionPost);
-    // window.location.reload();
   });
 
   /** ********FIN MURO******************* */
