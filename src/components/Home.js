@@ -1,6 +1,6 @@
 import { logOutFunction, informationUser } from '../lib/firebase';
 import { onNavigate } from '../router';
-import { createPost, getUserPosts } from '../lib/functions_post';
+import { createPost, getUserPosts, deletePost } from '../lib/functions_post';
 
 /* ========= Funcion que crea y ordena por fecha los posts del usuario ========= */
 async function showPost(container) {
@@ -11,7 +11,9 @@ async function showPost(container) {
   postWall.id = 'post-wall';
   const arrayPosts = [];
   postsObject.forEach((doc) => {
-    arrayPosts.push(doc.data());
+    const dataPostUid = doc.data();
+    dataPostUid.uid = doc.id;
+    arrayPosts.push(dataPostUid);
   });
   arrayPosts.sort((a, b) => a.date.seconds - b.date.seconds);
   arrayPosts.forEach((doc) => {
@@ -19,32 +21,24 @@ async function showPost(container) {
     sectionPost.innerText = doc.contenido;
     postWall.appendChild(sectionPost);
     const buttonDeletePost = document.createElement('button');
-    buttonDeletePost.id = doc.postId;
+    const buttonEditPost = document.createElement('button');
+    buttonDeletePost.id = doc.uid;
+    buttonDeletePost.id = doc.uid;
     buttonDeletePost.className = 'btnDelete';
-    buttonDeletePost.textContent = 'Eliminar';
+    buttonEditPost.className = 'btnEdit';
+    buttonDeletePost.textContent = '🗑️';
+    buttonEditPost.textContent = '🖉';
     buttonDeletePost.addEventListener('click', () => {
-      console.log(buttonDeletePost.id);
-    })
-    sectionPost.appendChild(buttonDeletePost);
+      deletePost(buttonDeletePost.id);
+      // console.log(buttonDeletePost.id);
+      sectionPost.innerHTML = '';
+    });
+    sectionPost.append(buttonEditPost, buttonDeletePost);
   });
   container.appendChild(postWall);
-  console.log(postWall);
 }
 
-/* ================ Funcion para elminar posts ================== */
-function deletePost() {
-  let btnsDeleteAll = [];
-  btnsDeleteAll = document.querySelectorAll('.btnDelete');
-  console.log(btnsDeleteAll);
-  Array.from(btnsDeleteAll).forEach((element) => {
-    console.log(element);
-    element.addEventListener('click', () => {
-      console.log('click dado');
-    });
-  });
-}
 export const Home = () => {
-  console.log('ya no me repito :D');
   const user = informationUser();
   document.title = 'Home';
   const title = document.createElement('h1');
@@ -80,6 +74,10 @@ export const Home = () => {
     }
     sectionPost.innerHTML = '';
     showPost(sectionPost);
+    const btnsDelete = document.querySelectorAll('.btnDelete');
+    btnsDelete.forEach((button) => {
+      console.log(button.id);
+    });
   });
 
   /** ********FIN MURO******************* */
