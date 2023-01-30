@@ -6,6 +6,7 @@ import {
   doc,
   where,
   query,
+  getDoc,
   getDocs,
 } from 'firebase/firestore';
 import { app } from './firebase';
@@ -58,3 +59,8 @@ export async function getUserPosts(userId) {
 
   return getDocs(q);
 }
+
+export const getUserFromFirestore = async (userId) => {
+  const ref = doc(dataBase, 'usuarios', userId);
+  return getDoc(ref);
+};

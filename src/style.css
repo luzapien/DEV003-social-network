@@ -34,7 +34,19 @@ body {
     margin-top: 20px;
 }
 
+.create-post-form {
+    display: flex;
+}
+
 /*estilos y grillas login*/
+.mainContainer {
+    position: relative;
+}
+.signOutBtn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
 
 .mainContainer, 
 .container-register {  
@@ -77,6 +89,7 @@ body {
 .form-register > button {
     width: 100%;
 }
+
 .label-login{
     display: flex;
     flex-direction: column;
@@ -149,4 +162,11 @@ footer{
 }
 /*Responsive para el home*/
 
+}
+
+/*Edición imagen*/
+
+.userImage{
+    border-radius: 50%;
+    object-fit: cover;
 }
