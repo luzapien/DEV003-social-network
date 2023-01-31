@@ -19,6 +19,7 @@ const auth = getAuth(app);
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
+// eslint-disable-next-line consistent-return
 export function informationUser() {
   const user = auth.currentUser;
   if (user !== null) {
