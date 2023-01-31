@@ -44,10 +44,38 @@ body {
 }
 .signOutBtn {
     position: absolute;
-    top: 20px;
-    right: 20px;
+    top: 10px;
+    right: 10px;
+    font-size: var(--font-sm);
+    width: 25%;
+    height: 16%;
+    padding: 5px;
+}
+.post-input{
+    width: 100%;
+    padding: 12px 20px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    font-size: var(--font-sm);
 }
 
+h2{
+    font-family:Arial, Helvetica, sans-serif;
+}
+.button-post{
+    background-color:rgba(225, 103, 183, 0.8);
+    color: white;
+    border: none;
+    padding: 10px 12px;
+    font-size: var(--font-sm)
+}
+
+#scPost {
+    font-size: var(--font-md);
+    font-family: Arial, Helvetica, sans-serif;
+    width: 80%;
+    margin: 20px;
+}
 .mainContainer, 
 .container-register {  
     display: flex;
@@ -55,18 +83,21 @@ body {
     align-items: center;
     text-align: center;
     background-color: rgba(248, 108, 248, 0.4);
-    margin: 15%;
+    /*margin: 15%;*/
     border-radius: 10px; 
     padding: 20px;
     /*min-height: 900px;*/ 
 }
-.title-page{
+.title-page,
+.title-register{
+    display:flex;
+    text-align: center;
     color: gray;
     border-radius: 15px;
     font-style: oblique;
-    font-size: 6rem;
+    font-size: 14vw;
     -webkit-text-stroke: 2px rgb(106, 106, 106);
-    width: 95%;
+    width: 60%;
     margin: 8%;
 }
 .form-login,
@@ -74,8 +105,9 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 60%;
+    width: 100%;
     gap: 12px;
+    margin-top: 20px;
 }
 
 .form-input {
@@ -90,12 +122,12 @@ body {
     width: 100%;
 }
 .btnGoogle{
-    width: 60%;
+    width: 100%;
     margin-top: 15px;
     
 }
 .btn-register{
-    width: 60%;
+    width: 100%;
     margin-top: 15px;
 }
 .label-login{
@@ -111,28 +143,14 @@ body {
 
 }
 
-/**Estilos pagina de registro**/
-.title-register{
-    color: gray;
-    border-radius: 15px;
-    font-style: oblique;
-    font-size: 6rem;
-    -webkit-text-stroke: 2px rgb(106, 106, 106);
-    width: 95%;
-    margin: 8%;
-}
 
 footer{
-    font-size: var(--font-lg);
+    font-size: var(--font-sm);
     bottom: 0;
-    width: 100%;
-    height: 40px;
 }
 /** Responsive desktop **/
 @media (min-width: 992px) { 
-    html{
-        font-size: 12px;
-    }
+ 
     /**Responsividad para login **/
     .mainContainer,
     .container-register {
@@ -143,33 +161,41 @@ footer{
         width: 200%;
         align-items: center;
     }
-    .input-login{
-        /* width: 100%;
-        margin: 4%; */
-    }
-    .btn-login{
-        /* width:100% ;
-        font-size: 2rem; */
-    }
+ 
     .title-page{
+        font-size: 5vw;
         margin: 5%;
-        width: 70%;
+        width: 30%;
     }
 
     /** Responsividad para register **/
    .title-register{
+        font-size: 6vw;
         margin: 5%;
+        width: 30%;
         
 }
 
-.form-register > input {
+.form-register > input,
+.form-login > input {
     width: 70%;
 }
-.form-register > button{
+.form-register > button,
+.form-login > button {
     width: 70%;
+}
+.btnGoogle{
+    width: 70%;
+}
+.btn-register{
+    width: 70%;
+  
 }
 /*Responsive para el home*/
 
+}
+footer{
+    font-size: var(--font-md);
 }
 
 /*Edición imagen*/
@@ -177,4 +203,13 @@ footer{
 .userImage{
     border-radius: 50%;
     object-fit: cover;
+}
+
+.mainContainer {
+    position: relative;
+}
+.signOutBtn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
 }

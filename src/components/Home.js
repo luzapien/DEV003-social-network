@@ -64,7 +64,7 @@ export const Home = async () => {
   const sectionPost = document.createElement('section');
   sectionPost.id = 'scPost';
   const postInput = document.createElement('input');
-  postInput.className = 'form-input';
+  postInput.className = 'post-input';
   postInput.type = 'text';
   postInput.placeholder = '¿Qué vas a compartir?';
   const createPostForm = document.createElement('form');
@@ -72,7 +72,7 @@ export const Home = async () => {
   const submitPostBtn = document.createElement('button');
   submitPostBtn.textContent = 'Publicar';
   submitPostBtn.type = 'submit';
-  submitPostBtn.className = 'stylesBtns';
+  submitPostBtn.className = 'button-post';
   createPostForm.id = 'allPostContainer';
   createPostForm.addEventListener('submit', async (e) => {
     e.preventDefault();
