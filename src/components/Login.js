@@ -75,7 +75,7 @@ export const Login = () => {
   });
 
   form.append(email, password, btnLogin);
-  container.appendChild(title) ;
+  container.appendChild(title);
   container.append(form, btnGoogle, btnRegister);
 
   return container;

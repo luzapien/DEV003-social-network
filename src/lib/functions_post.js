@@ -9,6 +9,7 @@ import {
   getDoc,
   getDocs,
   updateDoc,
+  orderBy,
 } from 'firebase/firestore';
 import { app } from './firebase';
 
@@ -56,6 +57,7 @@ export async function getUserPosts(userId) {
   const q = query( // Se crea la query/consulta
     ref,
     where('userId', '==', userId), // Condición donde userId sea igual al userId pasado como parámetro
+    orderBy('date', 'desc'),
   );
 
   return getDocs(q);
