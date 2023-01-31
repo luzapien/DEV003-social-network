@@ -14,10 +14,10 @@ import { app } from './firebase';
 // Initialize Cloud Firestore and get a reference to the service
 const dataBase = getFirestore(app);
 /* funcion que cree collection. debe llamarse al registrarse */
-export function userCollection(userEmail) {
-  console.log(`entro al collection: ${userEmail}`);
-  addDoc(collection(dataBase, userEmail), {});
-}
+// export function userCollection(userEmail) {
+//   console.log(`entro al collection: ${userEmail}`);
+//   addDoc(collection(dataBase, userEmail), {});
+// }
 
 export function createUserDoc(user) {
   return setDoc(doc(dataBase, 'usuarios', user.uid), {

@@ -116,3 +116,14 @@ export const Home = async () => {
   container.appendChild(signOutBtn);
   return container;
 };
+
+function loadAllPost() {
+  const containerAllPost = document.getElementById('allPostContainer');
+  containerAllPost.innerHTML = '';
+  allposts= [];
+  try {
+    const response= await getUserPosts(userUid);
+  } catch (error) {
+    
+  }
+}
