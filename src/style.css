@@ -1,4 +1,9 @@
-
+.input-edit{
+    height: 40px;
+}
+.btn-update{
+    height: 20px;
+}
 /**Estilos generales**/
 html {
     padding: 0;
