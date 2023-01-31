@@ -10,7 +10,6 @@ function dialogEditPost(idPost, text, container) {
   const formDialog = document.createElement('form');
   formDialog.method = 'dialog';
   const inputText = document.createElement('textarea');
-  inputText.innerHTML = '';
   inputText.value = text;
   const btnUpdate = document.createElement('button');
   btnUpdate.textContent = 'Actualizar';
@@ -48,9 +47,9 @@ async function showPost(container) {
   arrayPosts.sort((a, b) => a.date.seconds - b.date.seconds);
   arrayPosts.forEach((doc) => {
     const sectionPost = document.createElement('div');
-    sectionPost.id = 'section-post';
+    sectionPost.className = 'section-post';
     const spanPost = document.createElement('span');
-    spanPost.id = 'span-post';
+    spanPost.className = 'span-post';
     spanPost.innerText = doc.contenido;
     postWall.appendChild(sectionPost);
     const buttonDeletePost = document.createElement('button');
@@ -117,7 +116,7 @@ export const Home = async () => {
     } finally {
       createPostForm.reset();
     }
-
+    sectionPost.innerHTML = '';
     showPost(sectionPost);
     const btnsDelete = document.querySelectorAll('.btnDelete');
     btnsDelete.forEach((button) => {

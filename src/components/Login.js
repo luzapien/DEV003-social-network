@@ -1,7 +1,8 @@
-import { emailLogin, loginWithGoogle } from '../lib/firebase';
+import { loginWithGoogle } from '../lib/firebase';
 // import { userCollectionGoogle } from '../lib/functions_post';
 import { createUserDoc } from '../lib/functions_post';
 import { onNavigate } from '../router';
+import { validationloginWithMail } from '../main';
 
 export const Login = () => {
   document.title = 'Login';
@@ -26,24 +27,7 @@ export const Login = () => {
     e.preventDefault();
     const emailValue = email.value;
     const passwordValue = password.value;
-    if (emailValue && passwordValue) {
-      try {
-        // const email =
-        await emailLogin(emailValue, passwordValue);
-      //  const email2 = email.user.email;
-      } catch (error) {
-        let message = 'Algo salió mal';
-
-        if (error.code === 'auth/wrong-password') {
-          message = 'Contraseña incorrecta';
-        } if (error.code === 'auth/user-not-found') {
-          message = 'Correo no registrado';
-        } if (error.code === 'auth/invalid-email') {
-          message = 'Correo invalido';
-        }
-        alert(message);
-      }
-    }
+    validationloginWithMail(emailValue, passwordValue);
   });
   // Botones inicio y registrar
   const btnLogin = document.createElement('button');
