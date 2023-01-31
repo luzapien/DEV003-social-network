@@ -25,7 +25,6 @@ export async function validationloginWithMail(email, password) {
     }
   }
 }
-
 /* Función para boton de login con google */
 export async function validationLoginWithGoogle() {
   try {
@@ -36,3 +35,5 @@ export async function validationLoginWithGoogle() {
     console.log(error);
   }
 }
+
+/* =======Funciones para register======== */
