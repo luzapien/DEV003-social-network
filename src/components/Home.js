@@ -114,7 +114,7 @@ export const Home = async () => {
     } finally {
       createPostForm.reset();
     }
-    keychr
+
     showPost(sectionPost);
     const btnsDelete = document.querySelectorAll('.btnDelete');
     btnsDelete.forEach((button) => {
