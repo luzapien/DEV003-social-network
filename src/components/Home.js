@@ -16,6 +16,12 @@ function dialogEditPost(idPost, text, container) {
   btnUpdate.textContent = 'Actualizar';
   btnUpdate.id = 'buttonEditDialog';
   btnUpdate.type = 'submit';
+  const btnCancelDialog = document.createElement('button');
+  btnCancelDialog.textContent = 'Cancelar';
+  btnCancelDialog.id = 'buttonCancelDialog';
+  btnCancelDialog.addEventListener('click', () => {
+    dialogTag.open = false;
+  });
   formDialog.append(inputText, btnUpdate);
   dialogTag.appendChild(formDialog);
   formDialog.addEventListener('submit', async () => {
@@ -62,9 +68,12 @@ async function showPost(container) {
     buttonDeletePost.textContent = '🗑️';
     buttonEditPost.textContent = '🖉';
     buttonDeletePost.addEventListener('click', () => {
-      deletePost(buttonDeletePost.id);
-      // console.log(buttonDeletePost.id);
-      sectionPost.innerHTML = '';
+      const answer = confirm('¿Estas seguro de elminar el post?');
+      if (answer) {
+        deletePost(buttonDeletePost.id);
+        // console.log(buttonDeletePost.id);
+        sectionPost.innerHTML = '';
+      }
     });
     buttonEditPost.addEventListener('click', () => {
       dialogEditPost(buttonEditPost.id, doc.contenido, sectionPost);
@@ -110,19 +119,23 @@ export const Home = async () => {
   createPostForm.id = 'allPostContainer';
   createPostForm.addEventListener('submit', async (e) => {
     e.preventDefault();
-    try {
-      await createPost(user.uid, postInput.value);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      createPostForm.reset();
-    }
+    if (postInput.value.trim() !== '') {
+      try {
+        await createPost(user.uid, postInput.value);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        createPostForm.reset();
+      }
 
-    showPost(sectionPost);
-    const btnsDelete = document.querySelectorAll('.btnDelete');
-    btnsDelete.forEach((button) => {
-      console.log(button.id);
-    });
+      showPost(sectionPost);
+      const btnsDelete = document.querySelectorAll('.btnDelete');
+      btnsDelete.forEach((button) => {
+        console.log(button.id);
+      });
+    } else {
+      alert('No hay nada que publicar');
+    }
   });
 
   /** ********FIN MURO******************* */
