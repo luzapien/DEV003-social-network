@@ -7,7 +7,8 @@ export const Login = () => {
   document.title = 'Login';
   const container = document.createElement('section');
   container.className = 'mainContainer';
-  const title = '<h1 class = "title-page">CatsLover</h1>';
+  const title = document.createElement('img');
+  title.src = '../images/logooriginalcats.png';
   const form = document.createElement('form');
   form.className = 'form-login';
   const email = document.createElement('input');
@@ -71,7 +72,7 @@ export const Login = () => {
   });
 
   form.append(email, password, btnLogin);
-  container.innerHTML = title;
+  container.appendChild(title) ;
   container.append(form, btnGoogle, btnRegister);
 
   return container;
