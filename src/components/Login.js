@@ -47,10 +47,12 @@ export const Login = () => {
   // Botones inicio y registrar
   const btnLogin = document.createElement('button');
   btnLogin.textContent = 'Iniciar Sesión';
+  btnLogin.id = 'buttonLogin';
   btnLogin.type = 'submit';
   btnLogin.className = 'btn-login stylesBtns mt-20';
   const btnRegister = document.createElement('button');
   btnRegister.textContent = 'Registrar';
+  btnRegister.id = 'buttonRegister';
   btnRegister.className = 'btn-register stylesBtns';
   btnRegister.addEventListener('click', (e) => {
     e.preventDefault();
@@ -58,6 +60,7 @@ export const Login = () => {
   });
 
   const btnGoogle = document.createElement('button');
+  btnGoogle.id = 'buttonGoogle';
   btnGoogle.className = 'btnGoogle stylesBtns';
   btnGoogle.textContent = 'Entrar con Google';
   btnGoogle.addEventListener('click', async () => {

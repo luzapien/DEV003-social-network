@@ -9,9 +9,12 @@ function dialogEditPost(idPost, text, container) {
   dialogTag.open = true;
   const formDialog = document.createElement('form');
   formDialog.method = 'dialog';
-  const inputText = document.createElement('input');
+  const inputText = document.createElement('textarea');
+  inputText.innerHTML = '';
   inputText.value = text;
   const btnUpdate = document.createElement('button');
+  btnUpdate.textContent = 'Actualizar';
+  btnUpdate.id = 'buttonEditDialog';
   btnUpdate.type = 'submit';
   formDialog.append(inputText, btnUpdate);
   dialogTag.appendChild(formDialog);
