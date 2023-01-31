@@ -1,8 +1,33 @@
 import { logOutFunction, informationUser } from '../lib/firebase';
 import { onNavigate } from '../router';
 import {
-  createPost, getUserPosts, deletePost, getUserFromFirestore,
+  createPost, getUserPosts, deletePost, getUserFromFirestore, updatePost,
 } from '../lib/functions_post';
+
+function dialogEditPost(idPost, text, container) {
+  const dialogTag = document.createElement('dialog');
+  dialogTag.open = true;
+  const formDialog = document.createElement('form');
+  formDialog.method = 'dialog';
+  const inputText = document.createElement('input');
+  inputText.value = text;
+  const btnUpdate = document.createElement('button');
+  btnUpdate.type = 'submit';
+  formDialog.append(inputText, btnUpdate);
+  dialogTag.appendChild(formDialog);
+  formDialog.addEventListener('submit', async () => {
+    console.log(`sirvo en form ${idPost}`);
+    await updatePost(idPost, {
+      contenido: inputText.value,
+      date: new Date(),
+    });
+    const spanPost = document.getElementById('span-post');
+    spanPost.textContent = inputText.value;
+  });
+  console.log('tambien sirvo');
+  container.appendChild(dialogTag);
+  return dialogTag;
+}
 
 /* ========= Funcion que crea y ordena por fecha los posts del usuario ========= */
 async function showPost(container) {
@@ -20,12 +45,15 @@ async function showPost(container) {
   arrayPosts.sort((a, b) => a.date.seconds - b.date.seconds);
   arrayPosts.forEach((doc) => {
     const sectionPost = document.createElement('div');
-    sectionPost.innerText = doc.contenido;
+    sectionPost.id = 'section-post';
+    const spanPost = document.createElement('span');
+    spanPost.id = 'span-post';
+    spanPost.innerText = doc.contenido;
     postWall.appendChild(sectionPost);
     const buttonDeletePost = document.createElement('button');
     const buttonEditPost = document.createElement('button');
     buttonDeletePost.id = doc.uid;
-    buttonDeletePost.id = doc.uid;
+    buttonEditPost.id = doc.uid;
     buttonDeletePost.className = 'btnDelete';
     buttonEditPost.className = 'btnEdit';
     buttonDeletePost.textContent = '🗑️';
@@ -35,7 +63,10 @@ async function showPost(container) {
       // console.log(buttonDeletePost.id);
       sectionPost.innerHTML = '';
     });
-    sectionPost.append(buttonEditPost, buttonDeletePost);
+    buttonEditPost.addEventListener('click', () => {
+      dialogEditPost(buttonEditPost.id, doc.contenido, sectionPost);
+    });
+    sectionPost.append(spanPost, buttonEditPost, buttonDeletePost);
   });
   container.appendChild(postWall);
 }
