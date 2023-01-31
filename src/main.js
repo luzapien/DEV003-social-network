@@ -1,5 +1,6 @@
 import './router';
-import { emailLogin } from './lib/firebase';
+import { emailLogin, loginWithGoogle } from './lib/firebase';
+import { createUserDoc } from './lib/functions_post';
 
 /* =======Funciones para login======== */
 
@@ -22,5 +23,16 @@ export async function validationloginWithMail(email, password) {
       }
       alert(message);
     }
+  }
+}
+
+/* Función para boton de login con google */
+export async function validationLoginWithGoogle() {
+  try {
+    const result = await loginWithGoogle();
+    const user = result.user;
+    await createUserDoc(user);
+  } catch (error) {
+    console.log(error);
   }
 }
