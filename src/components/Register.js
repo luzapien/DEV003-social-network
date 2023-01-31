@@ -77,15 +77,16 @@ export const Register = () => {
   });
 
   const registerBtn = document.createElement('button');
+  registerBtn.id = 'buttonRegisterHome';
   registerBtn.textContent = 'Registrar';
   registerBtn.type = 'submit';
   registerBtn.className = 'btns-register stylesBtns mt-20';
 
   const loginBtn = document.createElement('button');
   loginBtn.textContent = 'Regresar al inicio de sesión';
+  loginBtn.id = 'btn-return-login';
   loginBtn.type = 'button';
   loginBtn.className = 'btns-register stylesBtns';
-  loginBtn.setAttribute('id', 'btn-return-login');
   loginBtn.addEventListener('click', () => {
     onNavigate('/');
   });
