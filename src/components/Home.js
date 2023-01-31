@@ -1,17 +1,21 @@
 import { logOutFunction, informationUser } from '../lib/firebase';
 import { onNavigate } from '../router';
+import { Dialog } from './Dialog';
 import {
   createPost, getUserPosts, deletePost, getUserFromFirestore, updatePost,
 } from '../lib/functions_post';
 
 function dialogEditPost(idPost, text, container) {
-  const dialogTag = document.createElement('dialog');
-  dialogTag.open = true;
+  // const dialogTag = document.createElement('dialog');
+  // dialogTag.open = true;
   const formDialog = document.createElement('form');
-  formDialog.method = 'dialog';
+  // formDialog.method = 'dialog';
   const inputText = document.createElement('textarea');
   inputText.innerHTML = '';
   inputText.value = text;
+  const closeDialogBtn = document.createElement('button');
+  closeDialogBtn.type = 'button';
+  closeDialogBtn.textContent = 'Close';
   const btnUpdate = document.createElement('button');
   btnUpdate.textContent = 'Actualizar';
   btnUpdate.id = 'buttonEditDialog';
@@ -33,13 +37,17 @@ function dialogEditPost(idPost, text, container) {
     const spanPost = document.getElementById('span-post');
     spanPost.textContent = inputText.value;
   });
-  console.log('tambien sirvo');
-  container.appendChild(dialogTag);
-  return dialogTag;
+
+  const dialog = Dialog('Editar Post', formDialog);
+  closeDialogBtn.addEventListener('click', () => dialog.close());
+  container.appendChild(dialog);
+
+  return dialog;
 }
 
 /* ========= Funcion que crea y ordena por fecha los posts del usuario ========= */
 async function showPost(container) {
+  container.innerHTML = '';
   const user = informationUser();
   const postsObject = await getUserPosts(user.uid);
   const postWall = document.createElement('section');
@@ -51,8 +59,17 @@ async function showPost(container) {
     dataPostUid.uid = doc.id;
     arrayPosts.push(dataPostUid);
   });
-  arrayPosts.sort((a, b) => a.date.seconds - b.date.seconds);
   arrayPosts.forEach((doc) => {
+    const postActionsContainer = document.createElement('div');
+    const postActionsRight = document.createElement('div');
+    postActionsRight.className = 'postActionsRight';
+    postActionsContainer.className = 'postActions';
+    const likeIcon = document.createElement('span');
+    likeIcon.className = 'likeIcon';
+    const likeBtn = document.createElement('button');
+    likeBtn.type = 'button';
+    likeBtn.className = 'likeBtn';
+    likeBtn.appendChild(likeIcon);
     const sectionPost = document.createElement('div');
     sectionPost.id = 'section-post';
     const spanPost = document.createElement('span');
@@ -64,21 +81,32 @@ async function showPost(container) {
     buttonDeletePost.id = doc.uid;
     buttonEditPost.id = doc.uid;
     buttonDeletePost.className = 'btnDelete';
+    buttonDeletePost.title = 'Eliminar';
     buttonEditPost.className = 'btnEdit';
-    buttonDeletePost.textContent = '🗑️';
-    buttonEditPost.textContent = '🖉';
+    buttonEditPost.title = 'Editar';
+    // buttonDeletePost.textContent = '🗑️';
+    // buttonEditPost.textContent = '🖉';
+    const deleteIcon = document.createElement('span');
+    deleteIcon.className = 'deleteIcon';
+    buttonDeletePost.appendChild(deleteIcon);
+    const editIcon = document.createElement('span');
+    editIcon.className = 'editIcon';
+    buttonEditPost.appendChild(editIcon);
     buttonDeletePost.addEventListener('click', () => {
       const answer = confirm('¿Estas seguro de elminar el post?');
       if (answer) {
         deletePost(buttonDeletePost.id);
         // console.log(buttonDeletePost.id);
-        sectionPost.innerHTML = '';
+        sectionPost.remove();
       }
     });
     buttonEditPost.addEventListener('click', () => {
-      dialogEditPost(buttonEditPost.id, doc.contenido, sectionPost);
+      const editPostDialog = dialogEditPost(buttonEditPost.id, doc.contenido, container);
+      editPostDialog.showModal();
     });
-    sectionPost.append(spanPost, buttonEditPost, buttonDeletePost);
+    postActionsRight.append(buttonEditPost, buttonDeletePost);
+    postActionsContainer.append(likeBtn, postActionsRight);
+    sectionPost.append(spanPost, postActionsContainer);
   });
   container.appendChild(postWall);
 }
@@ -139,10 +167,13 @@ export const Home = async () => {
   });
 
   /** ********FIN MURO******************* */
+  const signOutIcon = document.createElement('span');
+  signOutIcon.className = 'signOutIcon';
   const signOutBtn = document.createElement('button');
   signOutBtn.className = 'stylesBtns signOutBtn';
+  signOutBtn.title = 'Cerrar sesión';
   signOutBtn.type = 'button';
-  signOutBtn.innerText = 'Cerrar sesión';
+  signOutBtn.appendChild(signOutIcon);
   signOutBtn.addEventListener('click', async () => {
     try {
       await logOutFunction();
