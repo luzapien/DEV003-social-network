@@ -19,10 +19,11 @@ function dialogEditPost(idPost, text, container) {
   btnUpdate.textContent = 'Actualizar';
   btnUpdate.id = 'buttonEditDialog';
   btnUpdate.type = 'submit';
-  formDialog.append(inputText, btnUpdate, closeDialogBtn);
-  // dialogTag.appendChild(formDialog);
-  btnUpdate.addEventListener('submit', async () => {
-    console.log(inputText.value);
+
+  formDialog.append(inputText, btnUpdate);
+
+  formDialog.addEventListener('submit', async () => {
+    console.log(`sirvo en form ${idPost}`);
     await updatePost(idPost, {
       contenido: inputText.value,
       date: new Date(),
