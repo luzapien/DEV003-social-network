@@ -11,7 +11,6 @@ function dialogEditPost(idPost, text, container) {
   const formDialog = document.createElement('form');
   // formDialog.method = 'dialog';
   const inputText = document.createElement('textarea');
-  inputText.innerHTML = '';
   inputText.value = text;
   const closeDialogBtn = document.createElement('button');
   closeDialogBtn.type = 'button';
@@ -65,9 +64,9 @@ async function showPost(container) {
     likeBtn.className = 'likeBtn';
     likeBtn.appendChild(likeIcon);
     const sectionPost = document.createElement('div');
-    sectionPost.id = 'section-post';
+    sectionPost.className = 'section-post';
     const spanPost = document.createElement('span');
-    spanPost.id = 'span-post';
+    spanPost.className = 'span-post';
     spanPost.innerText = doc.contenido;
     postWall.appendChild(sectionPost);
     const buttonDeletePost = document.createElement('button');
