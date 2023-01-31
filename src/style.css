@@ -271,7 +271,7 @@ footer {
     gap: 10px;
 }
 
-#section-post {
+.section-post {
     display: flex;
     flex-direction: column;
     gap: 10px;
