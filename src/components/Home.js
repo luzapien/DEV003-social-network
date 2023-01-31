@@ -20,14 +20,9 @@ function dialogEditPost(idPost, text, container) {
   btnUpdate.textContent = 'Actualizar';
   btnUpdate.id = 'buttonEditDialog';
   btnUpdate.type = 'submit';
-  const btnCancelDialog = document.createElement('button');
-  btnCancelDialog.textContent = 'Cancelar';
-  btnCancelDialog.id = 'buttonCancelDialog';
-  btnCancelDialog.addEventListener('click', () => {
-    dialogTag.open = false;
-  });
+
   formDialog.append(inputText, btnUpdate);
-  dialogTag.appendChild(formDialog);
+
   formDialog.addEventListener('submit', async () => {
     console.log(`sirvo en form ${idPost}`);
     await updatePost(idPost, {
