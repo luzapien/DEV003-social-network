@@ -73,7 +73,7 @@ export const Home = () => {
     } finally {
       frmEnterPost.reset();
     }
-    sectionPost.innerHTML = '';
+    keychr
     showPost(sectionPost);
     const btnsDelete = document.querySelectorAll('.btnDelete');
     btnsDelete.forEach((button) => {
