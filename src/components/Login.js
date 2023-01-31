@@ -1,6 +1,6 @@
 import { emailLogin, loginWithGoogle } from '../lib/firebase';
 // import { userCollectionGoogle } from '../lib/functions_post';
-import { createUserDoc, getUserPosts } from '../lib/functions_post';
+import { createUserDoc } from '../lib/functions_post';
 import { onNavigate } from '../router';
 
 export const Login = () => {
@@ -27,8 +27,9 @@ export const Login = () => {
     const passwordValue = password.value;
     if (emailValue && passwordValue) {
       try {
-        const email = await emailLogin(emailValue, passwordValue);
-        const email2 = email.user.email;
+        // const email =
+        await emailLogin(emailValue, passwordValue);
+      //  const email2 = email.user.email;
       } catch (error) {
         let message = 'Algo salió mal';
 
