@@ -1,7 +1,8 @@
 // importamos la funcion que vamos a testear
 // import { myFunction } from '../src/lib/index';
 // eslint-disable-next-line import/no-unresolved
-import { /* render, */ screen, fireEvent } from '@testing-library/react';
+// import { /* render, */ screen, fireEvent } from '@testing-library/react';
+// import { screen, fireEvent } from 'react';
 import { emailLogin } from '../src/lib/firebase';
 
 import {
@@ -34,6 +35,7 @@ test('should dont return an email', async () => {
 test('should get user correct', () => {
   // const sut= render(<button />);
 // btnLoginWithEmail= sut.getByTestId('buttonLogin');
+
   const buttonLogin = screen.getByRole('button', { name: 'Iniciar Sesión' });
   fireEvent.click(buttonLogin);
   expect(emailLogin).toHaveBeenCalled();
