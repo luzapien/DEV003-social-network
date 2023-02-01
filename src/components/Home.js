@@ -21,16 +21,15 @@ function dialogEditPost(idPost, text, container) {
   btnUpdate.type = 'submit';
   formDialog.append(inputText, btnUpdate, closeDialogBtn);
   // dialogTag.appendChild(formDialog);
-  btnUpdate.addEventListener('submit', async (e) => {
-    console.log('me ejecuto');
+  formDialog.addEventListener('submit', async (e) => {
     e.preventDefault();
+    console.log('me ejecuto');
     console.log(inputText.value);
     await updatePost(idPost, {
       contenido: inputText.value,
       date: new Date(),
     });
-    // const spanPost = document.getElementById('span-post');
-    // spanPost.textContent = inputText.value;
+    window.location.reload();
   });
 
   const dialog = Dialog('Editar Post', formDialog);
