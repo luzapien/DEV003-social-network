@@ -34,6 +34,7 @@ export const Login = () => {
   btnLogin.textContent = 'Iniciar Sesión';
   btnLogin.id = 'buttonLogin';
   btnLogin.type = 'submit';
+  btnLogin.id = 'buttonLogin';
   btnLogin.className = 'btn-login stylesBtns mt-20';
   const btnRegister = document.createElement('button');
   btnRegister.textContent = 'Registrar';
