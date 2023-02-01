@@ -9,3 +9,8 @@ export const registerNewUser = () => Promise.resolve('Kitty, Miau, catslover@gma
 export const emailLogin1 = () => Promise.resolve('catslover@hotmail.com, 123456');
 export const loginWithGoogle = () => Promise.resolve('catslover@gmail.com, 123456');
 export const logOutFunction = () => Promise.resolve('');
+export const usuario = [{
+  nombre: 'Sofía',
+  email: 'sofi@gmail.com',
+  password: '123456',
+}];

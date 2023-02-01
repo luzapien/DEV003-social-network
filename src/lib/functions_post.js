@@ -51,7 +51,7 @@ export function deletePost(idPost) {
   deleteDoc(doc(dataBase, 'publicaciones', idPost));
 }
 
-export async function getUserPosts(userId) {
+export function getUserPosts(userId) {
   // Obtener documentos de una Colección
   const ref = collection(dataBase, 'publicaciones'); // Se crea la referencia de la colección
   const q = query( // Se crea la query/consulta
@@ -63,11 +63,11 @@ export async function getUserPosts(userId) {
   return getDocs(q);
 }
 
-export async function updatePost(postId, newFields) {
-  updateDoc(doc(dataBase, 'publicaciones', postId), newFields);
+export function updatePost(postId, newFields) {
+  return updateDoc(doc(dataBase, 'publicaciones', postId), newFields);
 }
 
-export const getUserFromFirestore = async (userId) => {
+export const getUserFromFirestore = (userId) => {
   const ref = doc(dataBase, 'usuarios', userId);
   return getDoc(ref);
 };

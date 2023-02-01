@@ -1,40 +1,47 @@
 import { logOutFunction, informationUser } from '../lib/firebase';
 import { onNavigate } from '../router';
-import { Dialog } from './Dialog';
+import { Dialog, closeDialog } from './Dialog';
 import {
   createPost, getUserPosts, deletePost, getUserFromFirestore, updatePost,
 } from '../lib/functions_post';
 
-function dialogEditPost(idPost, text, container) {
-  // const dialogTag = document.createElement('dialog');
-  // dialogTag.open = true;
+function dialogEditPost(idPost, container, spanPost) {
+  const postContent = spanPost.textContent;
   const formDialog = document.createElement('form');
-  // formDialog.method = 'dialog';
+  formDialog.className = 'formDialog';
   const inputText = document.createElement('textarea');
-  inputText.value = text;
+  inputText.placeholder = postContent;
+  inputText.value = postContent;
+  const dialogActions = document.createElement('div');
+  dialogActions.className = 'dialogActions';
   const closeDialogBtn = document.createElement('button');
   closeDialogBtn.type = 'button';
-  closeDialogBtn.textContent = 'Close';
+  closeDialogBtn.className = 'stylesBtns';
+  closeDialogBtn.textContent = 'Cerrar';
   const btnUpdate = document.createElement('button');
   btnUpdate.textContent = 'Actualizar';
   btnUpdate.id = 'buttonEditDialog';
   btnUpdate.type = 'submit';
-  formDialog.append(inputText, btnUpdate, closeDialogBtn);
-  // dialogTag.appendChild(formDialog);
-  btnUpdate.addEventListener('submit', async (e) => {
-    console.log('me ejecuto');
+  btnUpdate.className = 'stylesBtns';
+
+  dialogActions.append(btnUpdate, closeDialogBtn);
+  formDialog.append(inputText, dialogActions);
+  formDialog.addEventListener('submit', async (e) => {
     e.preventDefault();
-    console.log(inputText.value);
-    await updatePost(idPost, {
-      contenido: inputText.value,
-      date: new Date(),
-    });
-    // const spanPost = document.getElementById('span-post');
-    // spanPost.textContent = inputText.value;
+    try {
+      await updatePost(idPost, {
+        contenido: inputText.value,
+        date: new Date(),
+      });
+      spanPost.textContent = inputText.value;
+      closeDialog();
+    } catch (error) {
+      console.log(error);
+    }
   });
 
   const dialog = Dialog('Editar Post', formDialog);
-  closeDialogBtn.addEventListener('click', () => dialog.close());
+  closeDialogBtn.addEventListener('click', () => closeDialog());
   container.appendChild(dialog);
 
   return dialog;
@@ -79,8 +86,6 @@ async function showPost(container) {
     buttonDeletePost.title = 'Eliminar';
     buttonEditPost.className = 'btnEdit';
     buttonEditPost.title = 'Editar';
-    // buttonDeletePost.textContent = '🗑️';
-    // buttonEditPost.textContent = '🖉';
     const deleteIcon = document.createElement('span');
     deleteIcon.className = 'deleteIcon';
     buttonDeletePost.appendChild(deleteIcon);
@@ -88,6 +93,7 @@ async function showPost(container) {
     editIcon.className = 'editIcon';
     buttonEditPost.appendChild(editIcon);
     buttonDeletePost.addEventListener('click', () => {
+      // eslint-disable-next-line no-restricted-globals
       const answer = confirm('¿Estas seguro de elminar el post?');
       if (answer) {
         deletePost(buttonDeletePost.id);
@@ -96,7 +102,7 @@ async function showPost(container) {
       }
     });
     buttonEditPost.addEventListener('click', () => {
-      const editPostDialog = dialogEditPost(buttonEditPost.id, doc.contenido, container);
+      const editPostDialog = dialogEditPost(buttonEditPost.id, container, spanPost);
       editPostDialog.showModal();
     });
     postActionsRight.append(buttonEditPost, buttonDeletePost);
@@ -138,7 +144,7 @@ export const Home = async () => {
   const submitPostBtn = document.createElement('button');
   submitPostBtn.textContent = 'Publicar';
   submitPostBtn.type = 'submit';
-  submitPostBtn.className = 'button-post';
+  submitPostBtn.className = 'stylesBtns createPostBtn';
   createPostForm.id = 'allPostContainer';
   createPostForm.addEventListener('submit', async (e) => {
     e.preventDefault();
