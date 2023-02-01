@@ -10,6 +10,7 @@ const routes = {
   '/register': Register,
 };
 
+
 export async function onNavigate(pathname) {
   const localPath = window.location.pathname;
   window.history.pushState(

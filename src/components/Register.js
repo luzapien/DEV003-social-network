@@ -1,8 +1,8 @@
 import { registerNewUser, updateUserProfile } from '../lib/firebase';
 import { onNavigate } from '../router';
-import { createUserDoc } from '../lib/functions_post';
-// importar el crear colecion por usuario y secrea con su id o nombre
 
+let errorCode;
+// importar el crear colecion por usuario y secrea con su id o nombre
 export const Register = () => {
   const container = document.createElement('div');
   container.className = 'container-register';
@@ -48,17 +48,25 @@ export const Register = () => {
     }
 
     if (emailValue && passwordValue && nameValue && lastnameValue && passwordConfirmValue) {
-      let errorCode;
-      try {
+      const result = registerNewUser(emailValue, passwordValue);
+      result.then(() => {
+        const user = result.user;
+        updateUserProfile(user, fullName, 'http://placekitten.com/200/300');
+      });
+      result.catch((error) => {
+        errorCode = error.code;
+      });
+      /* try {
         const result = await registerNewUser(emailValue, passwordValue);
+
         const user = result.user;
         await updateUserProfile(user, fullName, 'http://placekitten.com/200/300');
         // llamar a funcion crear coleccion del usuario , enviar correo
         // userCollection(emailValue);
-        await createUserDoc(user);
+        await userCollection(emailValue);
       } catch (error) {
         errorCode = error.code;
-      }
+      } */
       let message;
       console.log(errorCode);
       if (errorCode) {

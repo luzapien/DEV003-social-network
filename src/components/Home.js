@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 import { logOutFunction, informationUser } from '../lib/firebase';
 import { onNavigate } from '../router';
 import { Dialog } from './Dialog';
@@ -109,6 +110,7 @@ async function showPost(container) {
 export const Home = async () => {
   const user = informationUser();
   const result = await getUserFromFirestore(user.uid);
+  
   const userData = result.data();
   document.title = 'Home';
   const userImage = document.createElement('img');

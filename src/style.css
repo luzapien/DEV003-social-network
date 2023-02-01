@@ -40,9 +40,6 @@ body {
 }
 /* xxxxxxxx */
 /*estilos y grillas login*/
-.mainContainer {
-    position: relative;
-}
 
 .post-input {
     width: 100%;
@@ -143,11 +140,6 @@ h2 {
 
 }
 
-
-footer {
-    font-size: var(--font-sm);
-    bottom: 0;
-}
 
 /** Responsive desktop **/
 @media (min-width: 992px) {
