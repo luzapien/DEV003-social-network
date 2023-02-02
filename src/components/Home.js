@@ -30,7 +30,6 @@ function dialogEditPost(idPost, container, spanPost) {
     e.preventDefault();
     updatePost(idPost, {
       contenido: inputText.value,
-      date: new Date(),
     }).then(() => {
       spanPost.textContent = inputText.value;
       closeDialog();

@@ -48,22 +48,24 @@ export const Register = () => {
 
     if (emailValue && passwordValue && nameValue && lastnameValue && passwordConfirmValue) {
       let errorCode;
-      /*    registerNewUser(emailValue, passwordValue).then((result) => {
+      registerNewUser(emailValue, passwordValue).then((result) => {
         const user = result.user;
         console.log(user);
-        updateUserProfile(user.displayName, fullName, 'http://placekitten.com/200/300');
-        createUserDoc(user);
+        updateUserProfile(user, fullName, 'http://placekitten.com/200/300').then(() => {
+          createUserDoc(user);
+          console.log(user.displayName);
+        });
       }).catch((error) => {
-
-      }); */
-      try {
-        const result = await registerNewUser(emailValue, passwordValue);
-        const user = result.user;
-        await updateUserProfile(user, fullName, 'http://placekitten.com/200/300');
-        await createUserDoc(user);
-      } catch (error) {
         errorCode = error.code;
-      }
+      });
+      // try {
+      //   const result = await registerNewUser(emailValue, passwordValue);
+      //   const user = result.user;
+      //   await updateUserProfile(user, fullName, 'http://placekitten.com/200/300');
+      //   await createUserDoc(user);
+      // } catch (error) {
+      //   errorCode = error.code;
+      // }
       let message;
       //  console.log(errorCode);
       if (errorCode) {

@@ -5,10 +5,10 @@ import { createUserDoc } from './lib/functions_post';
 /* =======Funciones para login======== */
 
 /* Funcion para boton de logín con email */
-export async function validationloginWithMail(email, password) {
+export function validationloginWithMail(email, password) {
   if (email && password) {
     const promise = emailLogin(email, password);
-    promise.then(() => {
+    return promise.then(() => {
       const message = 'Usuario logueado';
       console.log(message);
       return message;
@@ -28,15 +28,24 @@ export async function validationloginWithMail(email, password) {
 }
 
 /* Función para boton de login con google */
+// export function validationLoginWithGoogle() {
+//   const result = loginWithGoogle();
+//   result.then(() => {
+//     const user = result.user;
+//     createUserDoc(user);
+//   }).catch((error) => {
+//     console.log(error);
+//   });
+// }
+
 export function validationLoginWithGoogle() {
-  const result = loginWithGoogle();
-  result.then((res) => {
-    const user = res.user;
-    console.log(user);
-    createUserDoc(user);
+  loginWithGoogle().then((result) => {
+    const user = result.user;
+    createUserDoc(user).then(() => {
+
+    });
   }).catch((error) => {
     console.log(error);
   });
 }
-
 /* =======Funciones para register======== */

@@ -26,7 +26,7 @@ export const Login = () => {
     e.preventDefault();
     const emailValue = email.value;
     const passwordValue = password.value;
-    validationloginWithMail(emailValue, passwordValue);
+    validationloginWithMail(emailValue, passwordValue).then((r) => console.log(r));
   });
 
   // Botones inicio y registrar
