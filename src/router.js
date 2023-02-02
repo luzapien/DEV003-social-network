@@ -10,7 +10,7 @@ const routes = {
   '/register': Register,
 };
 
-export async function onNavigate(pathname) {
+export function onNavigate(pathname) {
   const localPath = window.location.pathname;
   window.history.pushState(
     {},
@@ -22,7 +22,7 @@ export async function onNavigate(pathname) {
     rootDiv.removeChild(rootDiv.firstChild);
   }
 
-  rootDiv.appendChild(await routes[pathname]());
+  rootDiv.appendChild(routes[pathname]());
 }
 
 const component = routes[window.location.pathname] || routes['/'];
