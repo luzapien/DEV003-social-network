@@ -36,14 +36,6 @@ export async function validationLoginWithGoogle() {
   }).catch((error) => {
     console.log(error);
   });
-
-  /* try {
-    const result = await loginWithGoogle();
-    const user = result.user;
-    await createUserDoc(user);
-  } catch (error) {
-    console.log(error);
-  } */
 }
 
 /* =======Funciones para register======== */
