@@ -5,10 +5,10 @@ import { createUserDoc } from './lib/functions_post';
 /* =======Funciones para login======== */
 
 /* Funcion para boton de logín con email */
-export async function validationloginWithMail(email, password) {
+export function validationloginWithMail(email, password) {
   if (email && password) {
     const promise = emailLogin(email, password);
-    promise.then(() => {
+    return promise.then(() => {
       const message = 'Usuario logueado';
       console.log(message);
       return message;

@@ -43,7 +43,6 @@ export function createPost(userId, postContent) {
     contenido: postContent,
     likes: [],
     date: today,
-
   });
 }
 
