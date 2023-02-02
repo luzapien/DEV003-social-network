@@ -28,10 +28,11 @@ export async function validationloginWithMail(email, password) {
 }
 
 /* Función para boton de login con google */
-export async function validationLoginWithGoogle() {
-  const result = await loginWithGoogle();
-  result.then(() => {
-    const user = result.user;
+export function validationLoginWithGoogle() {
+  const result = loginWithGoogle();
+  result.then((res) => {
+    const user = res.user;
+    console.log(user);
     createUserDoc(user);
   }).catch((error) => {
     console.log(error);

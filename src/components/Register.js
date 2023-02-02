@@ -51,7 +51,7 @@ export const Register = () => {
       /*    registerNewUser(emailValue, passwordValue).then((result) => {
         const user = result.user;
         console.log(user);
-        updateUserProfile(user, fullName, 'http://placekitten.com/200/300');
+        updateUserProfile(user.displayName, fullName, 'http://placekitten.com/200/300');
         createUserDoc(user);
       }).catch((error) => {
 
