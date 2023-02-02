@@ -1,7 +1,6 @@
 import { registerNewUser, updateUserProfile } from '../lib/firebase';
 import { onNavigate } from '../router';
 import { createUserDoc } from '../lib/functions_post';
-// importar el crear colecion por usuario y secrea con su id o nombre
 
 export const Register = () => {
   const container = document.createElement('div');
@@ -49,18 +48,24 @@ export const Register = () => {
 
     if (emailValue && passwordValue && nameValue && lastnameValue && passwordConfirmValue) {
       let errorCode;
+      /*    registerNewUser(emailValue, passwordValue).then((result) => {
+        const user = result.user;
+        console.log(user);
+        updateUserProfile(user, fullName, 'http://placekitten.com/200/300');
+        createUserDoc(user);
+      }).catch((error) => {
+
+      }); */
       try {
         const result = await registerNewUser(emailValue, passwordValue);
         const user = result.user;
         await updateUserProfile(user, fullName, 'http://placekitten.com/200/300');
-        // llamar a funcion crear coleccion del usuario , enviar correo
-        // userCollection(emailValue);
         await createUserDoc(user);
       } catch (error) {
         errorCode = error.code;
       }
       let message;
-      console.log(errorCode);
+      //  console.log(errorCode);
       if (errorCode) {
         if (errorCode === 'auth/email-already-in-use') {
           message = 'Ya hay un usuario registrado con el correo';
