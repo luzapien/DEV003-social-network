@@ -7,13 +7,13 @@ import { createUserDoc } from './lib/functions_post';
 /* Funcion para boton de logín con email */
 export async function validationloginWithMail(email, password) {
   if (email && password) {
-    try {
-      // const email =
-      await emailLogin(email, password);
-    //  const email2 = email.user.email;
-    } catch (error) {
+    const promise = emailLogin(email, password);
+    promise.then(() => {
+      const message = 'Usuario logueado';
+      console.log(message);
+      return message;
+    }).catch((error) => {
       let message = 'Algo salió mal';
-
       if (error.code === 'auth/wrong-password') {
         message = 'Contraseña incorrecta';
       } if (error.code === 'auth/user-not-found') {
@@ -22,19 +22,20 @@ export async function validationloginWithMail(email, password) {
         message = 'Correo invalido';
       }
       alert(message);
-    }
+      return message;
+    });
   }
 }
 
 /* Función para boton de login con google */
 export async function validationLoginWithGoogle() {
-  try {
-    const result = await loginWithGoogle();
+  const result = await loginWithGoogle();
+  result.then(() => {
     const user = result.user;
-    await createUserDoc(user);
-  } catch (error) {
+    createUserDoc(user);
+  }).catch((error) => {
     console.log(error);
-  }
+  });
 }
 
 /* =======Funciones para register======== */
