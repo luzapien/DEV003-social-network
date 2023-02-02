@@ -28,14 +28,24 @@ export async function validationloginWithMail(email, password) {
 }
 
 /* Función para boton de login con google */
-export async function validationLoginWithGoogle() {
-  const result = await loginWithGoogle();
-  result.then(() => {
+// export function validationLoginWithGoogle() {
+//   const result = loginWithGoogle();
+//   result.then(() => {
+//     const user = result.user;
+//     createUserDoc(user);
+//   }).catch((error) => {
+//     console.log(error);
+//   });
+// }
+
+export function validationLoginWithGoogle() {
+  loginWithGoogle().then((result) => {
     const user = result.user;
-    createUserDoc(user);
+    createUserDoc(user).then(() => {
+
+    });
   }).catch((error) => {
     console.log(error);
   });
 }
-
 /* =======Funciones para register======== */
