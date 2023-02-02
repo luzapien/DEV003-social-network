@@ -33,7 +33,7 @@ export function informationUser() {
 
 /* export function getCurrentUser() {
   return auth.currentUser;
-} */
+} */ 
 
 export function loginWithGoogle() {
   const provider = new GoogleAuthProvider();

@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 import { logOutFunction, informationUser } from '../lib/firebase';
 import { onNavigate } from '../router';
 import { Dialog, closeDialog } from './Dialog';
