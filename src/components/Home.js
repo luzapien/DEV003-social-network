@@ -1,6 +1,6 @@
 import { logOutFunction, informationUser } from '../lib/firebase';
 import { onNavigate } from '../router';
-import { comments } from './Comments';
+import { comments, commentsUpdate } from './Comments';
 import { Dialog, closeDialog } from './Dialog';
 import {
   createPost, getUserPosts, deletePost, getUserFromFirestore, updatePost,
@@ -72,7 +72,7 @@ function showPost(container) {
       arrayPosts.push(dataPostUid);
     });
     arrayPosts.forEach((doc) => {
-      //const comments = Comments(doc);
+      // const comments = Comments(doc);
       console.log('leyendo array post');
       const postActionsContainer = document.createElement('div');
       const postActionsRight = document.createElement('div');
@@ -86,6 +86,7 @@ function showPost(container) {
       likeBtn.appendChild(likeIcon);
       const sectionPost = document.createElement('div');
       sectionPost.className = 'section-post';
+      sectionPost.id = 'section-post';
       const spanPost = document.createElement('span');
       spanPost.className = 'span-post';
       spanPost.innerText = doc.contenido;
@@ -121,6 +122,7 @@ function showPost(container) {
       postActionsContainer.append(likeBtn, postActionsRight);
       sectionPost.append(spanPost, postActionsContainer);
       comments(doc, sectionPost);
+      commentsUpdate(doc);
     });
     container.appendChild(postWall);
   }).catch((error) => {
