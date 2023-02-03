@@ -2,7 +2,7 @@ import { logOutFunction, informationUser } from '../lib/firebase';
 import { onNavigate } from '../router';
 import { Dialog, closeDialog } from './Dialog';
 import {
-  createPost, getUserPosts, deletePost, getUserFromFirestore, updatePost,
+  createPost, getUserPosts, deletePost, getUserFromFirestore, updatePost, counterLike,
 } from '../lib/functions_post';
 
 function dialogEditPost(idPost, container, spanPost) {
@@ -80,7 +80,21 @@ function showPost(container) {
       const likeBtn = document.createElement('button');
       likeBtn.type = 'button';
       likeBtn.className = 'likeBtn';
+      // likeBtn.id = doc.uid;
       likeBtn.appendChild(likeIcon);
+      /** ***LIKE***** */
+      // const counter = 0;
+      likeBtn.addEventListener('click', () => {
+        // eslint-disable-next-line no-plusplus
+        // counter++;
+        console.log(user.uid, user.displayName);
+        counterLike(user.uid, doc.uid);
+        
+        // user.uid
+        // obtener  user.id que esta logeado
+      });
+
+      /** ************* */
       const sectionPost = document.createElement('div');
       sectionPost.className = 'section-post';
       const spanPost = document.createElement('span');

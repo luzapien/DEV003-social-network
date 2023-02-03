@@ -10,6 +10,8 @@ import {
   getDocs,
   updateDoc,
   orderBy,
+  arrayUnion,
+  arrayRemove,
 } from 'firebase/firestore';
 import { app } from './firebase';
 
@@ -58,7 +60,6 @@ export function getUserPosts(userId) {
     where('userId', '==', userId), // Condición donde userId sea igual al userId pasado como parámetro
     orderBy('date', 'desc'),
   );
-
   return getDocs(q);
 }
 
@@ -70,3 +71,29 @@ export const getUserFromFirestore = (userId) => {
   const ref = doc(dataBase, 'usuarios', userId);
   return getDoc(ref);
 };
+
+export function counterLike(userUid, postId) {
+  // si usario ya le dio like entonces le quita el like
+  // contar cantidad de items en el like para el numero de like que tiene la publicacion
+
+  const postLikes = doc(dataBase, 'publicaciones', postId);
+
+  const ref = collection(dataBase, 'publicaciones'); 
+  const arr = query(ref, where('likes', 'array-contains', userUid));
+  const array = getDocs(arr);
+  array.then((result) => {
+    if (result) {
+      console.log('existe', result);
+      updateDoc(postLikes, {
+        likes: arrayRemove(userUid),
+      });
+    } else {
+      // Atomically add a new region to the "regions" array field.
+      console.log('nuevo', result);
+      updateDoc(postLikes, {
+        // likes: arrayUnion(`${userUid}2`),
+        likes: arrayUnion(userUid),
+      });
+    }
+  });
+}
