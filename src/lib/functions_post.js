@@ -1,4 +1,3 @@
-import { isEmpty } from '@firebase/util';
 import {
   getFirestore,
   collection,
@@ -73,40 +72,65 @@ export const getUserFromFirestore = (userId) => {
   return getDoc(ref);
 };
 
+function addLike(postLikes, userUid) {
+  updateDoc(postLikes, {
+    likes: arrayUnion(userUid),
+  });
+}
+
+function removeLike(postLikes, userUid) {
+  updateDoc(postLikes, {
+    likes: arrayRemove(userUid),
+  });
+}
+
 export function counterLike(userUid, docPost) {
   // si usario ya le dio like entonces le quita el like
   // contar cantidad de items en el like para el numero de like que tiene la publicacion
   const postLikes = doc(dataBase, 'publicaciones', docPost.uid);
   const ref = collection(dataBase, 'publicaciones');
-  const arrLike = query(ref, where('likes', 'array-contains', userUid));
+  const arrLike = query(ref, where('postId', '==', docPost.postId)); // where('likes', 'array-contains', userUid));
   const getData = getDocs(arrLike);
   let dataLikes = '';
+  let cantLikes;
 
   getData.then((result) => {
     const arrayLikes = result;
     arrayLikes.forEach((d) => {
       if (d.exists()) {
-      //  console.log('trae datos');
+        console.log('trae datos');
         dataLikes = d.data();
-        if (dataLikes.likes.toString() === userUid) { // si existe quitar like
-          console.log('existe, quitar like');
-          updateDoc(postLikes, {
-            likes: arrayRemove(userUid),
-          });
-        // } else {
-        //   // no existe
-        //   console.log('nuevo like');
-        //   updateDoc(postLikes, {
-        //     likes: arrayUnion(userUid),
-        //   });
+        //  console.log('datalikes id:', dataLikes);
+        //  console.log('viene de home post id:', docPost);
+        if (dataLikes.postId === docPost.postId) {
+          console.log('encontro el post');
+          //   console.log('post', dataLikes.likes);
+          //  console.log(dataLikes.likes.toString());
+          if (dataLikes.likes.length > 0) {
+            console.log(dataLikes.likes);
+            for (let i = 0; i < dataLikes.likes.length; i += 1) {
+              if (dataLikes.likes[i] === userUid) {
+                console.log('iguales', dataLikes.likes[i], userUid);
+                removeLike(postLikes, userUid);
+                //     console.log('existe, quitar like:', dataLikes.likes.length - 1
+                cantLikes = dataLikes.likes.length - 1;
+              } else {
+                console.log('diferentes', dataLikes.likes[i], userUid);
+                addLike(postLikes, userUid);
+                //     console.log('nuevo total like:', dataLikes.likes.length + 1);
+                cantLikes = dataLikes.likes.length + 1;
+              }
+            }
+          } else {
+            console.log('no tiene ningun like');
+            addLike(postLikes, userUid);
+            console.log('nuevo total like:', dataLikes.likes.length + 1);
+          }
         }
       }
     });
-    if (dataLikes === '') {
-      console.log('nuevo like');
-      updateDoc(postLikes, {
-        likes: arrayUnion(userUid),
-      });
-    }
+    console.log('total likes',cantLikes);
+    return cantLikes;
   });
+
 }

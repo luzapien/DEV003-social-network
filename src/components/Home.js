@@ -80,18 +80,35 @@ function showPost(container) {
       const likeBtn = document.createElement('button');
       likeBtn.type = 'button';
       likeBtn.className = 'likeBtn';
+      const lblCounterLike = document.createElement('label');
+      lblCounterLike.id = 'lblCounterLike';
+      //  console.log(doc.likes);
+      if (doc.likes.length === 0) {
+        lblCounterLike.innerText = 0;
+      } else {
+        lblCounterLike.innerText = doc.likes.length;
+      }
       // likeBtn.id = doc.uid;
       likeBtn.appendChild(likeIcon);
-      /** ***LIKE***** */
-      // const counter = 0;
-      likeBtn.addEventListener('click', () => {
-        // eslint-disable-next-line no-plusplus
-        // counter++;
-      //  console.log(user.uid, user.displayName);
-        counterLike(user.uid, doc);
 
-        // user.uid
-        // obtener  user.id que esta logeado
+      /** ***LIKE***** */
+
+      likeBtn.addEventListener('click', () => {
+        const likesActual = counterLike(user.uid, doc);
+
+        const cantLikes = likesActual.then((valor) => valor);
+        lblCounterLike.innerText = cantLikes;
+        //    actualizar al dar o quitar like
+        // likesActual.then((res) => {
+        //   const arrLike = res;
+        //   arrLike.forEach((d) => {
+        //     if (d.exists()) {
+        //       const numLikes = d.data();
+        //       console.log('numLikes', numLikes);
+        //       lblCounterLike.innerText = numLikes.length;
+        //     }
+        //   });
+        // });
       });
 
       /** ************* */
@@ -129,7 +146,7 @@ function showPost(container) {
         editPostDialog.showModal();
       });
       postActionsRight.append(buttonEditPost, buttonDeletePost);
-      postActionsContainer.append(likeBtn, postActionsRight);
+      postActionsContainer.append(likeBtn, lblCounterLike, postActionsRight);
       sectionPost.append(spanPost, postActionsContainer);
     });
     container.appendChild(postWall);
