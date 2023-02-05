@@ -1,3 +1,4 @@
+import { isEmpty } from '@firebase/util';
 import {
   getFirestore,
   collection,
@@ -72,26 +73,38 @@ export const getUserFromFirestore = (userId) => {
   return getDoc(ref);
 };
 
-export function counterLike(userUid, postId) {
+export function counterLike(userUid, docPost) {
   // si usario ya le dio like entonces le quita el like
   // contar cantidad de items en el like para el numero de like que tiene la publicacion
+  const postLikes = doc(dataBase, 'publicaciones', docPost.uid);
+  const ref = collection(dataBase, 'publicaciones');
+  const arrLike = query(ref, where('likes', 'array-contains', userUid));
+  const getData = getDocs(arrLike);
+  let dataLikes = '';
 
-  const postLikes = doc(dataBase, 'publicaciones', postId);
-
-  const ref = collection(dataBase, 'publicaciones'); 
-  const arr = query(ref, where('likes', 'array-contains', userUid));
-  const array = getDocs(arr);
-  array.then((result) => {
-    if (result) {
-      console.log('existe', result);
+  getData.then((result) => {
+    const arrayLikes = result;
+    arrayLikes.forEach((d) => {
+      if (d.exists()) {
+      //  console.log('trae datos');
+        dataLikes = d.data();
+        if (dataLikes.likes.toString() === userUid) { // si existe quitar like
+          console.log('existe, quitar like');
+          updateDoc(postLikes, {
+            likes: arrayRemove(userUid),
+          });
+        // } else {
+        //   // no existe
+        //   console.log('nuevo like');
+        //   updateDoc(postLikes, {
+        //     likes: arrayUnion(userUid),
+        //   });
+        }
+      }
+    });
+    if (dataLikes === '') {
+      console.log('nuevo like');
       updateDoc(postLikes, {
-        likes: arrayRemove(userUid),
-      });
-    } else {
-      // Atomically add a new region to the "regions" array field.
-      console.log('nuevo', result);
-      updateDoc(postLikes, {
-        // likes: arrayUnion(`${userUid}2`),
         likes: arrayUnion(userUid),
       });
     }

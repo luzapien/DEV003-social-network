@@ -87,9 +87,9 @@ function showPost(container) {
       likeBtn.addEventListener('click', () => {
         // eslint-disable-next-line no-plusplus
         // counter++;
-        console.log(user.uid, user.displayName);
-        counterLike(user.uid, doc.uid);
-        
+      //  console.log(user.uid, user.displayName);
+        counterLike(user.uid, doc);
+
         // user.uid
         // obtener  user.id que esta logeado
       });
