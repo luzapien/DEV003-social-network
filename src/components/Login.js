@@ -19,6 +19,7 @@ export const Login = () => {
   email.className = 'form-input';
   const password = document.createElement('input');
   password.type = 'password';
+  password.required = true;
   password.placeholder = 'Contraseña';
   password.minLength = 6;
   password.className = 'form-input';

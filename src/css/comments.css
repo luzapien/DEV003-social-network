@@ -1,0 +1,16 @@
+.commentsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: var(--font-sm);
+}
+
+.commentsDiv {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.commentContainer {
+  border: 1px solid #333;
+}

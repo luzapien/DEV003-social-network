@@ -1,5 +1,6 @@
 import { logOutFunction, informationUser } from '../lib/firebase';
 import { onNavigate } from '../router';
+import { comments } from './Comments';
 import { Dialog, closeDialog } from './Dialog';
 import {
   createPost, getUserPosts, deletePost, getUserFromFirestore, updatePost, counterLike,
@@ -71,6 +72,8 @@ function showPost(container) {
       arrayPosts.push(dataPostUid);
     });
     arrayPosts.forEach((doc) => {
+      // const comments = Comments(doc);
+      console.log('leyendo array post');
       const postActionsContainer = document.createElement('div');
       const postActionsRight = document.createElement('div');
       postActionsRight.className = 'postActionsRight';
@@ -148,6 +151,7 @@ function showPost(container) {
       postActionsRight.append(buttonEditPost, buttonDeletePost);
       postActionsContainer.append(likeBtn, lblCounterLike, postActionsRight);
       sectionPost.append(spanPost, postActionsContainer);
+      comments(doc, sectionPost);
     });
     container.appendChild(postWall);
   }).catch((error) => {

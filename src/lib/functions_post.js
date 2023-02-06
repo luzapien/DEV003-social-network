@@ -13,6 +13,9 @@ import {
   arrayUnion,
   arrayRemove,
 } from 'firebase/firestore';
+import {
+  getDatabase, child, push, update,
+} from 'firebase/database';
 import { app } from './firebase';
 
 // Initialize Cloud Firestore and get a reference to the service
@@ -22,7 +25,10 @@ const dataBase = getFirestore(app);
 //   console.log(`entro al collection: ${userEmail}`);
 //   addDoc(collection(dataBase, userEmail), {});
 // }
-
+export function createID(use) {
+  const idGenerator = Math.random().toString(30).substring(2);
+  return use + idGenerator;
+}
 export function createUserDoc(user) {
   return setDoc(doc(dataBase, 'usuarios', user.uid), {
     id: user.uid,
@@ -32,15 +38,13 @@ export function createUserDoc(user) {
   });
 }
 
-function createID() {
-  return Math.random().toString(30).substring(2);
-}
-
 export function createPost(userId, postContent) {
+  const postId = createID('post');
+  console.log(postId);
   // crea un nuevo objeto `Date` con fecha y hora del momento
   const today = new Date();
   return addDoc(collection(dataBase, 'publicaciones'), {
-    postId: createID(),
+    postId,
     userId,
     contenido: postContent,
     likes: [],
@@ -132,4 +136,27 @@ export function counterLike(userUid, docPost) {
     console.log('total likes', cantLikes);
     return cantLikes;
   });
+}
+
+export function writeNewComment(contenido, userId) {
+  const db = getDatabase();
+  const ref = collection(dataBase, 'publicaciones');
+
+  // A post entry.
+  const newFieldsComments = {
+    comentarios: [{
+      contenido,
+      userId,
+    }],
+  };
+
+  // Get a key for a new Post.
+  const newPostKey = push(child(ref(db), 'comentarios')).key;
+
+  // Write the new post's data simultaneously in the posts list and the user's post list.
+  const updates = {};
+  updates[`/comentarios/${newPostKey}`] = newFieldsComments;
+  updates[`/publicaciones-comentarios/${userId}/${newPostKey}`] = newFieldsComments;
+
+  return update(ref(db), updates);
 }

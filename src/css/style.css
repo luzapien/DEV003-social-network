@@ -1,3 +1,5 @@
+@import url('./comments.css');
+
 /**Estilos generales**/
 html {
     padding: 0;
@@ -6,12 +8,12 @@ html {
 
 body {
     justify-items: center;
-    background-image: url("./images/patitascat.jpg");
+    background-image: url("../images/patitascat.jpg");
     text-align: center;
 }
 
 .stylesBtns {
-    background-color: rgba(225, 103, 183, 0.8);
+    background-color: rgba(241, 153, 210, 0.8);
     color: white;
     border: none;
     padding: 10px 12px;
@@ -227,7 +229,7 @@ footer {
     height: 20px;
     display: block;
     background-repeat: no-repeat;
-    background-image: url('./images/logout.svg');
+    background-image: url('../images/logout.svg');
 }
 
 .btnDelete,
@@ -241,7 +243,7 @@ footer {
     height: 14px;
     display: block;
     background-repeat: no-repeat;
-    background-image: url('./images/delete-icon.svg');
+    background-image: url('../images/delete-icon.svg');
 }
 
 .editIcon {
@@ -249,7 +251,7 @@ footer {
     height: 14px;
     display: block;
     background-repeat: no-repeat;
-    background-image: url('./images/edit-icon.svg');
+    background-image: url('../images/edit-icon.svg');
 }
 
 .likeIcon {
@@ -257,7 +259,7 @@ footer {
     height: 16px;
     display: block;
     background-repeat: no-repeat;
-    background-image: url('./images/likegatuno16.png');
+    background-image: url('../images/likegatuno16.png');
 }
 
 .postActions {
