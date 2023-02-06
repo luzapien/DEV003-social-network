@@ -72,7 +72,7 @@ function showPost(container) {
       arrayPosts.push(dataPostUid);
     });
     arrayPosts.forEach((doc) => {
-      //const comments = Comments(doc);
+      // const comments = Comments(doc);
       console.log('leyendo array post');
       const postActionsContainer = document.createElement('div');
       const postActionsRight = document.createElement('div');
