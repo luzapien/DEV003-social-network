@@ -24,7 +24,8 @@ export function validationloginWithMail(email, password) {
       alert(message);
       return message;
     });
-  }
+  // eslint-disable-next-line no-undef
+  } return message;
 }
 
 /* Función para boton de login con google */
@@ -49,4 +50,3 @@ export function validationLoginWithGoogle() {
   });
 }
 /* =======Funciones para register======== */
-

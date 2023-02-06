@@ -129,8 +129,7 @@ export function counterLike(userUid, docPost) {
         }
       }
     });
-    console.log('total likes',cantLikes);
+    console.log('total likes', cantLikes);
     return cantLikes;
   });
-
 }
