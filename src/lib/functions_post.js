@@ -91,6 +91,7 @@ function removeLike(postLikes, userUid) {
 export function counterLike(userUid, docPost) {
   // si usario ya le dio like entonces le quita el like
   // contar cantidad de items en el like para el numero de like que tiene la publicacion
+  // xxxxxx
   const postLikes = doc(dataBase, 'publicaciones', docPost.uid);
   const ref = collection(dataBase, 'publicaciones');
   const arrLike = query(ref, where('postId', '==', docPost.postId)); // where('likes', 'array-contains', userUid));
