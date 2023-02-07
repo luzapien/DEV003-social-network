@@ -29,12 +29,12 @@ export function createID(use) {
   const idGenerator = Math.random().toString(30).substring(2);
   return use + idGenerator;
 }
-export function createUserDoc(user) {
+export function createUserDoc(user, fullName, photo) {
   return setDoc(doc(dataBase, 'usuarios', user.uid), {
     id: user.uid,
     correo: user.email,
-    nombre: user.displayName,
-    foto: user.photoURL,
+    nombre: fullName,
+    foto: photo,
   });
 }
 

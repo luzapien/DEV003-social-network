@@ -8,7 +8,6 @@ import {
   createUserWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
-  updateProfile,
   signInWithEmailAndPassword,
 } from 'firebase/auth';
 import { firebaseConfig } from './configFirebase.js';
@@ -50,14 +49,6 @@ export function emailLogin(email, password) {
 export function registerNewUser(email, password) {
   return createUserWithEmailAndPassword(auth, email, password);
 }
-
-export const updateUserProfile = (user, displayName, userPhoto) => {
-  const userProperties = {
-    displayName,
-    photoURL: userPhoto,
-  };
-  return updateProfile(user, userProperties);
-};
 
 onAuthStateChanged(auth, (user) => {
   if (user) {

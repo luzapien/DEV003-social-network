@@ -1,33 +1,40 @@
-import { registerNewUser, updateUserProfile } from '../lib/firebase';
+import { registerNewUser } from '../lib/firebase';
 import { onNavigate } from '../router';
 import { createUserDoc } from '../lib/functions_post';
 
 export const Register = () => {
   const container = document.createElement('div');
+  container.id = 'containerRegister';
   container.className = 'container-register';
   const titleRegister = '<h1 class = \'title-register\'>Registrate</h1>';
   const form = document.createElement('form');
+  form.id = 'formRegister';
   form.className = 'form-register';
   const name = document.createElement('input');
+  name.id = 'nameId';
   name.type = 'text';
   name.required = true;
   name.placeholder = 'Nombre';
   name.className = 'form-input';
   const lastname = document.createElement('input');
+  lastname.id = 'lastnameId';
   lastname.type = 'text';
   lastname.required = true;
   lastname.placeholder = 'Apellido';
   lastname.className = 'form-input';
   const email = document.createElement('input');
+  email.id = 'emailId';
   email.type = 'email';
   email.required = true;
   email.placeholder = 'Correo';
   email.className = 'form-input';
   const password = document.createElement('input');
+  password.id = 'passwordId';
   password.type = 'password';
   password.placeholder = 'Contraseña';
   password.className = 'form-input';
   const passwordConfirm = document.createElement('input');
+  passwordConfirm.id = 'confirmPasswordId';
   passwordConfirm.type = 'password';
   passwordConfirm.placeholder = 'Confirmar contraseña';
   passwordConfirm.className = 'form-input';
@@ -48,8 +55,7 @@ export const Register = () => {
       registerNewUser(emailValue, passwordValue).then((result) => {
         const user = result.user;
         console.log(user);
-        updateUserProfile(user, fullName, 'http://placekitten.com/200/300').then(() => {
-          createUserDoc(user);
+        createUserDoc(user, fullName, 'http://placekitten.com/200/300').then(() => {
           console.log(user.displayName);
         });
       }).catch((error) => {
@@ -78,7 +84,6 @@ export const Register = () => {
       // } catch (error) {
       //   errorCode = error.code;
       // }
- 
     }
   });
 
