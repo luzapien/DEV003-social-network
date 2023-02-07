@@ -60,6 +60,15 @@ function dialogEditPost(idPost, container, spanPost) {
   return dialog;
 }
 
+/* funcion que pinta el like */
+export function paintLikes(numberLikes, idButton) {
+  const containerLike = document.getElementById(`lbl${idButton}`);
+  containerLike.innerText = numberLikes;
+}
+
+// export function paintComents(arrayComents) {
+//   arrayComents.forEach;
+// }
 /* ========= Funcion que crea y ordena por fecha los posts del usuario ========= */
 function showPost(container) {
   container.innerHTML = '';
@@ -88,33 +97,23 @@ function showPost(container) {
       likeBtn.type = 'button';
       likeBtn.className = 'likeBtn';
       const lblCounterLike = document.createElement('label');
-      lblCounterLike.id = 'lblCounterLike';
+      lblCounterLike.className = 'lblCounterLike';
+      lblCounterLike.id = `lbl${doc.postId}`;
       //  console.log(doc.likes);
       if (doc.likes.length === 0) {
         lblCounterLike.innerText = 0;
       } else {
         lblCounterLike.innerText = doc.likes.length;
       }
-      // likeBtn.id = doc.uid;
+      likeBtn.id = doc.postId;
       likeBtn.appendChild(likeIcon);
 
       /** ***LIKE***** */
 
       likeBtn.addEventListener('click', () => {
-        counterLike(user.uid, doc);
-
-    
-        //    actualizar al dar o quitar like
-        // likesActual.then((res) => {
-        //   const arrLike = res;
-        //   arrLike.forEach((d) => {
-        //     if (d.exists()) {
-        //       const numLikes = d.data();
-        //       console.log('numLikes', numLikes);
-        //       lblCounterLike.innerText = numLikes.length;
-        //     }
-        //   });
-        // });
+        console.log(likeBtn);
+        counterLike(user.uid, doc, likeBtn.id);
+        console.log(doc);
       });
 
       /** ************* */
@@ -208,19 +207,6 @@ export const Home = () => {
         }).finally(() => {
           createPostForm.reset();
         });
-        // try {
-        //   await createPost(user.uid, postInput.value);
-        // } catch (error) {
-        //   console.log(error);
-        // } finally {
-        //   createPostForm.reset();
-        // }
-
-        // showPost(sectionPost);
-        // const btnsDelete = document.querySelectorAll('.btnDelete');
-        // btnsDelete.forEach((button) => {
-        //   console.log(button.id);
-        // });
       } else {
         alert('No hay nada que publicar');
       }
