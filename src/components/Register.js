@@ -43,10 +43,7 @@ export const Register = () => {
 
     if (passwordValue !== passwordConfirmValue) {
       alert('Las contraseñas no coinciden');
-      return;
-    }
-
-    if (emailValue && passwordValue && nameValue && lastnameValue && passwordConfirmValue) {
+    } if (emailValue && passwordValue && nameValue && lastnameValue && passwordConfirmValue) {
       let errorCode;
       registerNewUser(emailValue, passwordValue).then((result) => {
         const user = result.user;
@@ -56,7 +53,22 @@ export const Register = () => {
           console.log(user.displayName);
         });
       }).catch((error) => {
+        console.log(error);
         errorCode = error.code;
+        let message;
+        console.log(errorCode);
+        if (errorCode) {
+          if (errorCode === 'auth/email-already-in-use') {
+            message = 'Ya hay un usuario registrado con el correo';
+          } else if (errorCode === 'auth/internal-error' || errorCode === 'auth/invalid-email') {
+            message = 'Ingrese un correo valido';
+          } else if (errorCode === 'auth/weak-password') {
+            message = 'La contraseña debe tener minimo 6 caracteres';
+          } else if (errorCode === 'invalid-argument') {
+            message = 'Algo salió mal';
+          }
+          alert(message);
+        }
       });
       // try {
       //   const result = await registerNewUser(emailValue, passwordValue);
@@ -66,20 +78,7 @@ export const Register = () => {
       // } catch (error) {
       //   errorCode = error.code;
       // }
-      let message;
-      //  console.log(errorCode);
-      if (errorCode) {
-        if (errorCode === 'auth/email-already-in-use') {
-          message = 'Ya hay un usuario registrado con el correo';
-        } else if (errorCode === 'auth/internal-error' || errorCode === 'auth/invalid-email') {
-          message = 'Ingrese un correo valido';
-        } else if (errorCode === 'auth/weak-password') {
-          message = 'La contraseña debe tener minimo 6 caracteres';
-        } else if (errorCode === 'invalid-argument') {
-          message = 'Algo salió mal';
-        }
-        alert(message);
-      }
+ 
     }
   });
 
