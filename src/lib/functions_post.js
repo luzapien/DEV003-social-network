@@ -12,11 +12,10 @@ import {
   orderBy,
   arrayUnion,
   arrayRemove,
+  onSnapshot,
 } from 'firebase/firestore';
-import {
-  getDatabase, child, push, update,
-} from 'firebase/database';
 import { app } from './firebase';
+import { paintLikes } from '../components/Home';
 
 // Initialize Cloud Firestore and get a reference to the service
 const dataBase = getFirestore(app);
@@ -137,27 +136,10 @@ export function counterLike(userUid, docPost) {
     console.log('total likes', cantLikes);
     return cantLikes;
   });
-}
-
-export function writeNewComment(contenido, userId) {
-  const db = getDatabase();
-  const ref = collection(dataBase, 'publicaciones');
-
-  // A post entry.
-  const newFieldsComments = {
-    comentarios: [{
-      contenido,
-      userId,
-    }],
-  };
-
-  // Get a key for a new Post.
-  const newPostKey = push(child(ref(db), 'comentarios')).key;
-
-  // Write the new post's data simultaneously in the posts list and the user's post list.
-  const updates = {};
-  updates[`/comentarios/${newPostKey}`] = newFieldsComments;
-  updates[`/publicaciones-comentarios/${userId}/${newPostKey}`] = newFieldsComments;
-
-  return update(ref(db), updates);
+  const q = query(collection(dataBase, 'publicaciones'), where('postId', '==', docPost.postId));
+  onSnapshot(q, (querySnapshot) => {
+    querySnapshot.forEach((d) => {
+      paintLikes(d.data().likes.length);
+    });
+  });
 }

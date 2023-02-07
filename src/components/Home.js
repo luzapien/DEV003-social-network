@@ -6,6 +6,10 @@ import {
   createPost, getUserPosts, deletePost, getUserFromFirestore, updatePost, counterLike,
 } from '../lib/functions_post';
 
+export function paintLikes(numberLikes) {
+  const containerLike = document.getElementById('lblCounterLike');
+  containerLike.innerText = numberLikes;
+}
 function dialogEditPost(idPost, container, spanPost) {
   const postContent = spanPost.textContent;
   const formDialog = document.createElement('form');
@@ -97,10 +101,9 @@ function showPost(container) {
       /** ***LIKE***** */
 
       likeBtn.addEventListener('click', () => {
-        const likesActual = counterLike(user.uid, doc);
+        counterLike(user.uid, doc);
 
-        const cantLikes = likesActual.then((valor) => valor);
-        lblCounterLike.innerText = cantLikes;
+    
         //    actualizar al dar o quitar like
         // likesActual.then((res) => {
         //   const arrLike = res;
