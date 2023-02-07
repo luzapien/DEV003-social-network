@@ -43,7 +43,7 @@ export const Register = () => {
 
     if (passwordValue !== passwordConfirmValue) {
       alert('Las contraseñas no coinciden');
-      return;
+      // return;
     }
 
     if (emailValue && passwordValue && nameValue && lastnameValue && passwordConfirmValue) {
@@ -53,33 +53,27 @@ export const Register = () => {
         console.log(user);
         updateUserProfile(user, fullName, 'http://placekitten.com/200/300').then(() => {
           createUserDoc(user);
-          console.log(user.displayName);
+        //  console.log(user.displayName);
         });
-      }).catch((error) => {
-        errorCode = error.code;
-      });
-      // try {
-      //   const result = await registerNewUser(emailValue, passwordValue);
-      //   const user = result.user;
-      //   await updateUserProfile(user, fullName, 'http://placekitten.com/200/300');
-      //   await createUserDoc(user);
-      // } catch (error) {
-      //   errorCode = error.code;
-      // }
-      let message;
-      //  console.log(errorCode);
-      if (errorCode) {
-        if (errorCode === 'auth/email-already-in-use') {
-          message = 'Ya hay un usuario registrado con el correo';
-        } else if (errorCode === 'auth/internal-error' || errorCode === 'auth/invalid-email') {
-          message = 'Ingrese un correo valido';
-        } else if (errorCode === 'auth/weak-password') {
-          message = 'La contraseña debe tener minimo 6 caracteres';
-        } else if (errorCode === 'invalid-argument') {
-          message = 'Algo salió mal';
+      }).catch((err) => {
+        errorCode = err.code;
+        console.log('1', errorCode);
+        let message;
+        //  console.log(errorCode);
+        if (errorCode) {
+          if (errorCode === 'auth/email-already-in-use') {
+            message = 'Ya hay un usuario registrado con el correo';
+          } else if (errorCode === 'auth/internal-error' || errorCode === 'auth/invalid-email') {
+            message = 'Ingrese un correo valido';
+          } else if (errorCode === 'auth/weak-password') {
+            message = 'La contraseña debe tener minimo 6 caracteres';
+          } else if (errorCode === 'invalid-argument') {
+            message = 'Algo salió mal';
+          }
+          alert(message);
         }
-        alert(message);
-      }
+      });
+      // console.log('2', errorCode);
     }
   });
 
