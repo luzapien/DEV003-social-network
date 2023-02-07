@@ -43,10 +43,7 @@ export const Register = () => {
 
     if (passwordValue !== passwordConfirmValue) {
       alert('Las contraseñas no coinciden');
-      // return;
-    }
-
-    if (emailValue && passwordValue && nameValue && lastnameValue && passwordConfirmValue) {
+    } if (emailValue && passwordValue && nameValue && lastnameValue && passwordConfirmValue) {
       let errorCode;
       registerNewUser(emailValue, passwordValue).then((result) => {
         const user = result.user;
@@ -55,11 +52,11 @@ export const Register = () => {
           createUserDoc(user);
         //  console.log(user.displayName);
         });
-      }).catch((err) => {
-        errorCode = err.code;
-        console.log('1', errorCode);
+      }).catch((error) => {
+        console.log(error);
+        errorCode = error.code;
         let message;
-        //  console.log(errorCode);
+        console.log(errorCode);
         if (errorCode) {
           if (errorCode === 'auth/email-already-in-use') {
             message = 'Ya hay un usuario registrado con el correo';
@@ -73,7 +70,15 @@ export const Register = () => {
           alert(message);
         }
       });
-      // console.log('2', errorCode);
+      // try {
+      //   const result = await registerNewUser(emailValue, passwordValue);
+      //   const user = result.user;
+      //   await updateUserProfile(user, fullName, 'http://placekitten.com/200/300');
+      //   await createUserDoc(user);
+      // } catch (error) {
+      //   errorCode = error.code;
+      // }
+ 
     }
   });
 
