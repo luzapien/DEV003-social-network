@@ -16,6 +16,7 @@ import {
 } from 'firebase/firestore';
 import { app } from './firebase';
 import { paintLikes } from '../components/Home';
+import { paintComments } from '../components/Comments';
 
 // Initialize Cloud Firestore and get a reference to the service
 const dataBase = getFirestore(app);
@@ -92,7 +93,6 @@ export function counterLike(userUid, docPost, idButton) {
   // contar cantidad de items en el like para el numero de like que tiene la publicacion
   // xxxxxx
 
-
   const postLikes = doc(dataBase, 'publicaciones', docPost.uid);
   const ref = collection(dataBase, 'publicaciones');
   const arrLike = query(ref, where('postId', '==', docPost.postId));
@@ -139,10 +139,13 @@ export function counterLike(userUid, docPost, idButton) {
       paintLikes(d.data().likes.length, idButton);
     });
   });
+}
+
+export function updateteComments(userUid, docPost, idButton) {
   const q = query(collection(dataBase, 'publicaciones'), where('postId', '==', docPost.postId));
   onSnapshot(q, (querySnapshot) => {
     querySnapshot.forEach((d) => {
-      paintLikes(d.data().likes.length);
+      paintComments(d.data().comentarios, idButton);
     });
   });
 }

@@ -1,5 +1,17 @@
 import { informationUser } from '../lib/firebase';
-import { updatePost, createID } from '../lib/functions_post';
+import { updatePost, createID, updateteComments } from '../lib/functions_post';
+
+export function paintComments(arrayComments, idButton) {
+  const commentsContainer = document.getElementById(`commentDiv${idButton}`);
+  commentsContainer.innerHTML = '';
+  arrayComments.forEach((comentario) => {
+    // console.log(comentario);
+    const commentContainer = document.createElement('div');
+    commentContainer.className = 'commentContainer';
+    commentContainer.textContent = comentario.contenido;
+    commentsContainer.appendChild(commentContainer);
+  });
+}
 
 export function comments(post, containerRender) {
   const user = informationUser();
@@ -17,7 +29,7 @@ export function comments(post, containerRender) {
   const commentsDiv = document.createElement('div');
   commentsDiv.innerHTML = '';
   commentsDiv.className = 'commentsDiv';
-  commentsDiv.id = 'coments-Div';
+  commentsDiv.id = `commentDiv${post.postId}`;
 
   const commentsForm = document.createElement('form');
   const commentsInput = document.createElement('input');
@@ -25,6 +37,7 @@ export function comments(post, containerRender) {
   commentsInput.required = true;
   commentsInput.placeholder = 'Escribe un comentario';
   const btnComments = document.createElement('button');
+  btnComments.id = post.postId;
   btnComments.type = 'submit';
   btnComments.textContent = 'comentar';
   commentsForm.className = 'commentsForm';
@@ -34,11 +47,11 @@ export function comments(post, containerRender) {
     });
     e.preventDefault();
     // console.log(comentarios);
+    updateteComments(user.uid, post, btnComments.id);
+    commentsInput.value = '';
     updatePost(post.uid, {
       comentarios,
     }).then(() => {
-    }).catch((error) => {
-      console.log(error);
     });
   });
   if (comentarios) {

@@ -6,8 +6,8 @@ import {
   createPost, getUserPosts, deletePost, getUserFromFirestore, updatePost, counterLike,
 } from '../lib/functions_post';
 
-export function paintLikes(numberLikes) {
-  const containerLike = document.getElementById('lblCounterLike');
+export function paintLikes(numberLikes, idButton) {
+  const containerLike = document.getElementById(`lbl${idButton}`);
   containerLike.innerText = numberLikes;
 }
 function dialogEditPost(idPost, container, spanPost) {
@@ -41,16 +41,6 @@ function dialogEditPost(idPost, container, spanPost) {
     }).catch((error) => {
       console.log(error);
     });
-    // try {
-    //   await updatePost(idPost, {
-    //     contenido: inputText.value,
-    //     date: new Date(),
-    //   });
-    //   spanPost.textContent = inputText.value;
-    //   closeDialog();
-    // } catch (error) {
-    //   console.log(error);
-    // }
   });
 
   const dialog = Dialog('Editar Post', formDialog);
@@ -60,15 +50,6 @@ function dialogEditPost(idPost, container, spanPost) {
   return dialog;
 }
 
-/* funcion que pinta el like */
-export function paintLikes(numberLikes, idButton) {
-  const containerLike = document.getElementById(`lbl${idButton}`);
-  containerLike.innerText = numberLikes;
-}
-
-// export function paintComents(arrayComents) {
-//   arrayComents.forEach;
-// }
 /* ========= Funcion que crea y ordena por fecha los posts del usuario ========= */
 function showPost(container) {
   container.innerHTML = '';
