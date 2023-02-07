@@ -15,7 +15,9 @@ export function comments(post, containerRender) {
   commentsContainer.className = 'commentsContainer';
 
   const commentsDiv = document.createElement('div');
+  commentsDiv.innerHTML = '';
   commentsDiv.className = 'commentsDiv';
+  commentsDiv.id = 'coments-Div';
 
   const commentsForm = document.createElement('form');
   const commentsInput = document.createElement('input');

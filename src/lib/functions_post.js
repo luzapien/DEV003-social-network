@@ -12,11 +12,13 @@ import {
   orderBy,
   arrayUnion,
   arrayRemove,
+  onSnapshot,
 } from 'firebase/firestore';
 import {
   getDatabase, child, push, update,
 } from 'firebase/database';
 import { app } from './firebase';
+import { paintLikes } from '../components/Home';
 
 // Initialize Cloud Firestore and get a reference to the service
 const dataBase = getFirestore(app);
@@ -88,13 +90,16 @@ function removeLike(postLikes, userUid) {
   });
 }
 
-export function counterLike(userUid, docPost) {
+export function counterLike(userUid, docPost, idButton) {
   // si usario ya le dio like entonces le quita el like
   // contar cantidad de items en el like para el numero de like que tiene la publicacion
   // xxxxxx
+
+
   const postLikes = doc(dataBase, 'publicaciones', docPost.uid);
   const ref = collection(dataBase, 'publicaciones');
-  const arrLike = query(ref, where('postId', '==', docPost.postId)); // where('likes', 'array-contains', userUid));
+  const arrLike = query(ref, where('postId', '==', docPost.postId));
+
   const getData = getDocs(arrLike);
   let dataLikes = '';
   let cantLikes;
@@ -105,24 +110,18 @@ export function counterLike(userUid, docPost) {
       if (d.exists()) {
         console.log('trae datos');
         dataLikes = d.data();
-        //  console.log('datalikes id:', dataLikes);
-        //  console.log('viene de home post id:', docPost);
         if (dataLikes.postId === docPost.postId) {
           console.log('encontro el post');
-          //   console.log('post', dataLikes.likes);
-          //  console.log(dataLikes.likes.toString());
           if (dataLikes.likes.length > 0) {
             console.log(dataLikes.likes);
             for (let i = 0; i < dataLikes.likes.length; i += 1) {
               if (dataLikes.likes[i] === userUid) {
                 console.log('iguales', dataLikes.likes[i], userUid);
                 removeLike(postLikes, userUid);
-                //     console.log('existe, quitar like:', dataLikes.likes.length - 1
                 cantLikes = dataLikes.likes.length - 1;
               } else {
                 console.log('diferentes', dataLikes.likes[i], userUid);
                 addLike(postLikes, userUid);
-                //     console.log('nuevo total like:', dataLikes.likes.length + 1);
                 cantLikes = dataLikes.likes.length + 1;
               }
             }
@@ -135,7 +134,13 @@ export function counterLike(userUid, docPost) {
       }
     });
     console.log('total likes', cantLikes);
-    return cantLikes;
+  });
+
+  const q = query(collection(dataBase, 'publicaciones'), where('postId', '==', docPost.postId));
+  onSnapshot(q, (querySnapshot) => {
+    querySnapshot.forEach((d) => {
+      paintLikes(d.data().likes.length, idButton);
+    });
   });
 }
 
