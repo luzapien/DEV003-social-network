@@ -9,7 +9,7 @@ export const Login = () => {
   const container = document.createElement('section');
   container.className = 'mainContainer';
   const title = document.createElement('img');
-  title.src = '../images/logooriginalcats.png';
+  title.src = 'https://i.postimg.cc/9FgZx0M0/Cats.png';
   const form = document.createElement('form');
   form.className = 'form-login';
   const email = document.createElement('input');

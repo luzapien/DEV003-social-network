@@ -6,6 +6,7 @@ dialogContent.className = 'loquesea';
 
 export const Dialog = (title, content) => {
   dialogTitle.textContent = title;
+  dialogContent.innerHTML = '';
   dialogContent.appendChild(content);
   dialog.append(dialogTitle, dialogContent);
 
