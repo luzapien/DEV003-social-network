@@ -72,6 +72,9 @@ function showPost(container) {
       const postActionsRight = document.createElement('div');
       postActionsRight.className = 'postActionsRight';
       postActionsContainer.className = 'postActions';
+      const postActionsLeft = document.createElement('div');
+      postActionsLeft.className = 'postActionLeft';
+      postActionsLeft.id = 'postActionLeft';
       const likeIcon = document.createElement('span');
       likeIcon.className = 'likeIcon';
       const likeBtn = document.createElement('button');
@@ -88,7 +91,7 @@ function showPost(container) {
       }
       likeBtn.id = doc.postId;
       likeBtn.appendChild(likeIcon);
-
+      postActionsLeft.append(likeBtn, lblCounterLike);
       /** ***LIKE***** */
 
       likeBtn.addEventListener('click', () => {
@@ -102,6 +105,7 @@ function showPost(container) {
       sectionPost.className = 'section-post';
       const spanPost = document.createElement('span');
       spanPost.className = 'span-post';
+      spanPost.id = 'spanPost';
       spanPost.innerText = doc.contenido;
       postWall.appendChild(sectionPost);
       const buttonDeletePost = document.createElement('button');
@@ -132,7 +136,7 @@ function showPost(container) {
         editPostDialog.showModal();
       });
       postActionsRight.append(buttonEditPost, buttonDeletePost);
-      postActionsContainer.append(likeBtn, lblCounterLike, postActionsRight);
+      postActionsContainer.append(postActionsLeft, postActionsRight);
       sectionPost.append(spanPost, postActionsContainer);
       comments(doc, sectionPost);
     });
@@ -168,12 +172,14 @@ export const Home = () => {
     const sectionPost = document.createElement('section');
     sectionPost.id = 'scPost';
     const postInput = document.createElement('input');
+    postInput.id = 'postInput';
     postInput.className = 'post-input';
     postInput.type = 'text';
     postInput.placeholder = '¿Qué vas a compartir?';
     const createPostForm = document.createElement('form');
     createPostForm.className = 'create-post-form';
     const submitPostBtn = document.createElement('button');
+    submitPostBtn.id = 'submitPostBtn';
     submitPostBtn.textContent = 'Publicar';
     submitPostBtn.type = 'submit';
     submitPostBtn.className = 'stylesBtns createPostBtn';

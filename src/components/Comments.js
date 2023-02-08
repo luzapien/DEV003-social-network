@@ -34,6 +34,8 @@ export function comments(post, containerRender) {
   const commentsForm = document.createElement('form');
   const commentsInput = document.createElement('input');
   commentsInput.type = 'texto';
+  commentsInput.id = 'commentsInput';
+  commentsInput.className = 'commentsInput';
   commentsInput.required = true;
   commentsInput.placeholder = 'Escribe un comentario';
   const btnComments = document.createElement('button');
