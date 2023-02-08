@@ -42,9 +42,7 @@ export function validationloginWithMail(email, password) {
 export function validationLoginWithGoogle() {
   loginWithGoogle().then((result) => {
     const user = result.user;
-    createUserDoc(user).then(() => {
-
-    });
+    createUserDoc(user).then();
   }).catch((error) => {
     console.log(error);
   });
