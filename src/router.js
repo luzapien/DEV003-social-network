@@ -46,5 +46,13 @@ export function onNavigate(pathname) {
 //   Home: { viewcomponents: Home, init: home },
 //   Register: { components: Register, init: register },
 // };
+// const component = routes[window.location.pathname] || routes['/'];
 
 // export { routes };
+// window.onpopstate = () => {
+//   while (rootDiv.firstChild) {
+//     rootDiv.removeChild(rootDiv.firstChild);
+//   }
+//   rootDiv.appendChild(routes[window.location.pathname]());
+// };
+// rootDiv.appendChild(component());

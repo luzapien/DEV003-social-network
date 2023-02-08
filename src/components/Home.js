@@ -1,5 +1,4 @@
 import { logOutFunction, informationUser } from '../lib/firebase';
-import { onNavigate } from '../router';
 import { comments } from './Comments';
 import { Dialog, closeDialog } from './Dialog';
 import {
@@ -143,6 +142,7 @@ function showPost(container) {
     container.appendChild(postWall);
   }).catch((error) => {
     console.log(error);
+    throw new Error(error.message);
   });
 }
 
@@ -187,7 +187,8 @@ export const Home = () => {
     createPostForm.addEventListener('submit', (e) => {
       e.preventDefault();
       if (postInput.value.trim() !== '') {
-        createPost(user.uid, postInput.value).then(() => {
+        createPost(user.uid, postInput.value).then((result) => {
+          console.log("holaaa--->", result);
           showPost(sectionPost);
         }).catch((error) => {
           console.log(error);
@@ -209,9 +210,10 @@ export const Home = () => {
     signOutBtn.appendChild(signOutIcon);
     signOutBtn.addEventListener('click', () => {
       logOutFunction().then(() => {
-        onNavigate('/');
+        // onNavigate('/');
       }).catch((error) => {
         console.log(error);
+        throw new Error("error:", error.message);
       });
       // try {
       //   await logOutFunction();
@@ -220,6 +222,7 @@ export const Home = () => {
       //   console.log(error);
       // }
     });
+    console.log(userImage.innerHTML)
 
     createPostForm.append(postInput, submitPostBtn);
     sectionWall.append(createPostForm, sectionPost);
@@ -228,6 +231,7 @@ export const Home = () => {
     showPost(sectionPost);
   }).catch((error) => {
     console.log(error);
+    throw new Error("error:", error.message);
   });
 
   return container;
