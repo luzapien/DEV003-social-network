@@ -1,6 +1,7 @@
 import { registerNewUser } from '../lib/firebase';
 import { onNavigate } from '../router';
 import { createUserDoc } from '../lib/functions_post';
+import { modalError } from './ModalError';
 
 export const Register = () => {
   const container = document.createElement('div');
@@ -39,7 +40,7 @@ export const Register = () => {
   passwordConfirm.placeholder = 'Confirmar contraseña';
   passwordConfirm.className = 'form-input';
 
-  form.addEventListener('submit', async (e) => {
+  form.addEventListener('submit', (e) => {
     e.preventDefault();
     const emailValue = email.value;
     const passwordConfirmValue = passwordConfirm.value;
@@ -47,10 +48,12 @@ export const Register = () => {
     const nameValue = name.value;
     const lastnameValue = lastname.value;
     const fullName = `${nameValue} ${lastnameValue}`;
-
+    let message;
     if (passwordValue !== passwordConfirmValue) {
-      alert('Las contraseñas no coinciden');
-    } if (emailValue && passwordValue && nameValue && lastnameValue && passwordConfirmValue) {
+      message = 'Las contraseñas no coinciden';
+      container.appendChild(modalError(message));
+
+    } else if (emailValue && passwordValue && nameValue && lastnameValue && passwordConfirmValue) {
       let errorCode;
       registerNewUser(emailValue, passwordValue).then((result) => {
         const user = result.user;
@@ -61,7 +64,6 @@ export const Register = () => {
       }).catch((error) => {
         console.log(error);
         errorCode = error.code;
-        let message;
         console.log(errorCode);
         if (errorCode) {
           if (errorCode === 'auth/email-already-in-use') {
@@ -73,7 +75,7 @@ export const Register = () => {
           } else if (errorCode === 'invalid-argument') {
             message = 'Algo salió mal';
           }
-          alert(message);
+          container.appendChild(modalError(message));
         }
       });
       // try {
