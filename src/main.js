@@ -1,6 +1,7 @@
 import './router';
 import { emailLogin, loginWithGoogle } from './lib/firebase';
 import { createUserDoc } from './lib/functions_post';
+import { modalError } from './components/ModalError';
 
 /* =======Funciones para login======== */
 
@@ -21,7 +22,9 @@ export function validationloginWithMail(email, password) {
       } if (error.code === 'auth/invalid-email') {
         message = 'Correo invalido';
       }
-      alert(message);
+      const mainContainer = document.querySelector('.mainContainer');
+      mainContainer.appendChild(modalError(message));
+
       return message;
     });
   // eslint-disable-next-line no-undef
