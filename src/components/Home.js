@@ -105,7 +105,7 @@ function showPost(container) {
       const spanPost = document.createElement('span');
       spanPost.className = 'span-post';
       spanPost.id = 'spanPost';
-      spanPost.innerText = doc.contenido;
+      spanPost.innerHTML = doc.contenido;
       postWall.appendChild(sectionPost);
       const buttonDeletePost = document.createElement('button');
       const buttonEditPost = document.createElement('button');
