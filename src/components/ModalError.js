@@ -5,7 +5,7 @@ export function modalError(messageError) {
   ventanaModal.innerHTML = `<div class="modal-content">
   <span class="cerrar">&times;</span>
   <h2>Verifica el siguiente dato:</h2>
-  <p class = 'textError'>${messageError}</p>
+  <p class = 'textError' id= 'textErrorModal'>${messageError}</p>
 </div>`;
   ventanaModal.addEventListener('click', () => {
     ventanaModal.style.display = 'none';
