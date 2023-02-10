@@ -1,9 +1,6 @@
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { setDoc } from 'firebase/firestore';
 import { registerNewUser } from '../src/lib/firebase';
 import { Register } from '../src/components/Register';
 import { createUserDoc } from '../src/lib/functions_post';
-import { modalError } from '../src/components/ModalError';
 
 // const user = { user: { uid: 1234, nombre: "juan" } };
 // const message = 'auth/email-already-in-use';
@@ -15,18 +12,7 @@ jest.mock('../src/lib/firebase', () => ({
   registerNewUser: jest.fn(),
 
 }));
-jest.mock('firebase/auth', () => ({
-  createUserWithEmailAndPassword: jest.fn(() => Promise.reject(new Error({ code: 'auth/invalid-email' }))),
-}));
 
-jest.mock('firebase/firestore', () => ({
-  setDoc: jest.fn(),
-}));
-
-jest.mock('../src/components/ModalError', () => ({
-  modalError: jest.fn(),
-
-}));
 function tick() {
   return new Promise((resolve) => {
     setTimeout(resolve, 0);
@@ -56,13 +42,9 @@ describe('first Test for Register', () => {
     inputConfirmPassword = document.getElementById('confirmPasswordId');
     buttonRegister = document.getElementById('buttonRegisterHome');
     buttonReturnLogin = document.getElementById('btn-return-login');
-    textModalError = document.getElementById('textModalError');
   });
 
   it('Debería mostrar un error', async () => {
-    registerNewUser.mockImplementationOnce((email, password) => Promise.reject(
-      new Error('auth/invalid-email'),
-    ));
     inputName.value = 'Chris';
     inputLastname.value = 'Olivos';
     inputEmail.value = 'chris@gmail.com';
@@ -70,8 +52,8 @@ describe('first Test for Register', () => {
     inputConfirmPassword.value = '123589';
     form.submit();
     await tick();
-
-    expect(textModalError.value).toBe('auth/invalid-email');
+    textModalError = document.getElementById('textModalError');
+    expect(textModalError.textContent).toBe('Las contraseñas no coinciden');
   });
 
   // it('Debería mostrar un error', async () => {
