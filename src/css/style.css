@@ -225,12 +225,19 @@ footer {
 }
 
 .signOutBtn {
+    color:black;
+    font-size: var(--font-sm);
     position: absolute;
+    font-weight: 300;
     top: 20px;
     right: 20px;
+    border-radius: 10px;
+    padding: 10px;
+    height: 50px;
 }
 
 .signOutIcon {
+    margin: 0 auto;
     width: 20px;
     height: 20px;
     display: block;
@@ -274,6 +281,9 @@ footer {
     display: block;
     background-repeat: no-repeat;
     background-image: url('../images/likegatuno16.png');
+}
+.textLikeBtn {
+    font-size: 0.5rem;
 }
 
 .postActions {
