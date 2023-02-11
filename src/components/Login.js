@@ -7,17 +7,21 @@ import { validationloginWithMail, validationLoginWithGoogle } from '../main';
 export const Login = () => {
   document.title = 'Login';
   const container = document.createElement('section');
+  container.id = 'containerLogin';
   container.className = 'mainContainer';
   const title = document.createElement('img');
   title.src = 'https://i.postimg.cc/9FgZx0M0/Cats.png';
   const form = document.createElement('form');
+  form.id = 'formLogin';
   form.className = 'form-login';
   const email = document.createElement('input');
+  email.id = 'inputEmail';
   email.type = 'email';
   email.required = true;
   email.placeholder = 'Correo';
   email.className = 'form-input';
   const password = document.createElement('input');
+  password.id = 'inputPassword';
   password.type = 'password';
   password.required = true;
   password.placeholder = 'Contraseña';
@@ -35,7 +39,6 @@ export const Login = () => {
   btnLogin.textContent = 'Iniciar Sesión';
   btnLogin.id = 'buttonLogin';
   btnLogin.type = 'submit';
-  btnLogin.id = 'buttonLogin';
   btnLogin.className = 'btn-login stylesBtns mt-20';
   const btnRegister = document.createElement('button');
   btnRegister.textContent = 'Registrar';
@@ -57,6 +60,6 @@ export const Login = () => {
   form.append(email, password, btnLogin);
   container.appendChild(title);
   container.append(form, btnGoogle, btnRegister);
-  
+
   return container;
 };
