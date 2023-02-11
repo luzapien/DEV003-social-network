@@ -58,17 +58,11 @@ export const Register = () => {
       });
     } else if (emailValue && passwordValue && nameValue && lastnameValue && passwordConfirmValue) {
       let errorCode;
-      console.log('=========================== estoy antes del registerNew');
       registerNewUser(emailValue, passwordValue).then((result) => {
         const user = result.user;
-        console.log(user);
         createUserDoc(user, fullName, 'http://placekitten.com/200/300').then(() => {
-          console.log(user.displayName);
         });
       }).catch((error) => {
-        console.log('------------------------========>>>soy el catch');
-        console.log(error);
-        console.log(error.code);
         errorCode = error.code;
         if (errorCode) {
           if (errorCode === 'auth/email-already-in-use') {
@@ -87,14 +81,6 @@ export const Register = () => {
           });
         }
       });
-      // try {
-      //   const result = await registerNewUser(emailValue, passwordValue);
-      //   const user = result.user;
-      //   await updateUserProfile(user, fullName, 'http://placekitten.com/200/300');
-      //   await createUserDoc(user);
-      // } catch (error) {
-      //   errorCode = error.code;
-      // }
     }
   });
 
