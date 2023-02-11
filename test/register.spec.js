@@ -9,8 +9,7 @@ jest.mock('../src/lib/functions_post', () => ({
   createUserDoc: jest.fn(),
 }));
 jest.mock('../src/lib/firebase', () => ({
-  registerNewUser: jest.fn(() => Promise.reject(new Error({ code: 'error probando' }))),
-
+  registerNewUser: jest.fn(),
 }));
 
 function tick() {
@@ -78,6 +77,10 @@ describe('registro con un correo ya registrado', () => {
   });
 
   it('Debería mostrar un error', async () => {
+    // eslint-disable-next-line prefer-promise-reject-errors
+    registerNewUser.mockImplementationOnce(() => Promise.reject({ code: 'auth/email-already-in-use' }));
+    const windowModal = document.getElementById('textErrorModal');
+    windowModal.click();
     inputName.value = 'Chris';
     inputLastname.value = 'Olivos';
     inputEmail.value = 'chris@gmail.com';
@@ -85,9 +88,9 @@ describe('registro con un correo ya registrado', () => {
     inputConfirmPassword.value = '12345678';
     buttonRegister.click();
     await tick();
-    const textErrorModal2 = document.getElementById('textErrorModal');
-    console.log('prueba 2 ', textErrorModal2);
-    console.log('prueba 2 ', textErrorModal2.textContent);
-    expect(textErrorModal2.textContent).toBe('auth/invalid-email');
+    const textErrorModal2 = document.getElementById('textModalError');
+    console.log('prueba 2 =========>', textErrorModal2);
+    console.log('prueba 2 =========>', textErrorModal2.textContent);
+    expect(textErrorModal2.textContent).toBe('Ya hay un usuario registrado con el correo');
   });
 });

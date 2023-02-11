@@ -52,10 +52,13 @@ export const Register = () => {
     if (passwordValue !== passwordConfirmValue) {
       message = 'Las contraseñas no coinciden';
       container.appendChild(modalError(message));
-
+      const windowModal = document.getElementById('textErrorModal');
+      windowModal.addEventListener('click', () => {
+        container.removeChild(windowModal);
+      });
     } else if (emailValue && passwordValue && nameValue && lastnameValue && passwordConfirmValue) {
       let errorCode;
-      console.log('=========================== estoy antes del registerNew')
+      console.log('=========================== estoy antes del registerNew');
       registerNewUser(emailValue, passwordValue).then((result) => {
         const user = result.user;
         console.log(user);
@@ -78,6 +81,10 @@ export const Register = () => {
             message = 'Algo salió mal';
           }
           container.appendChild(modalError(message));
+          const windowModal = document.getElementById('textErrorModal');
+          windowModal.addEventListener('click', () => {
+            container.removeChild(windowModal);
+          });
         }
       });
       // try {

@@ -1,16 +1,13 @@
 export function modalError(messageError) {
-  const ventanaModal = document.createElement('div');
-  ventanaModal.id = 'textErrorModal';
-  ventanaModal.className = 'modal';
-  ventanaModal.innerHTML = `<div class="modal-content">
+  const windowModal = document.createElement('div');
+  windowModal.id = 'textErrorModal';
+  windowModal.className = 'modal';
+  windowModal.innerHTML = `<div class="modal-content">
   <span class="cerrar">&times;</span>
   <h2>Verifica el siguiente dato:</h2>
   <p id = 'textModalError' class = 'textError'>${messageError}</p>
 </div>`;
-  ventanaModal.addEventListener('click', () => {
-    ventanaModal.style.display = 'none';
-  });
-  return ventanaModal;
+  return windowModal;
 }
 
 export function modalDeletePost(messageError) {
