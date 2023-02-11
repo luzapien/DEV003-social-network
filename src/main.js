@@ -24,23 +24,16 @@ export function validationloginWithMail(email, password) {
       }
       const mainContainer = document.querySelector('.mainContainer');
       mainContainer.appendChild(modalError(message));
+      const windowModal = document.getElementById('textErrorModal');
+      windowModal.addEventListener('click', () => {
+        mainContainer.removeChild(windowModal);
+      });
 
       return message;
     });
   // eslint-disable-next-line no-undef
   } return message;
 }
-
-/* Función para boton de login con google */
-// export function validationLoginWithGoogle() {
-//   const result = loginWithGoogle();
-//   result.then(() => {
-//     const user = result.user;
-//     createUserDoc(user);
-//   }).catch((error) => {
-//     console.log(error);
-//   });
-// }
 
 export function validationLoginWithGoogle() {
   loginWithGoogle().then((result) => {
@@ -50,4 +43,3 @@ export function validationLoginWithGoogle() {
     console.log(error);
   });
 }
-/* =======Funciones para register======== */

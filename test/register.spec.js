@@ -1,9 +1,5 @@
 import { registerNewUser } from '../src/lib/firebase';
 import { Register } from '../src/components/Register';
-import { createUserDoc } from '../src/lib/functions_post';
-
-// const user = { user: { uid: 1234, nombre: "juan" } };
-const message = 'auth/email-already-in-use';
 
 jest.mock('../src/lib/functions_post', () => ({
   createUserDoc: jest.fn(),
@@ -11,9 +7,6 @@ jest.mock('../src/lib/functions_post', () => ({
 jest.mock('../src/lib/firebase', () => ({
   registerNewUser: jest.fn(),
 }));
-// createUserWithEmailAndPassword(auth, email, password);
-
-// jest.spyOn(window, 'alert').mockImplementation((alerta) => { 'auth/email-already-in-use'; });
 
 function tick() {
   return new Promise((resolve) => {
@@ -21,52 +14,53 @@ function tick() {
   });
 }
 
-describe('first Test for Register', () => {
-  let viewContainer;
-  let form;
+describe('Registro con contraseñas diferentes en imputs', () => {
   let inputName;
   let inputLastname;
   let inputEmail;
   let inputPassword;
   let inputConfirmPassword;
   let buttonRegister;
-  let buttonReturnLogin;
-  let textModalError;
 
   beforeEach(() => {
     document.body.appendChild(Register());
-    viewContainer = document.getElementById('containerRegister');
-    form = document.getElementById('formRegister');
     inputName = document.getElementById('nameId');
     inputLastname = document.getElementById('lastnameId');
     inputEmail = document.getElementById('emailId');
     inputPassword = document.getElementById('passwordId');
     inputConfirmPassword = document.getElementById('confirmPasswordId');
     buttonRegister = document.getElementById('buttonRegisterHome');
-    buttonReturnLogin = document.getElementById('btn-return-login');
-    textModalError = document.getElementById('textModalError');
   });
 
-  it('Error: ya existe ese correo registrado', async () => {
-    registerNewUser.mockImplementationOnce(() => Promise.reject(
-      // email = 'chris@gmail.com'
-      // password ='123456'
-      // Promise.reject({ code: '23505' });    });
-      new Error('Ya hay un usuario registrado con el correo'),
-    ));
-
+  it('Debería mostrar un error', async () => {
     inputName.value = 'Chris';
     inputLastname.value = 'Olivos';
     inputEmail.value = 'chris@gmail.com';
-    inputPassword.value = '123456';
-    inputConfirmPassword.value = '123456';
-    form.submit();
+    inputPassword.value = '12345689';
+    inputConfirmPassword.value = '12345612';
+    buttonRegister.click();
     await tick();
+    const textErrorModal = document.getElementById('textModalError');
+    expect(textErrorModal.textContent).toBe('Las contraseñas no coinciden');
+  });
+});
 
-    console.log('Message:', textModalError);
+describe('registro con un correo ya registrado', () => {
+  let inputName;
+  let inputLastname;
+  let inputEmail;
+  let inputPassword;
+  let inputConfirmPassword;
+  let buttonRegister;
 
-    expect(textModalError).toBe('Ya hay un usuario registrado con el correo');
-    // expect(registerNewUser()).Error('Ya hay un usuario registrado con el correo');
+  beforeEach(() => {
+    document.body.appendChild(Register());
+    inputName = document.getElementById('nameId');
+    inputLastname = document.getElementById('lastnameId');
+    inputEmail = document.getElementById('emailId');
+    inputPassword = document.getElementById('passwordId');
+    inputConfirmPassword = document.getElementById('confirmPasswordId');
+    buttonRegister = document.getElementById('buttonRegisterHome');
   });
 });
 
@@ -84,40 +78,54 @@ describe('first Test for Register', () => {
 //   );
 // });
 
-// it('Debería mostrar un error', async () => {
-//   registerNewUser.mockImplementationOnce((email, password) => Promise.reject(
-//     new Error(email, password),
-//   ));
-//   inputEmail.value = 'emailverify.com';
-//   inputPassword.value = '123456';
-//   buttonRegister.click();
-//   await tick();
-//   expect(window.alert).toBeCalled();
-// });
-// est.spyOn(window, 'alert').mockImplementation(() => {});
-// const TestModule = require('../module');
-// describe('Mock window property', () => {
-//   it('should mock window alert function', () => {
-//     Object.defineProperty(global, 'window', {
-//       value: {
-//         alert: jest.fn(),
-//       },
-//     });
-//     TestModule.notification();
-//     expect(window.alert).toBeCalled();
-//   });
-// });
+  it('Debería mostrar un error', async () => {
+    // eslint-disable-next-line prefer-promise-reject-errors
+    registerNewUser.mockImplementationOnce(() => Promise.reject({ code: 'auth/email-already-in-use' }));
+    const windowModal = document.getElementById('textErrorModal');
+    windowModal.click();
+    inputName.value = 'Chris';
+    inputLastname.value = 'Olivos';
+    inputEmail.value = 'chris@gmail.com';
+    inputPassword.value = '12345678';
+    inputConfirmPassword.value = '12345678';
+    buttonRegister.click();
+    await tick();
+    const textErrorModal2 = document.getElementById('textModalError');
+    expect(textErrorModal2.textContent).toBe('Ya hay un usuario registrado con el correo');
+  });
+});
 
-// it('Debería mostrar exito', async () => {
-//   registerNewUser.mockImplementationOnce((email, password) => Promise.resolve({
-//     user: { email, password },
-//   }));
+describe('registro con una contraseña debil', () => {
+  let inputName;
+  let inputLastname;
+  let inputEmail;
+  let inputPassword;
+  let inputConfirmPassword;
+  let buttonRegister;
 
-//   inputEmail.value = 'email@verify.com';
-//   inputPassword.value = '123456';
+  beforeEach(() => {
+    document.body.appendChild(Register());
+    inputName = document.getElementById('nameId');
+    inputLastname = document.getElementById('lastnameId');
+    inputEmail = document.getElementById('emailId');
+    inputPassword = document.getElementById('passwordId');
+    inputConfirmPassword = document.getElementById('confirmPasswordId');
+    buttonRegister = document.getElementById('buttonRegisterHome');
+  });
 
-//   buttonRegister.click();
-//   await tick();
-//   buttonRegister.dispatchEvent(new Event('click'));
-//   expect(registerNewUser).toHaveBeenCalled();
-// });
+  it('Debería mostrar un error', async () => {
+    // eslint-disable-next-line prefer-promise-reject-errors
+    registerNewUser.mockImplementationOnce(() => Promise.reject({ code: 'auth/weak-password' }));
+    const windowModal = document.getElementById('textErrorModal');
+    windowModal.click();
+    inputName.value = 'Chris';
+    inputLastname.value = 'Olivos';
+    inputEmail.value = 'chris@gmail.com';
+    inputPassword.value = '12';
+    inputConfirmPassword.value = '12';
+    buttonRegister.click();
+    await tick();
+    const textErrorModal2 = document.getElementById('textModalError');
+    expect(textErrorModal2.textContent).toBe('La contraseña debe tener minimo 6 caracteres');
+  });
+});
