@@ -67,7 +67,7 @@ function showPost(container) {
     });
     arrayPosts.forEach((doc) => {
       // const comments = Comments(doc);
-      console.log('leyendo array post');
+      // console.log('leyendo array post');
       const postActionsContainer = document.createElement('div');
       const postActionsRight = document.createElement('div');
       postActionsRight.className = 'postActionsRight';
@@ -99,9 +99,9 @@ function showPost(container) {
       /** ***LIKE***** */
 
       likeBtn.addEventListener('click', () => {
-        console.log(likeBtn);
+        // console.log(likeBtn);
         counterLike(user.uid, doc, likeBtn.id);
-        console.log(doc);
+        // console.log(doc);
       });
 
       /** ************* */
@@ -200,7 +200,7 @@ export const Home = () => {
       e.preventDefault();
       if (postInput.value.trim() !== '') {
         createPost(user.uid, postInput.value).then((result) => {
-          console.log('holaaa--->', result);
+          // console.log('holaaa--->', result);
           showPost(sectionPost);
         }).catch((error) => {
           console.log(error);
@@ -238,7 +238,7 @@ export const Home = () => {
       //   console.log(error);
       // }
     });
-    console.log(userImage.innerHTML);
+    // console.log(userImage.innerHTML);
 
     createPostForm.append(postInput, submitPostBtn);
     sectionWall.append(createPostForm, sectionPost);
