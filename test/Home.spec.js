@@ -1,14 +1,16 @@
-import { logOutFunction, informationUser} from '../src/lib/firebase';
+import { logOutFunction, informationUser } from '../src/lib/firebase';
 import { Home } from '../src/components/Home';
 
-import { createPost, getUserPosts, deletePost, getUserFromFirestore, updatePost, counterLike, createID } from '../src/lib/functions_post';
+import {
+  createPost, getUserPosts, deletePost, getUserFromFirestore, updatePost, counterLike, createID,
+} from '../src/lib/functions_post';
 
 jest.mock('../src/lib/firebase', () => ({
   logOutFunction: jest.fn(),
   informationUser: jest.fn(() => Promise.resolve({ uid: 21234 })),
 }));
 
-const user = { uid: 1234, nombre: "juan" };
+const user = { uid: 1234, nombre: 'juan' };
 
 jest.mock('../src/lib/functions_post', () => ({
   createPost: jest.fn(),
@@ -33,7 +35,6 @@ describe('first Test for Home', () => {
   let spanPost;
 
   beforeEach(() => {
-
     document.body.appendChild(Home());
     btnPost = document.getElementById('submitPostBtn');
     postInput = document.getElementById('postInput');

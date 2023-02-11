@@ -14,7 +14,7 @@ function tick() {
   });
 }
 
-describe('Registro con contraseñas diferentes en imputs', () => {
+describe('Registro con contraseñas diferentes en inputs', () => {
   let inputName;
   let inputLastname;
   let inputEmail;
@@ -62,24 +62,23 @@ describe('registro con un correo ya registrado', () => {
     inputConfirmPassword = document.getElementById('confirmPasswordId');
     buttonRegister = document.getElementById('buttonRegisterHome');
   });
-});
 
-// it('Debería mostrar un error', async () => {
-//   register.mockImplementationOnce((email, password) => {
-//     return Promise.reject(
-//       new Error('Firebase: Error (auth/invalid-email).'),
-//     );
-//   });
+  // it('Debería mostrar un error', async () => {
+  //   register.mockImplementationOnce((email, password) => {
+  //     return Promise.reject(
+  //       new Error('Firebase: Error (auth/invalid-email).'),
+  //     );
+  //   });
 
-//   inputForSend.click();
-//       await tick();
-//   expect(errorMessage.innerHTML).toBe(
-//     'Firebase: Error (auth/invalid-email).'
-//   );
-// });
+  //   inputForSend.click();
+  //       await tick();
+  //   expect(errorMessage.innerHTML).toBe(
+  //     'Firebase: Error (auth/invalid-email).'
+  //   );
+  // });
 
   it('Debería mostrar un error', async () => {
-    // eslint-disable-next-line prefer-promise-reject-errors
+  // eslint-disable-next-line prefer-promise-reject-errors
     registerNewUser.mockImplementationOnce(() => Promise.reject({ code: 'auth/email-already-in-use' }));
     const windowModal = document.getElementById('textErrorModal');
     windowModal.click();
@@ -94,7 +93,6 @@ describe('registro con un correo ya registrado', () => {
     expect(textErrorModal2.textContent).toBe('Ya hay un usuario registrado con el correo');
   });
 });
-
 describe('registro con una contraseña debil', () => {
   let inputName;
   let inputLastname;
