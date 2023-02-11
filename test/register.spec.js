@@ -1,9 +1,5 @@
 import { registerNewUser } from '../src/lib/firebase';
 import { Register } from '../src/components/Register';
-// import { createUserDoc } from '../src/lib/functions_post';
-
-// const user = { user: { uid: 1234, nombre: "juan" } };
-// const message = 'auth/email-already-in-use';
 
 jest.mock('../src/lib/functions_post', () => ({
   createUserDoc: jest.fn(),

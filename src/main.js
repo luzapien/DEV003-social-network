@@ -35,7 +35,6 @@ export function validationloginWithMail(email, password) {
   } return message;
 }
 
-
 export function validationLoginWithGoogle() {
   loginWithGoogle().then((result) => {
     const user = result.user;
@@ -44,4 +43,3 @@ export function validationLoginWithGoogle() {
     console.log(error);
   });
 }
-/* =======Funciones para register======== */

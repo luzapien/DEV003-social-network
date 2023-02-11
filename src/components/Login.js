@@ -17,12 +17,14 @@ export const Login = () => {
   email.required = true;
   email.placeholder = 'Correo';
   email.className = 'form-input';
+  email.id = 'inputEmailLogin';
   const password = document.createElement('input');
   password.type = 'password';
   password.required = true;
   password.placeholder = 'Contraseña';
   password.minLength = 6;
   password.className = 'form-input';
+  password.id = 'inputPasswordLogin';
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     const emailValue = email.value;
@@ -33,7 +35,6 @@ export const Login = () => {
   // Botones inicio y registrar
   const btnLogin = document.createElement('button');
   btnLogin.textContent = 'Iniciar Sesión';
-  btnLogin.id = 'buttonLogin';
   btnLogin.type = 'submit';
   btnLogin.id = 'buttonLogin';
   btnLogin.className = 'btn-login stylesBtns mt-20';
@@ -57,6 +58,5 @@ export const Login = () => {
   form.append(email, password, btnLogin);
   container.appendChild(title);
   container.append(form, btnGoogle, btnRegister);
-  
   return container;
 };
