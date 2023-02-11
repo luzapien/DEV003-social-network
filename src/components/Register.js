@@ -55,6 +55,7 @@ export const Register = () => {
 
     } else if (emailValue && passwordValue && nameValue && lastnameValue && passwordConfirmValue) {
       let errorCode;
+      console.log('=========================== estoy antes del registerNew')
       registerNewUser(emailValue, passwordValue).then((result) => {
         const user = result.user;
         console.log(user);
@@ -62,9 +63,10 @@ export const Register = () => {
           console.log(user.displayName);
         });
       }).catch((error) => {
+        console.log('------------------------========>>>soy el catch');
         console.log(error);
+        console.log(error.code);
         errorCode = error.code;
-        console.log(errorCode);
         if (errorCode) {
           if (errorCode === 'auth/email-already-in-use') {
             message = 'Ya hay un usuario registrado con el correo';

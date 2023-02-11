@@ -1,6 +1,6 @@
 import { registerNewUser } from '../src/lib/firebase';
 import { Register } from '../src/components/Register';
-import { createUserDoc } from '../src/lib/functions_post';
+// import { createUserDoc } from '../src/lib/functions_post';
 
 // const user = { user: { uid: 1234, nombre: "juan" } };
 // const message = 'auth/email-already-in-use';
@@ -9,7 +9,7 @@ jest.mock('../src/lib/functions_post', () => ({
   createUserDoc: jest.fn(),
 }));
 jest.mock('../src/lib/firebase', () => ({
-  registerNewUser: jest.fn(),
+  registerNewUser: jest.fn(() => Promise.reject(new Error({ code: 'error probando' }))),
 
 }));
 
@@ -19,7 +19,40 @@ function tick() {
   });
 }
 
-describe('first Test for Register', () => {
+const users = ['kaozztrs@gmail.com', 'chris@gmail.com', 'luzapien@gmail.com'];
+
+describe('Registro con contraseñas diferentes en imputs', () => {
+  let inputName;
+  let inputLastname;
+  let inputEmail;
+  let inputPassword;
+  let inputConfirmPassword;
+  let buttonRegister;
+
+  beforeEach(() => {
+    document.body.appendChild(Register());
+    inputName = document.getElementById('nameId');
+    inputLastname = document.getElementById('lastnameId');
+    inputEmail = document.getElementById('emailId');
+    inputPassword = document.getElementById('passwordId');
+    inputConfirmPassword = document.getElementById('confirmPasswordId');
+    buttonRegister = document.getElementById('buttonRegisterHome');
+  });
+
+  it('Debería mostrar un error', async () => {
+    inputName.value = 'Chris';
+    inputLastname.value = 'Olivos';
+    inputEmail.value = 'chris@gmail.com';
+    inputPassword.value = '12345689';
+    inputConfirmPassword.value = '12345612';
+    buttonRegister.click();
+    await tick();
+    const textErrorModal = document.getElementById('textModalError');
+    expect(textErrorModal.textContent).toBe('Las contraseñas no coinciden');
+  });
+});
+
+describe('registro con un correo ya registrado', () => {
   let viewContainer;
   let form;
   let inputName;
@@ -48,49 +81,13 @@ describe('first Test for Register', () => {
     inputName.value = 'Chris';
     inputLastname.value = 'Olivos';
     inputEmail.value = 'chris@gmail.com';
-    inputPassword.value = '123456';
-    inputConfirmPassword.value = '123589';
-    form.submit();
+    inputPassword.value = '12345678';
+    inputConfirmPassword.value = '12345678';
+    buttonRegister.click();
     await tick();
-    textModalError = document.getElementById('textModalError');
-    expect(textModalError.textContent).toBe('Las contraseñas no coinciden');
+    const textErrorModal2 = document.getElementById('textErrorModal');
+    console.log('prueba 2 ', textErrorModal2);
+    console.log('prueba 2 ', textErrorModal2.textContent);
+    expect(textErrorModal2.textContent).toBe('auth/invalid-email');
   });
-
-  // it('Debería mostrar un error', async () => {
-  //   registerNewUser.mockImplementationOnce((email, password) => Promise.reject(
-  //     new Error(email, password),
-  //   ));
-  //   inputEmail.value = 'emailverify.com';
-  //   inputPassword.value = '123456';
-  //   buttonRegister.click();
-  //   await tick();
-  //   expect(window.alert).toBeCalled();
-  // });
-  // est.spyOn(window, 'alert').mockImplementation(() => {});
-  // const TestModule = require('../module');
-  // describe('Mock window property', () => {
-  //   it('should mock window alert function', () => {
-  //     Object.defineProperty(global, 'window', {
-  //       value: {
-  //         alert: jest.fn(),
-  //       },
-  //     });
-  //     TestModule.notification();
-  //     expect(window.alert).toBeCalled();
-  //   });
-  // });
-
-  // it('Debería mostrar exito', async () => {
-  //   registerNewUser.mockImplementationOnce((email, password) => Promise.resolve({
-  //     user: { email, password },
-  //   }));
-
-  //   inputEmail.value = 'email@verify.com';
-  //   inputPassword.value = '123456';
-
-  //   buttonRegister.click();
-  //   await tick();
-  //   buttonRegister.dispatchEvent(new Event('click'));
-  //   expect(registerNewUser).toHaveBeenCalled();
-  // });
 });

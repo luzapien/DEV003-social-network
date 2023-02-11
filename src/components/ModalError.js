@@ -1,6 +1,6 @@
 export function modalError(messageError) {
   const ventanaModal = document.createElement('div');
-  ventanaModal.id = 'ventanaModal';
+  ventanaModal.id = 'textErrorModal';
   ventanaModal.className = 'modal';
   ventanaModal.innerHTML = `<div class="modal-content">
   <span class="cerrar">&times;</span>
