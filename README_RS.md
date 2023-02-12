@@ -25,11 +25,11 @@ La Red Social permite a los usuarios acceder con su cuenta de Google, también p
 ## 3. Objetivos generales del proyecto
 Los objetivos generales fueron los siguientes:
 
-* ✓ Desarrollar una SPA con temática de red social.
-* ✓ Aplicar los conceptos de responsividad en el desarrollo de las vistas (templates).
-* ✓ Implementar un router para la navegación entre las diferentes vistas de la aplicación.
-* ✓ Emplear un servicio externo para la persistencia de datos de la aplicación (firebase).
-* ✓ Crear una suite de pruebas unitarias que permitan testear código asíncrono (jtest).
+- [x] Desarrollar una SPA con temática de red social.
+- [x] Aplicar los conceptos de responsividad en el desarrollo de las vistas (templates).
+- [x] Implementar un router para la navegación entre las diferentes vistas de la aplicación.
+- [x] Emplear un servicio externo para la persistencia de datos de la aplicación (firebase).
+- [x] Crear una suite de pruebas unitarias que permitan testear código asíncrono (jtest).
 
 ## 4. Historias de Usuario
 
@@ -75,7 +75,7 @@ Imágenes del Prototipo de Baja Fidelidad:
 Desarrollamos prototipos de cada vista, implementándolos en mobile first, esto lo hicimos con la herramienta de Figma. [Aquí puedes acceder al prototipo.](https://www.figma.com/proto/SpAk0S6RastCojzJzc56Gc/CatsLover?node-id=1%3A2&scaling=min-zoom&page-id=0%3A1&starting-point-node-id=1%3A2 "Aquí puedes acceder al prototipo.")
 
 ## 7. Áreas de mejora
-Al realizar los tests nos dimos cuenta que teníamos que restructurar el codigo de algunas de nuestras funciones.
+Al realizar los tests nos dimos cuenta que teníamos que reestructurar el código de algunas de nuestras funciones.
 
 También observamos que podemos mejorar en la nomenclatura de nuestras funciones y variables para que nuestro código sea más comprensible.
 
@@ -114,7 +114,7 @@ Resultado del feedback recibido:
 * Utilizar el botón original de Google para el logueo
 
 ## 9. Boiler Plate
-.
+
 ├── src
 
 |   ├── Component
@@ -133,19 +133,19 @@ Resultado del feedback recibido:
 
 |   ├── css
 
-|   ├── comments.css
+|   |   ├── comments.css
 
-|   ├── style.css
+|   |   ├── style.css
 
 |   ├── lib
 
-|   ├── configFirebase.js
+|   |   ├── configFirebase.js
 
-|   ├── createUserID.js
+|   |   ├── createUserID.js
 
-|  ├── firebase.js
+|  |    ├── firebase.js
 
-|  ├── functions_post.js
+|  |    ├── functions_post.js
 
 |  └── index.html
 
@@ -155,13 +155,24 @@ Resultado del feedback recibido:
 
 └── test
 
-   └── Home.spec.js
+|   └── Home.spec.js
 
-   └── Login.spec.js
+|   └── Login.spec.js
 
-   └── register.spec.js
+|   └── register.spec.js
 
 ├── README.md
 
 
 ## 10. Checklist
+
+- [x] HTML
+- [x] CSS
+- [x] Web APIs
+- [x] JavaScript
+- [x] Control de Versiones (Git y GitHub)
+- [x] Centrado en el usuario
+- [x] Diseño de producto
+- [x] Investigación
+- [x] Firebase
+
