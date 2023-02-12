@@ -23,11 +23,11 @@ La Red Social permite a los usuarios acceder con su cuenta de Google, también p
 ## 3. Objetivos generales del proyecto
 Los objetivos generales fueron los siguientes:
 
-✓ Desarrollar una SPA con temática de red social.
-✓ Aplicar los conceptos de responsividad en el desarrollo de las vistas (templates).
-✓ Implementar un router para la navegación entre las diferentes vistas de la aplicación.
-✓ Emplear un servicio externo para la persistencia de datos de la aplicación (firebase).
-✓ Crear una suite de pruebas unitarias que permitan testear código asíncrono (jtest).
+* [✓ Desarrollar una SPA con temática de red social.]
+* [✓ Aplicar los conceptos de responsividad en el desarrollo de las vistas (templates).]
+* [✓ Implementar un router para la navegación entre las diferentes vistas de la aplicación.]
+* [✓ Emplear un servicio externo para la persistencia de datos de la aplicación (firebase).]
+* [✓ Crear una suite de pruebas unitarias que permitan testear código asíncrono (jtest).]
 
 ## 4. Historias de Usuario
 
@@ -105,3 +105,12 @@ Los resultados que obtuvimos de estos últimos test fueron los siguientes:
 
 ![Test de usabilidad: Pregunta10](https://github.com/chrisolivos/DEV003-social-network/blob/9f5fb686fd2156ab54d022f974238508ecb3d829/src/Images/TestUsabilidad/Pregunta10.png)
 
+### Resultados de los Test de Usabilidad
+Resultado del feedback recibido:
+*[●	Mayor claridad sobre la iconografía (agregar texto)]
+*[●	Sustituir los alerts por ventanas más amigables visualmente.]
+*[●	Utilizar el botón original de Google para el logueo]
+
+## 9. Boiler Plate
+
+## 10. Checklist
