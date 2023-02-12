@@ -1,13 +1,13 @@
 Índice
 * [1. Introducción](#1-introducción)
 * [2. Resumen del proyecto](#2-resumen-del-proyecto)
-* [3. Objetivos Generales del Proyecto](#2-objetios-generales-del-proyecto)
-* [4. Historias de Usuario](#3-historias-de-usuario)
-* [5. Prototipos Baja Fidelidad](#4-prototipos-baja-fidelidad)
-* [6. Prototipos Alta Fidelidad](#5-prototipos-alta-fidelidad)
-* [7. Áreas de Mejora](#6-áreas-de-mejora)
-* [8. Test de Usabilidad](#7-test-de-usabilidad)
-* [9. Boiler Plate](#8-boiler-plate)
+* [3. Objetivos Generales del Proyecto](#3-objetivos-generales-del-proyecto)
+* [4. Historias de Usuario](#4-historias-de-usuario)
+* [5. Prototipos Baja Fidelidad](#5-prototipos-baja-fidelidad)
+* [6. Prototipos Alta Fidelidad](#6-prototipos-alta-fidelidad)
+* [7. Áreas de Mejora](#7-áreas-de-mejora)
+* [8. Test de Usabilidad](#8-tests-de-usabilidad)
+* [9. Boiler Plate](#9-boiler-plate)
 * [10. Checklist](#10-checklist)
 
 
@@ -84,3 +84,24 @@ Se implementaron tests de usabilidad al concluir cada historia de usuario.
 En la última historia de usuario, se realizaron los tests de usabilidad apoyándonos de un formulario, con el cual obtuvimos un feedback más claro y logramos analizar mejor los puntos de observados.
 
 Los resultados que obtuvimos de estos últimos test fueron los siguientes:
+
+![Test de usabilidad: Pregunta1](https://github.com/chrisolivos/DEV003-social-network/blob/9f5fb686fd2156ab54d022f974238508ecb3d829/src/Images/TestUsabilidad/Pregunta1.png)
+
+![Test de usabilidad: Pregunta2](https://github.com/chrisolivos/DEV003-social-network/blob/9f5fb686fd2156ab54d022f974238508ecb3d829/src/Images/TestUsabilidad/Pregunta2.png)
+
+![Test de usabilidad: Pregunta3](https://github.com/chrisolivos/DEV003-social-network/blob/9f5fb686fd2156ab54d022f974238508ecb3d829/src/Images/TestUsabilidad/Pregunta3.png)
+
+![Test de usabilidad: Pregunta4](https://github.com/chrisolivos/DEV003-social-network/blob/9f5fb686fd2156ab54d022f974238508ecb3d829/src/Images/TestUsabilidad/Pregunta4.png)
+
+![Test de usabilidad: Pregunta5](https://github.com/chrisolivos/DEV003-social-network/blob/9f5fb686fd2156ab54d022f974238508ecb3d829/src/Images/TestUsabilidad/Pregunta5.png)
+
+![Test de usabilidad: Pregunta6](https://github.com/chrisolivos/DEV003-social-network/blob/9f5fb686fd2156ab54d022f974238508ecb3d829/src/Images/TestUsabilidad/Pregunta6.png)
+
+![Test de usabilidad: Pregunta7](https://github.com/chrisolivos/DEV003-social-network/blob/9f5fb686fd2156ab54d022f974238508ecb3d829/src/Images/TestUsabilidad/Pregunta7.png)
+
+![Test de usabilidad: Pregunta8](https://github.com/chrisolivos/DEV003-social-network/blob/9f5fb686fd2156ab54d022f974238508ecb3d829/src/Images/TestUsabilidad/Pregunta8.png)
+
+![Test de usabilidad: Pregunta9](https://github.com/chrisolivos/DEV003-social-network/blob/9f5fb686fd2156ab54d022f974238508ecb3d829/src/Images/TestUsabilidad/Pregunta9.png)
+
+![Test de usabilidad: Pregunta10](https://github.com/chrisolivos/DEV003-social-network/blob/9f5fb686fd2156ab54d022f974238508ecb3d829/src/Images/TestUsabilidad/Pregunta10.png)
+
