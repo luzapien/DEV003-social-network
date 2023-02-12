@@ -14,13 +14,13 @@
 
 
 ## 1. Introducción
-Hay redes sociales de todo tipo y para todo tipo de intereses. Mas no encontramos una enfocada totalmente en los gatitos, a pesar de haber tanto contenido en redes dedicado a este ejemplar y habiendo personas que los aman. Por esta razón, decidimos aprovechar y enfocar nuestro proyecto a la creación de una red social, para todos los Cat Lovers.
+Hay redes sociales de todo tipo y para todo tipo de intereses. Pero en nuestra busqueda no encontramos una enfocada en las personas que gustan de los gatos, a pesar de haber tanto contenido en redes dedicado a este ejemplar. Por esta razón, decidimos aprovechar la oportunidad y enfocar nuestro proyecto a la creación de una red social, para todos los Cat Lovers.
 
 ## 2. Resumen del proyecto
 
-En este proyecto se decidimos construir una Red Social para las personas que aman a los gatos. Realizamos un sondeo entre nuestros conocidos y les pareció interesante la idea de poder tener una red social donde puedan compartir desde curiosidades, tips, videos, entre otras cosas, hasta publicaciones sobre adopción responsable.
+En este proyecto decidimos construir una Red Social para las personas que aman a los gatos. Realizamos un sondeo entre nuestros conocidos y les pareció interesante la idea de poder tener una red social donde puedan compartir desde curiosidades, tips, videos, entre otras cosas, hasta publicaciones sobre adopción responsable.
 
-La Red Social permite a los usuarios acceder con su cuenta de Google, también permite el registro con un correo electrónico y el acceso con el mismo y un password definido por el usuario. Una vez el usuario logueado puede crear, editar, borrar, comentar y darle o quitarle like a sus publicaciones. [Aquí puedes visitar nuestro proyecto.](https://chrisolivos.github.io/DEV003-social-network/ "Aquí puedes visitar nuestro proyecto.")
+La Red Social permite a los usuarios acceder con su cuenta de Google y permite el registro con un correo electrónico, para que de tal manera pueda acceder con el mismo, mediante un password definido por el usuario. Una vez el usuario se encuentra logueado puede crear, editar, borrar, comentar y darle o quitarle like a sus publicaciones. [Aquí puedes visitar nuestro proyecto.](https://chrisolivos.github.io/DEV003-social-network/ "Aquí puedes visitar nuestro proyecto.")
 
 ## 3. Objetivos generales del proyecto
 Los objetivos generales fueron los siguientes:
