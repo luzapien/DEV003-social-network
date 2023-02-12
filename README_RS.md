@@ -64,9 +64,9 @@ Dividimos nuestro proyecto en tres historias de usuario:
 Los prototipos de baja fidelidad se crearon con lápiz y papel en primera instancia.
 Imágenes del Prototipo de Baja Fidelidad:
 
-[Prototipo de baja fidelidada: Login](https://github.com/chrisolivos/DEV003-social-network/blob/9f5fb686fd2156ab54d022f974238508ecb3d829/src/Images/Prototipos/PrototipoLogin.jpg)
+![Prototipo de baja fidelidada: Login](https://github.com/chrisolivos/DEV003-social-network/blob/9f5fb686fd2156ab54d022f974238508ecb3d829/src/Images/Prototipos/PrototipoLogin.jpg)
 
-[Prototipo de baja fidelidada: Post](https://github.com/chrisolivos/DEV003-social-network/blob/9f5fb686fd2156ab54d022f974238508ecb3d829/src/Images/Prototipos/PrototipoPost.jpg)
+![Prototipo de baja fidelidada: Post](https://github.com/chrisolivos/DEV003-social-network/blob/9f5fb686fd2156ab54d022f974238508ecb3d829/src/Images/Prototipos/PrototipoPost.jpg)
 
 
 ## 6. Prototipos Alta Fidelidad
