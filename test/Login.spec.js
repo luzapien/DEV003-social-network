@@ -1,7 +1,7 @@
-import { emailLogin, informationUser } from '../src/lib/firebase';
-import { getUserFromFirestore } from '../src/lib/functions_post';
+import { emailLogin } from '../src/lib/firebase';
+// import { getUserFromFirestore } from '../src/lib/functions_post';
 import { Login } from '../src/components/Login';
-import { Home } from '../src/components/Home';
+// import { Home } from '../src/components/Home';
 
 jest.mock('../src/lib/functions_post', () => ({
   getUserFromFirestore: jest.fn(),
@@ -33,7 +33,7 @@ describe('Login con contraseña incorrecta', () => {
     buttonLogin = document.getElementById('buttonLogin');
   });
 
-  it('Debería mostrar un error de contraseña', async () => {
+  it('Debería mostrar error de contraseña', async () => {
     // eslint-disable-next-line prefer-promise-reject-errors
     emailLogin.mockImplementationOnce(() => Promise.reject({ code: 'auth/wrong-password' }));
     inputEmail.value = 'chris@gmail.com';
@@ -57,10 +57,10 @@ describe('Login con correo no registrado', () => {
     buttonLogin = document.getElementById('buttonLogin');
   });
 
-  it('Debería mostrar un error de contraseña', async () => {
-    // eslint-disable-next-line prefer-promise-reject-errors
+  it('Debería mostrar error de correo no registrado', async () => {
     const windowModal = document.getElementById('textErrorModal');
     windowModal.click();
+    // eslint-disable-next-line prefer-promise-reject-errors
     emailLogin.mockImplementationOnce(() => Promise.reject({ code: 'auth/user-not-found' }));
     inputEmail.value = 'chris@gmail.com';
     inputPassword.value = '123456';

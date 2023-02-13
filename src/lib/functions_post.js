@@ -14,6 +14,7 @@ import {
   arrayRemove,
   onSnapshot,
 } from 'firebase/firestore';
+// eslint-disable-next-line import/named
 import { app } from './firebase';
 import { paintLikes } from '../components/Home';
 import { paintComments } from '../components/Comments';
