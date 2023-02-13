@@ -122,8 +122,12 @@ h2 {
 .btnGoogle {
     width: 100%;
     margin-top: 15px;
-    background-image: ;
 
+}
+
+.google-image {
+    height: 50%;
+    width: 50%;
 }
 
 .btn-register {
@@ -199,7 +203,9 @@ footer {
     }
 
     .btnGoogle {
-        width: 70%;
+        width: 35%;
+        height: 35%;
+        cursor: pointer;
     }
 
     .btn-register {
@@ -303,6 +309,11 @@ footer {
     gap: 10px;
     padding: 12px;
     background-color: white;
+}
+
+.span-post-user-name {
+    font-size: 0.7rem;
+    text-align: right;
 }
 
 #post-wall,
