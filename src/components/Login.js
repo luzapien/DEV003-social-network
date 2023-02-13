@@ -51,19 +51,20 @@ export const Login = () => {
     onNavigate('/register');
   });
 
-  const btnGoogle = document.createElement('button');
+  const btnGoogle = document.createElement('img');
   btnGoogle.id = 'buttonGoogle';
-  btnGoogle.className = 'btnGoogle stylesBtns';
-  const googleImage = document.createElement('img');
-  googleImage.className = 'google-image';
-  googleImage.src = '../Images/login_google.png';
-  btnGoogle.appendChild(googleImage);
+  btnGoogle.className = 'btnGoogle';
+  btnGoogle.src = 'https://iili.io/HErbscX.png';
+  // const googleImage = document.createElement('img');
+  // googleImage.className = 'google-image';
+  // googleImage.src = 'https://iili.io/HErbscX.png';
+  // btnGoogle.appendChild(googleImage);
   btnGoogle.addEventListener('click', () => {
     validationLoginWithGoogle();
   });
 
   form.append(email, password, btnLogin);
   container.appendChild(title);
-  container.append(form, btnGoogle, btnRegister);
+  container.append(form, btnRegister, btnGoogle);
   return container;
 };

@@ -203,7 +203,9 @@ footer {
     }
 
     .btnGoogle {
-        width: 70%;
+        width: 35%;
+        height: 35%;
+        cursor: pointer;
     }
 
     .btn-register {
