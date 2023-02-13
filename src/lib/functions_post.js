@@ -39,7 +39,7 @@ export function createUserDoc(user, fullName, photo) {
   });
 }
 
-export function createPost(userId, postContent) {
+export function createPost(userId, displayName, postContent) {
   const postId = createID('post');
   console.log(postId);
   // crea un nuevo objeto `Date` con fecha y hora del momento
@@ -47,6 +47,7 @@ export function createPost(userId, postContent) {
   return addDoc(collection(dataBase, 'publicaciones'), {
     postId,
     userId,
+    displayName,
     contenido: postContent,
     likes: [],
     date: today,
@@ -62,7 +63,7 @@ export function getUserPosts(userId) {
   const ref = collection(dataBase, 'publicaciones'); // Se crea la referencia de la colección
   const q = query( // Se crea la query/consulta
     ref,
-    where('userId', '==', userId), // Condición donde userId sea igual al userId pasado como parámetro
+   // where('userId', '==', userId), // Condición donde userId sea igual al userId pasado como parámetro
     orderBy('date', 'desc'),
   );
   return getDocs(q);
