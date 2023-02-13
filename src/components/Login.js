@@ -54,7 +54,10 @@ export const Login = () => {
   const btnGoogle = document.createElement('button');
   btnGoogle.id = 'buttonGoogle';
   btnGoogle.className = 'btnGoogle stylesBtns';
-  btnGoogle.textContent = 'Entrar con Google';
+  const googleImage = document.createElement('img');
+  googleImage.className = 'google-image';
+  googleImage.src = '../Images/login_google.png';
+  btnGoogle.appendChild(googleImage);
   btnGoogle.addEventListener('click', () => {
     validationLoginWithGoogle();
   });

@@ -107,6 +107,10 @@ function showPost(container) {
       /** ************* */
       const sectionPost = document.createElement('div');
       sectionPost.className = 'section-post';
+      const spanPostUserName = document.createElement('span');
+      spanPostUserName.className = 'span-post-user-name';
+      spanPostUserName.innerHTML = doc.displayName;
+      const enter = document.createElement('br');
       const spanPost = document.createElement('span');
       spanPost.className = 'span-post';
       spanPost.id = 'spanPost';
@@ -146,9 +150,11 @@ function showPost(container) {
         const editPostDialog = dialogEditPost(buttonEditPost.id, container, spanPost);
         editPostDialog.showModal();
       });
-      postActionsRight.append(buttonEditPost, buttonDeletePost);
+      if (user.uid === doc.userId) {
+        postActionsRight.append(buttonEditPost, buttonDeletePost);
+      }
       postActionsContainer.append(postActionsLeft, postActionsRight);
-      sectionPost.append(spanPost, postActionsContainer);
+      sectionPost.append(spanPostUserName, enter, spanPost, postActionsContainer);
       comments(doc, sectionPost);
     });
     container.appendChild(postWall);
@@ -199,7 +205,7 @@ export const Home = () => {
     createPostForm.addEventListener('submit', (e) => {
       e.preventDefault();
       if (postInput.value.trim() !== '') {
-        createPost(user.uid, postInput.value).then((result) => {
+        createPost(user.uid, user.displayName, postInput.value).then((result) => {
           // console.log('holaaa--->', result);
           showPost(sectionPost);
         }).catch((error) => {
