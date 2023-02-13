@@ -17,7 +17,7 @@ export function modalDeletePost(messageError) {
   windowModalDelete.className = 'modal';
   windowModalDelete.innerHTML = `<div class="modal-content">
   <span class="cerrar">&times;</span>
-  <h2>Verifica el siguiente dato:</h2>
+  <h2 id="titleDeletePost">Verifica el siguiente dato:</h2>
   <p id = 'textModalError' class = 'textError'>${messageError}</p>
   <button id = 'yes'>Si</button>
   <button id = 'cancel'>Cancelar</button>
