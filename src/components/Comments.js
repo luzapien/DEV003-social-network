@@ -1,7 +1,7 @@
 import { informationUser } from '../lib/firebase';
 import { modalDeletePost } from './ModalError';
 import {
-  updatePost, createID, updateComments, getUserFromFirestore,  removeComment,
+  updatePost, createID, updateComments, getUserFromFirestore, removeComment,
 } from '../lib/functions_post';
 
 export function paintComments(arrayComments, idButton) {
@@ -12,8 +12,18 @@ export function paintComments(arrayComments, idButton) {
     // console.log(comentario);
     const commentContainer = document.createElement('div');
     commentContainer.className = 'commentContainer';
-    // commentContainer.textContent = comentario.contenido;
-    commentContainer.textContent = `${comentario.nombre}: ${comentario.contenido}`;
+    commentContainer.id = 'commentContainer';
+    const commentContainerName = document.createElement('div');
+    commentContainerName.className = 'commentContainerName';
+    commentContainerName.id = 'commentContainerName';
+    const commentContainerContent = document.createElement('div');
+    commentContainerContent.className = 'commentContainerContent ';
+    commentContainerContent.id = 'commentContainerContent ';
+    const commentContainerIcons = document.createElement('div');
+    commentContainerIcons.className = 'commentContainerIcons';
+    commentContainerIcons.id = 'commentContainerIcons';
+    commentContainerName.textContent = comentario.nombre;
+    commentContainerContent.textContent = comentario.contenido;
     /** ******BOTONES********** */
     const buttonDeletePost = document.createElement('button');
     const buttonEditPost = document.createElement('button');
@@ -50,10 +60,10 @@ export function paintComments(arrayComments, idButton) {
     //   editPostDialog.showModal();
     // });
     if (user.uid === comentario.userId) {
-      commentContainer.append(buttonEditPost);
+      commentContainerIcons.append(buttonEditPost, buttonDeletePost);
     }
-    commentContainer.append(buttonDeletePost);
     /** ****************** */
+    commentContainer.append(commentContainerName, commentContainerContent, commentContainerIcons);
     commentsContainer.appendChild(commentContainer);
   });
 }
@@ -74,7 +84,6 @@ export function comments(post, containerRender, postID) {
     }
     const commentsContainer = document.createElement('div');
     commentsContainer.className = 'commentsContainer';
-
 
     const commentsDiv = document.createElement('div');
     commentsDiv.innerHTML = '';
@@ -110,8 +119,7 @@ export function comments(post, containerRender, postID) {
       }).then(() => {
       });
     });
-
-    if (comentarios) {
+    /* if (comentarios) {
       comentarios.forEach((comentario) => {
       // console.log(comentario);
         const commentContainer = document.createElement('div');
@@ -120,11 +128,17 @@ export function comments(post, containerRender, postID) {
         const commentContainerName = document.createElement('div');
         commentContainerName.className = 'commentContainerName';
         commentContainerName.id = 'commentContainerName';
-        const commentContainerContent = 
-        // commentContainer.textContent = comentario.contenido;
+        const commentContainerContent = document.createElement('div');
+        commentContainerContent.className = 'commentContainerContent ';
+        commentContainerContent.id = 'commentContainerContent ';
+        const commentContainerIcons = document.createElement('div');
+        commentContainerIcons.className = 'commentContainerIcons';
+        commentContainerIcons.id = 'commentContainerIcons';
+        commentContainerName.textContent = comentario.nombre;
+        commentContainerContent.textContent = comentario.contenido;
         commentContainer.textContent = `${comentario.nombre}: ${comentario.contenido}`;
         //   console.log
-        /** ******BOTONES********** */
+        /** ******BOTONES********** * /
         const buttonDeletePost = document.createElement('button');
         const buttonEditPost = document.createElement('button');
         buttonDeletePost.id = comentario.commentID;
@@ -162,19 +176,20 @@ export function comments(post, containerRender, postID) {
         // });
         if (user.uid === comentario.userId) {
           commentContainer.append(buttonEditPost);
+          commentContainer.append(buttonDeletePost);
         }
-        commentContainer.append(buttonDeletePost);
-        /** ****************** */
         commentsDiv.appendChild(commentContainer);
       });
     } else {
       commentsContainer.textContent = 'No hay comentarios';
-    }
+    } */
 
     commentsContainer.append(commentsDiv, commentsForm);
     commentsForm.append(commentsInput, btnComments);
     containerRender.appendChild(commentsContainer);
-
+    if (comentarios) {
+      paintComments(comentarios, post.postId);
+    }
     return commentsContainer;
   });
 }
