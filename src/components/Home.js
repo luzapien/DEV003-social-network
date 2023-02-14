@@ -2,7 +2,7 @@ import { logOutFunction, informationUser } from '../lib/firebase';
 import { comments } from './Comments';
 import { Dialog, closeDialog } from './Dialog';
 import {
-  createPost, getUserPosts, deletePost, getUserFromFirestore, updatePost, counterLike,
+  createPost, getUserPosts, deletePost, getUserFromFirestore, updatePost, counterLike, 
 } from '../lib/functions_post';
 import { modalError, modalDeletePost } from './ModalError';
 
@@ -54,6 +54,7 @@ function dialogEditPost(idPost, container, spanPost) {
 function showPost(container) {
   container.innerHTML = '';
   const user = informationUser();
+  console.log('user datos', user);
   getUserPosts(user.uid).then((result) => {
     const postsObject = result;
     const postWall = document.createElement('section');
@@ -207,7 +208,7 @@ export const Home = () => {
       e.preventDefault();
       if (postInput.value.trim() !== '') {
         createPost(user.uid, userData.nombre, postInput.value).then((result) => {
-          console.log('holaaa--->', result);
+         // console.log('holaaa--->', result);
           showPost(sectionPost);
         }).catch((error) => {
           console.log(error);
