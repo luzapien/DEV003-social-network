@@ -65,7 +65,7 @@ export function comments(post, containerRender, postID) {
     // const nombreUser = userData.nombre;
     //   console.log('**********', nombreUser);
     // console.log('comments si corre');
-    // console.log(user);
+    // console.log(user);placeHol
     let comentarios = [];
     const dataComments = post.comentarios;
     // console.log(comentarios);
@@ -74,6 +74,7 @@ export function comments(post, containerRender, postID) {
     }
     const commentsContainer = document.createElement('div');
     commentsContainer.className = 'commentsContainer';
+
 
     const commentsDiv = document.createElement('div');
     commentsDiv.innerHTML = '';
@@ -86,7 +87,7 @@ export function comments(post, containerRender, postID) {
     commentsInput.id = 'commentsInput';
     commentsInput.className = 'commentsInput';
     commentsInput.required = true;
-    commentsInput.placeholder = 'Escribe un comentario';
+    commentsInput.placeholder = 'Comenta el post';
     const btnComments = document.createElement('button');
     btnComments.id = post.postId;
     btnComments.type = 'submit';
@@ -115,6 +116,11 @@ export function comments(post, containerRender, postID) {
       // console.log(comentario);
         const commentContainer = document.createElement('div');
         commentContainer.className = 'commentContainer';
+        commentContainer.id = 'commentContainer';
+        const commentContainerName = document.createElement('div');
+        commentContainerName.className = 'commentContainerName';
+        commentContainerName.id = 'commentContainerName';
+        const commentContainerContent = 
         // commentContainer.textContent = comentario.contenido;
         commentContainer.textContent = `${comentario.nombre}: ${comentario.contenido}`;
         //   console.log

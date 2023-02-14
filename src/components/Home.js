@@ -1,3 +1,4 @@
+import { doc } from 'firebase/firestore';
 import { logOutFunction, informationUser } from '../lib/firebase';
 import { comments } from './Comments';
 import { Dialog, closeDialog } from './Dialog';
@@ -37,8 +38,10 @@ function dialogEditPost(idPost, container, spanPost) {
     updatePost(idPost, {
       contenido: inputText.value,
     }).then(() => {
-      spanPost.textContent = inputText.value;
-      closeDialog();
+      if (inputText.value !== '') {
+        spanPost.textContent = inputText.value;
+        closeDialog();
+      }
     }).catch((error) => {
       console.log(error);
     });
@@ -218,6 +221,10 @@ export const Home = () => {
         });
       } else {
         container.appendChild(modalError('No hay nada que publicar'));
+        const modalErrorContainer = document.getElementById('textErrorModal');
+        modalErrorContainer.addEventListener('click', () => {
+          container.removeChild(modalErrorContainer);
+        });
       }
     });
 
