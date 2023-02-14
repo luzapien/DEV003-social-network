@@ -1,0 +1,75 @@
+import { registerNewUser, informationUser } from '../lib/firebase';
+import { onNavigate } from '../router';
+import { createUserDoc, getUserFromFirestore } from '../lib/functions_post';
+
+export const Profile = () => {
+  // const user = informationUser();
+//   getUserFromFirestore(user.uid).then((res) => {
+//     const userData = res.data();
+
+  const container = document.createElement('div');
+  container.id = 'containerProfile';
+  container.className = 'container-register';
+  const titleProfile = '<h1 class = \'title-register\'>Perfil</h1>';
+  const form = document.createElement('form');
+  form.id = 'formProfile';
+  form.className = 'form-register';
+  const name = document.createElement('input');
+  name.id = 'nameId';
+  name.type = 'text';
+  name.required = true;
+  // falta separar nombre y apellido
+  // name.value = user.nombre;
+  name.className = 'form-input';
+  const lastname = document.createElement('input');
+  lastname.id = 'lastnameId';
+  lastname.type = 'text';
+  lastname.required = true;
+  lastname.placeholder = 'Apellido';
+  lastname.className = 'form-input';
+  const email = document.createElement('input');
+  email.id = 'emailId';
+  email.type = 'email';
+  email.required = true;
+  email.disabled = true;
+  // email.value = userData.correo;
+  email.className = 'form-input';
+
+  // form.addEventListener('submit', (e) => {
+  //   e.preventDefault();
+  //   const emailValue = email.value;
+  //   const passwordValue = password.value;
+  //   const nameValue = name.value;
+  //   const lastnameValue = lastname.value;
+  //   const fullName = `${nameValue} ${lastnameValue}`;
+  //   if (emailValue && passwordValue && nameValue && lastnameValue) {
+  //     console.log('***** Guardando cambios');
+  //     // registerNewUser(emailValue, passwordValue).then((result) => {
+  //     //   const userP = result.user;
+  //     //   createUserDoc(userP, fullName, 'http://placekitten.com/200/300').then(() => {
+  //     //   });
+  //     // });
+  //   }
+  // });
+
+  const profileBtn = document.createElement('button');
+  profileBtn.id = 'buttonEditProfile';
+  profileBtn.textContent = 'Guardar';
+  profileBtn.type = 'submit';
+  profileBtn.className = 'btns-register stylesBtns mt-20';
+
+  const loginBtn = document.createElement('button');
+  loginBtn.textContent = 'Regresar al inicio de sesión';
+  loginBtn.id = 'btn-return-login';
+  loginBtn.type = 'button';
+  loginBtn.className = 'btns-register stylesBtns';
+  loginBtn.addEventListener('click', () => {
+    onNavigate('/');
+  });
+  form.append(name, lastname, email, profileBtn, loginBtn);
+  container.innerHTML = titleProfile;
+  container.appendChild(form);
+
+  return container;
+  // });
+};

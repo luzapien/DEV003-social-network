@@ -2,9 +2,10 @@ import { logOutFunction, informationUser } from '../lib/firebase';
 import { comments } from './Comments';
 import { Dialog, closeDialog } from './Dialog';
 import {
-  createPost, getUserPosts, deletePost, getUserFromFirestore, updatePost, counterLike, 
+  createPost, getUserPosts, deletePost, getUserFromFirestore, updatePost, counterLike,
 } from '../lib/functions_post';
 import { modalError, modalDeletePost } from './ModalError';
+import { onNavigate } from '../router';
 
 export function paintLikes(numberLikes, idButton) {
   const containerLike = document.getElementById(`lbl${idButton}`);
@@ -54,7 +55,7 @@ function dialogEditPost(idPost, container, spanPost) {
 function showPost(container) {
   container.innerHTML = '';
   const user = informationUser();
-  console.log('user datos', user);
+  //  console.log('user datos', user);
   getUserPosts(user.uid).then((result) => {
     const postsObject = result;
     const postWall = document.createElement('section');
@@ -111,7 +112,7 @@ function showPost(container) {
       const spanPostUserName = document.createElement('span');
       spanPostUserName.className = 'span-post-user-name';
       spanPostUserName.innerHTML = doc.nombre;
-      console.log('nombre', doc);
+      // console.log('nombre', doc);
       const enter = document.createElement('br');
       const spanPost = document.createElement('span');
       spanPost.className = 'span-post';
@@ -157,7 +158,7 @@ function showPost(container) {
       }
       postActionsContainer.append(postActionsLeft, postActionsRight);
       sectionPost.append(spanPostUserName, enter, spanPost, postActionsContainer);
-      comments(doc, sectionPost);
+      comments(doc, sectionPost, doc.postId);
     });
     container.appendChild(postWall);
   }).catch((error) => {
@@ -207,8 +208,8 @@ export const Home = () => {
     createPostForm.addEventListener('submit', (e) => {
       e.preventDefault();
       if (postInput.value.trim() !== '') {
-        createPost(user.uid, userData.nombre, postInput.value).then((result) => {
-         // console.log('holaaa--->', result);
+        createPost(user.uid, userData.nombre, postInput.value).then(() => {
+          // console.log('holaaa--->', result);
           showPost(sectionPost);
         }).catch((error) => {
           console.log(error);
@@ -227,6 +228,18 @@ export const Home = () => {
     signOutBtn.className = 'stylesBtns signOutBtn';
     signOutBtn.title = 'Cerrar sesión';
     signOutBtn.type = 'button';
+    /** ***perfil */
+    const editProfileIcon = document.createElement('span');
+    editProfileIcon.className = 'clsEditProfileBtn';
+    const btnEditProfile = document.createElement('button');
+    // btnEditProfile.className = 'stylesBtns signOutBtn';
+    btnEditProfile.title = 'Editar Perfil';
+    btnEditProfile.type = 'button';
+    btnEditProfile.append(editProfileIcon);
+    btnEditProfile.addEventListener('click', () => {
+      onNavigate('/profile');
+    });
+    /** ******** */
     const exitButtonText = document.createElement('div');
     exitButtonText.className = 'exitButtonText';
     exitButtonText.id = 'exitButtonText';
@@ -251,7 +264,7 @@ export const Home = () => {
     createPostForm.append(postInput, submitPostBtn);
     sectionWall.append(createPostForm, sectionPost);
     welcomeContainer.append(welcomeMessage, sectionWall);
-    container.append(userImage, welcomeContainer, signOutBtn);
+    container.append(userImage, welcomeContainer, signOutBtn, btnEditProfile);
     showPost(sectionPost);
   }).catch((error) => {
     console.log(error);

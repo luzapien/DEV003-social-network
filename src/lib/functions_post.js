@@ -63,7 +63,7 @@ export function getUserPosts(userId) {
   const ref = collection(dataBase, 'publicaciones'); // Se crea la referencia de la colección
   const q = query( // Se crea la query/consulta
     ref,
-   // where('userId', '==', userId), // Condición donde userId sea igual al userId pasado como parámetro
+    // where('userId', '==', userId),
     orderBy('date', 'desc'),
   );
   return getDocs(q);
@@ -149,5 +149,12 @@ export function updateComments(userUid, docPost, idButton) {
     querySnapshot.forEach((d) => {
       paintComments(d.data().comentarios, idButton);
     });
+  });
+}
+
+export function removeComment(postID, commentId) {
+  console.log(postID, commentId);
+  updateDoc(postID, {
+    commentID: arrayRemove(commentId),
   });
 }
