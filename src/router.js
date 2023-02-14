@@ -1,6 +1,7 @@
 import { Home } from './components/Home';
 import { Login } from './components/Login';
 import { Register } from './components/Register';
+import { Profile } from './components/EditProfile';
 
 const rootDiv = document.getElementById('root');
 
@@ -8,10 +9,13 @@ const routes = {
   '/': Login,
   '/home': Home,
   '/register': Register,
+  '/profile': Profile,
 };
 
 export function onNavigate(pathname) {
   const localPath = window.location.pathname;
+  console.log(localPath);
+  console.log(pathname);
   window.history.pushState(
     {},
     pathname,
