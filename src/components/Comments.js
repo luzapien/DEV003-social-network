@@ -1,5 +1,5 @@
 import { informationUser } from '../lib/firebase';
-import { updatePost, createID, updateteComments } from '../lib/functions_post';
+import { updatePost, createID, updateComments } from '../lib/functions_post';
 
 export function paintComments(arrayComments, idButton) {
   const commentsContainer = document.getElementById(`commentDiv${idButton}`);
@@ -8,7 +8,7 @@ export function paintComments(arrayComments, idButton) {
     // console.log(comentario);
     const commentContainer = document.createElement('div');
     commentContainer.className = 'commentContainer';
-    commentContainer.textContent = comentario.contenido;
+    commentContainer.textContent = `${comentario.nombre}: ${comentario.contenido}`;
     commentsContainer.appendChild(commentContainer);
   });
 }
@@ -44,12 +44,13 @@ export function comments(post, containerRender) {
   btnComments.textContent = 'comentar';
   commentsForm.className = 'commentsForm';
   commentsForm.addEventListener('submit', (e) => {
+    console.log('--->',user);
     comentarios.push({
-      contenido: commentsInput.value, userId: user.uid, commentID: createID('comment'), date: new Date(),
+      contenido: commentsInput.value, userId: user.uid, commentID: createID('comment'), date: new Date(), nombre: user.nombre,
     });
     e.preventDefault();
     // console.log(comentarios);
-    updateteComments(user.uid, post, btnComments.id);
+    updateComments(user.uid, post, btnComments.id);
     commentsInput.value = '';
     updatePost(post.uid, {
       comentarios,
@@ -61,7 +62,8 @@ export function comments(post, containerRender) {
       // console.log(comentario);
       const commentContainer = document.createElement('div');
       commentContainer.className = 'commentContainer';
-      commentContainer.textContent = comentario.contenido;
+      // commentContainer.textContent = comentario.contenido;
+      commentContainer.textContent = `${comentario.userName}: ${comentario.contenido}`;
       commentsDiv.appendChild(commentContainer);
     });
   } else {
