@@ -109,7 +109,8 @@ function showPost(container) {
       sectionPost.className = 'section-post';
       const spanPostUserName = document.createElement('span');
       spanPostUserName.className = 'span-post-user-name';
-      spanPostUserName.innerHTML = doc.displayName;
+      spanPostUserName.innerHTML = doc.nombre;
+      console.log('nombre', doc);
       const enter = document.createElement('br');
       const spanPost = document.createElement('span');
       spanPost.className = 'span-post';
@@ -205,8 +206,8 @@ export const Home = () => {
     createPostForm.addEventListener('submit', (e) => {
       e.preventDefault();
       if (postInput.value.trim() !== '') {
-        createPost(user.uid, user.displayName, postInput.value).then((result) => {
-          // console.log('holaaa--->', result);
+        createPost(user.uid, userData.nombre, postInput.value).then((result) => {
+          console.log('holaaa--->', result);
           showPost(sectionPost);
         }).catch((error) => {
           console.log(error);

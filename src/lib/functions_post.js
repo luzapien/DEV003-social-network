@@ -39,7 +39,7 @@ export function createUserDoc(user, fullName, photo) {
   });
 }
 
-export function createPost(userId, displayName, postContent) {
+export function createPost(userId, nombre, postContent) {
   const postId = createID('post');
   console.log(postId);
   // crea un nuevo objeto `Date` con fecha y hora del momento
@@ -47,7 +47,7 @@ export function createPost(userId, displayName, postContent) {
   return addDoc(collection(dataBase, 'publicaciones'), {
     postId,
     userId,
-    displayName,
+    nombre,
     contenido: postContent,
     likes: [],
     date: today,
@@ -143,7 +143,7 @@ export function counterLike(userUid, docPost, idButton) {
   });
 }
 
-export function updateteComments(userUid, docPost, idButton) {
+export function updateComments(userUid, docPost, idButton) {
   const q = query(collection(dataBase, 'publicaciones'), where('postId', '==', docPost.postId));
   onSnapshot(q, (querySnapshot) => {
     querySnapshot.forEach((d) => {
