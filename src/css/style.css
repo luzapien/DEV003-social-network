@@ -265,6 +265,7 @@ footer {
     cursor: pointer;
     background-color:  rgba(241, 153, 210, 0.8);
     border: none;
+    border-radius: 5px;
 }
 
 .btnDelete,
