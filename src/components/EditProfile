@@ -6,6 +6,7 @@ export const Profile = () => {
   // const user = informationUser();
 //   getUserFromFirestore(user.uid).then((res) => {
 //     const userData = res.data();
+//**** */
 
   const container = document.createElement('div');
   container.id = 'containerProfile';
