@@ -3,7 +3,8 @@ import { logOutFunction, informationUser } from '../lib/firebase';
 import { comments } from './Comments';
 import { Dialog, closeDialog } from './Dialog';
 import {
-  createPost, getUserPosts, deletePost, getUserFromFirestore, updatePost, counterLike,
+  // eslint-disable-next-line max-len
+  createPost, getUserPosts, deletePost, getUserFromFirestore, updatePost, counterLike, updateComments,
 } from '../lib/functions_post';
 import { modalError, modalDeletePost } from './ModalError';
 import { onNavigate } from '../router';
@@ -71,8 +72,10 @@ function showPost(container) {
       arrayPosts.push(dataPostUid);
     });
     arrayPosts.forEach((doc) => {
+      console.log(doc);
       // const comments = Comments(doc);
       // console.log('leyendo array post');
+      updateComments(user.uid, doc, doc.postId);
       const postActionsContainer = document.createElement('div');
       const postActionsRight = document.createElement('div');
       postActionsRight.className = 'postActionsRight';

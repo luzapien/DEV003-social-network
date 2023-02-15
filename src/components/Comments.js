@@ -4,11 +4,13 @@ import {
   updatePost, createID, updateComments, getUserFromFirestore, removeComment,
 } from '../lib/functions_post';
 
-export function paintComments(arrayComments, idButton) {
+export function paintComments(post, idButton) {
   const user = informationUser();
+  const postComments = post.comentarios;
+  console.log(postComments);
   const commentsContainer = document.getElementById(`commentDiv${idButton}`);
   commentsContainer.innerHTML = '';
-  arrayComments.forEach((comentario) => {
+  postComments.forEach((comentario) => {
     const commentContainer = document.createElement('div');
     commentContainer.className = 'commentContainer';
     commentContainer.id = 'commentContainer';
@@ -41,17 +43,19 @@ export function paintComments(arrayComments, idButton) {
     buttonDeletePost.addEventListener('click', () => {
       // eslint-disable-next-line no-restricted-globals
       commentsContainer.appendChild(modalDeletePost('¿Estás seguro de eliminar este post?'));
+      const windowModalDelete = document.getElementById('windowModalDelete');
       // const answer = confirm('¿Estas seguro de elminar el post?');
       const buttonCancel = document.getElementById('cancel');
-      const windowModalDelete = document.getElementById('windowModalDelete');
       buttonCancel.addEventListener('click', () => {
         commentsContainer.removeChild(windowModalDelete);
       });
       const buttonYes = document.getElementById('yes');
       buttonYes.addEventListener('click', () => {
-        removeComment(comentario.postId, buttonDeletePost.id);
-        commentContainer.remove();
-        commentContainer.removeChild(windowModalDelete);
+        console.log(post.postId);
+        console.log(buttonDeletePost.id);
+        removeComment(post, buttonDeletePost.id);
+        updateComments(user.uid, post, post.uid);
+        commentsContainer.removeChild(windowModalDelete);
       });
     });
     if (user.uid === comentario.userId) {
@@ -111,7 +115,7 @@ export function comments(post, containerRender, postID) {
     commentsForm.append(commentsInput, btnComments);
     containerRender.appendChild(commentsContainer);
     if (comentarios) {
-      paintComments(comentarios, post.postId);
+      paintComments(post, post.postId);
     }
     return commentsContainer;
   });

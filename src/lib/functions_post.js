@@ -17,7 +17,7 @@ import {
 // eslint-disable-next-line import/named
 import { app } from './firebase';
 import { paintLikes } from '../components/Home';
-import { paintComments } from '../components/Comments';
+import { comments, paintComments } from '../components/Comments';
 
 // Initialize Cloud Firestore and get a reference to the service
 const dataBase = getFirestore(app);
@@ -147,14 +147,38 @@ export function updateComments(userUid, docPost, idButton) {
   const q = query(collection(dataBase, 'publicaciones'), where('postId', '==', docPost.postId));
   onSnapshot(q, (querySnapshot) => {
     querySnapshot.forEach((d) => {
-      paintComments(d.data().comentarios, idButton);
+      console.log('===============================>', d.data());
+      paintComments(d.data(), idButton);
     });
   });
 }
 
-export function removeComment(postID, commentId) {
-  console.log(postID, commentId);
-  updateDoc(postID, {
-    commentID: arrayRemove(commentId),
+// export function updateDeleteComments(userUid, docPost) {
+//   const q = query(collection(dataBase, 'publicaciones'), where('postId', '==', docPost.postId));
+//   let dataUpdateComments = [];
+//   onSnapshot(q, (querySnapshot) => {
+//     querySnapshot.forEach((d) => {
+//       dataUpdateComments.push(d.data());
+//       console.log(d.data());
+//     });
+//   });
+//   console.log(dataUpdateComments)
+//   return dataUpdateComments;
+// }
+
+export function removeComment(post, commentID) {
+  // console.log(postID, commentId);
+  const arrayComments = post.comentarios;
+  const arrayUpdateComments = arrayComments.filter((comment) => comment.commentID !== commentID);
+  console.log(commentID);
+  console.log(arrayUpdateComments);
+  updateDoc(doc(dataBase, 'publicaciones', post.uid), {
+    comentarios: arrayUpdateComments,
   });
 }
+//  arrayComments.forEach((comment) => {
+//   if(comment.commentID === commentID) {
+
+//   }
+//  })
+// }
